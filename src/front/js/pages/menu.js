@@ -1,5 +1,6 @@
 import React from "react";
 
+
 export const Menu = () => {
   const menuday = [
     {
@@ -119,31 +120,31 @@ export const Menu = () => {
 
       <div className="text-center mb-4">
         <button className="btn w-100" style={{
-          fontFamily: "Mulish, sans-serif",
-          "font-optical-sizing": "auto",
-          "font-weight": "<weight>",
-          "font-style": "normal",
+          "fontFamily": "Mulish, sans-serif",
+          "fontOpticalSizing": "auto",
+          "fontWeight": "<weight>",
+          "fontStyle": "normal",
           "color": "white",
           "backgroundColor": "rgb(56, 101, 229"
         }}>RESERVAR HORARIO</button>
         <button className="btn btn-link text-primary mt-2" style={{
-          fontFamily: "Mulish, sans-serif",
-          "font-optical-sizing": "auto",
-          "font-weight": "<weight>",
-          "font-style": "normal"
+          "fontFamily": "Mulish, sans-serif",
+          "fontOpticalSizing": "auto",
+          "fontWeight": "<weight>",
+          "fontStyle": "normal"
         }}>
           Ver horarios disponibles
         </button>
       </div>
 
       {/* menu del dia1 */}
-      <div className="menudeldia" style={{ backgroundColor: "rgb(56, 101, 229, 0.3", "borderRadius": "10px", "overflow": "hidden", "marginBottom": "30px" }}>
+      <div className="menudeldia" style={{ "backgroundColor": "rgb(56, 101, 229, 0.3", "borderRadius": "10px", "overflow": "hidden", "marginBottom": "30px" }}>
         <div className="mb-5">
           <h2 className="text-center mb-5 text-light" style={{
-            fontFamily: "Mulish, sans-serif",
-            "font-optical-sizing": "auto",
-            "font-weight": "<weight>",
-            "font-style": "normal",
+            "fontFamily": "Mulish, sans-serif",
+            "fontOpticalSizing": "auto",
+            "fontWeight": "<weight>",
+            "fontStyle": "normal",
             "marginTop": "20px"
           }}>MENÚ DEL DÍA</h2>
           <div className="row">
@@ -158,11 +159,11 @@ export const Menu = () => {
                   />
                   <div className="card-body text-center">
                     <button className="btn  w-100" style={{
-                      backgroundColor: "rgb(56, 101, 229", "color": "white",
-                      fontFamily: "Mulish, sans-serif",
-                      "font-optical-sizing": "auto",
-                      "font-weight": "<weight>",
-                      "font-style": "normal"
+                      "backgroundColor": "rgb(56, 101, 229", "color": "white",
+                      "fontFamily": "Mulish, sans-serif",
+                      "fontOpticalSizing": "auto",
+                      "fontWeight": "<weight>",
+                      "fontStyle": "normal"
                     }}>Comprar</button>
                   </div>
                 </div>
@@ -173,13 +174,13 @@ export const Menu = () => {
       </div>
 
       {/* posible menu del dia2 */}
-      <div className="menudeldia2" style={{ backgroundColor: "rgb(56, 101, 229, 0.3", "borderRadius": "10px", "overflow": "hidden", "marginTop": "30px" }}>
+      <div className="menudeldia2" style={{ "backgroundColor": "rgb(56, 101, 229, 0.3", "borderRadius": "10px", "overflow": "hidden", "marginTop": "30px" }}>
         <div className="mb-5">
           <h2 className="text-center mb-5 text-light" style={{
-            fontFamily: "Mulish, sans-serif",
-            "font-optical-sizing": "auto",
-            "font-weight": "<weight>",
-            "font-style": "normal",
+            "fontFamily": "Mulish, sans-serif",
+            "fontOpticalSizing": "auto",
+            "fontWeight": "<weight>",
+            "fontStyle": "normal",
             "marginTop": "20px"
           }}>MENÚ DE LA SEMANA</h2>
           <div className="row">
@@ -189,17 +190,17 @@ export const Menu = () => {
                   <div
                     className="position-relative"
                     style={{
-                      backgroundColor: "rgb(56, 101, 229",
-                      color: "white",
-                      fontSize: "1.5rem",
-                      fontWeight: "bold",
-                      textAlign: "center",
-                      padding: "10px 0",
-                      position: "absolute",
-                      top: "0",
-                      left: "0",
-                      right: "0",
-                      zIndex: 2,
+                      "backgroundColor": "rgb(56, 101, 229",
+                      "color": "white",
+                      " fontSize": "1.5rem",
+                      " fontWeight": "bold",
+                      "textAlign": "center",
+                      "  padding": "10px 0",
+                      " position": "absolute",
+                      "top": "0",
+                      "left": "0",
+                      "  right": "0",
+                      "zIndex": 2,
                     }}
                   >
                     {item.title}
@@ -215,18 +216,18 @@ export const Menu = () => {
                     <button className="btn  w-50 m-1" style={{
                       "backgroundColor": "rgb(56, 101, 229", "color": "white",
                       "fontFamily": "Mulish, sans-serif",
-                      "font-optical-sizing": "auto",
-                      "font-weight": "<weight>",
-                      "font-style": "normal"
+                      "fontOpticalSizing": "auto",
+                      "fontWeight": "<weight>",
+                      "fontStyle": "normal"
                     }}>Comprar</button>
 
-<button className="btn  w-10 m-1" style={{
+                    <button className="btn  w-10 m-1" style={{
                       "backgroundColor": "#9b51e0", "color": "white",
                       "fontFamily": "Mulish, sans-serif",
-                      "font-optical-sizing": "auto",
-                      "font-weight": "<weight>",
-                      "font-style": "normal"
-                    }}><i class="fa-solid fa-star"></i></button>
+                      "fontOpticalSizing": "auto",
+                      "fontWeight": "<weight>",
+                      "fontStyle": "normal"
+                    }}><i className="fa-regular fa-star"></i></button>
                   </div>
                 </div>
               </div>
@@ -239,10 +240,10 @@ export const Menu = () => {
       {/* otro menu */}
       <div className="">
         <h2 className="text-center mb-3" style={{
-          fontFamily: "Mulish, sans-serif",
-          "font-optical-sizing": "auto",
-          "font-weight": "<weight>",
-          "font-style": "normal"
+          "fontFamily": "Mulish, sans-serif",
+          "fontOpticalSizing": "auto",
+          "fontWeight": "<weight>",
+          "fontStyle": "normal"
         }}>OTRAS OPCIONES</h2>
         <div className="row">
           {anotheroptions.map((item, index) => (
