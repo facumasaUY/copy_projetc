@@ -4,6 +4,7 @@ import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
+import { Menu } from "./pages/menu";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { ShoppingCart } from "./pages/shoppingCart";
