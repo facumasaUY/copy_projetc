@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-export const Card = () => {
+export const Feedback = () => {
 	return (
 		<div className="container d-flex m-2">
 			<div className="card" style={{"width": "18rem"}}>
