@@ -15,6 +15,7 @@ import { Footer } from "./component/loginfooter";
 import {Register} from "./component/register"
 
 import { Feedback } from "./component/card";
+import { PlaceReservations } from "./pages/placeReservations";
 import { Menu } from "./pages/menu";
 
 
@@ -36,10 +37,12 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Register />} path="/register" />
                         <Route element={<Single />} path="/single/:theid" />
+                        <Route element={<PlaceReservations />} path="/reservations" />
                         <Route element={<Menu />} path="/menu"/>
                         <Route element={<ShoppingCart />} path="/shoppingCart" />
                         <Route element={<Feedback />} path="/feedback/:theid"/>
                         <Route element={<h1>Not found!</h1>} />
+
                     </Routes>
                     <Footer />
                 </ScrollToTop>
