@@ -211,14 +211,22 @@ export const Menu = () => {
                     alt={item.name}
                     style={{ objectFit: "cover", height: "300px" }}
                   />
-                  <div className="card-body text-center">
-                    <button className="btn  w-100" style={{
-                      backgroundColor: "rgb(56, 101, 229", "color": "white",
-                      fontFamily: "Mulish, sans-serif",
+                  <div className="card-body text-center d-flex justify-content-between">
+                    <button className="btn  w-50 m-1" style={{
+                      "backgroundColor": "rgb(56, 101, 229", "color": "white",
+                      "fontFamily": "Mulish, sans-serif",
                       "font-optical-sizing": "auto",
                       "font-weight": "<weight>",
                       "font-style": "normal"
                     }}>Comprar</button>
+
+<button className="btn  w-10 m-1" style={{
+                      "backgroundColor": "#9b51e0", "color": "white",
+                      "fontFamily": "Mulish, sans-serif",
+                      "font-optical-sizing": "auto",
+                      "font-weight": "<weight>",
+                      "font-style": "normal"
+                    }}><i class="fa-solid fa-star"></i></button>
                   </div>
                 </div>
               </div>
@@ -257,4 +265,3 @@ export const Menu = () => {
     </div >
   );
 };
- 
