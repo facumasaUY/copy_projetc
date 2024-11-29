@@ -10,3 +10,25 @@
     background-color: white;
     padding: 20px;
 }
+
+.content{
+    margin-bottom: 260px ;
+}
+
+footer {
+    height: 120px;
+    background-color: #3865e5;
+    color: white;
+    text-align: center;
+}
+.andalogo{
+    width:90px;
+}
+
+.loginimage{
+    width: 350px;
+}
+
+.registeruser{
+    width:70px;
+}
