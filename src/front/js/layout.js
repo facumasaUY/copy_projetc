@@ -10,8 +10,10 @@ import { Single } from "./pages/single";
 import { ShoppingCart } from "./pages/shoppingCart";
 import injectContext from "./store/appContext";
 
-import { Navbar } from "./component/navbar";
-import { Footer } from "./component/footer";
+import { Navbar } from "./component/loginnavbar";
+import { Footer } from "./component/loginfooter";
+import {Register} from "./component/register"
+
 import { Feedback } from "./component/card";
 import { Menu } from "./pages/menu";
 
@@ -32,6 +34,7 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
+                        <Route element={<Register />} path="/register" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<Menu />} path="/menu"/>
                         <Route element={<ShoppingCart />} path="/shoppingCart" />
