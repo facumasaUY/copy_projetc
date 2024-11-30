@@ -4,12 +4,15 @@ import { Context } from "../store/appContext";
 export const ShoppingCart = () => {
 	const { store, actions } = useContext(Context);
    return (
-    <div id="listaDeCompras" className="text-center mt-5 mx-auto" style={{width:"370px"}}>
+    <div  className="" style={{color: "#3865e5", backgroundColor:"white"}}>
         <h1>Lista de Compras</h1>
-        <div>
+        <div className="listCart">
 
         </div>
-        
+        <div className="btn" >
+            <button className="close">CERRAR</button>
+            <button className="pay">PAGAR</button>
+        </div>
          
     </div>
 );
