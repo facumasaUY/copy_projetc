@@ -7,14 +7,7 @@ import {Login} from "../component/login"
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	const navigate = useNavigate();
-
-
-	const goMenu = () => {
-		navigate("/menu");
-
-
-	}
+	
 
 	return (
 		<div>
@@ -22,3 +15,4 @@ export const Home = () => {
 		</div>
 	);
 };
+
