@@ -1,0 +1,62 @@
+.shoppingcart{
+    width: 400px;
+    background-color: white;
+    color: #3865e5; 
+    position: fixed;
+    inset: 0 0 0 auto;
+    display: grid;
+    grid-template-rows: 70px 1fr 70px;
+}
+
+.shoppingcart h1{
+    padding: 20px;
+    margin: 0;
+}
+
+.shoppingcart .btn{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10%;
+    
+}
+
+.shoppingcart .close{
+    background-color: gray;
+    border: none;
+    border-radius: 5%;
+    cursor: pointer;
+}
+
+.shoppingcart .pay{
+    background-color: green;
+    border: none;
+    border-radius: 5%;
+    cursor: pointer;
+}
+
+.shoppingcart .listCart .foodImage img{
+    width: 50px;;
+}
+
+.shoppingcart .listCart{
+    display: grid;
+    grid-template-columns: 70px 150px 50px 1fr;
+    gap: 10px;
+    text-align: center;
+    align-items: center;
+}
+
+.shoppingcart .listCart span{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    color: white; 
+    background-color: #3865e5;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.shoppingcart .listCart span:nth-child(2){
+    background-color: transparent;
+    color: #3865e5;
+}
