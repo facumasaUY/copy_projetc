@@ -7,7 +7,7 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
-
+import { Form } from "./component/form";
 import { Navbar } from "./component/loginnavbar";
 import { Footer } from "./component/loginfooter";
 import {Register} from "./component/register"
@@ -29,7 +29,6 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                    <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
@@ -37,6 +36,7 @@ const Layout = () => {
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<PlaceReservations />} path="/reservations" />
                         <Route element={<Menu />} path="/menu"/>
+                        <Route element={<Form />} path="/form/:theid"/>
                         <Route element={<Feedback />} path="/feedback/:theid"/>
                         <Route element={<h1>Not found!</h1>} />
 
