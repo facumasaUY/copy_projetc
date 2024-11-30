@@ -12,7 +12,7 @@ import { Navbar } from "./component/loginnavbar";
 import { Footer } from "./component/loginfooter";
 import {Register} from "./component/register"
 
-import { Feedback } from "./component/card";
+import { Feedback } from "./component/feedback";
 import { PlaceReservations } from "./pages/placeReservations";
 import { Menu } from "./pages/menu";
 

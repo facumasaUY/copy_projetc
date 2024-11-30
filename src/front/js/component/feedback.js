@@ -1,22 +1,22 @@
-import React, { useState } from "react"; 
+import React, { useState } from "react";
 
-export const Feedback = ({ initialRating = 0 , id,name,imageURL,description}) => { 
+export const Feedback = ({ initialRating = 0, id, name, imageURL, description }) => {
 
-  const [rating, setRating] = useState(initialRating); 
+  const [rating, setRating] = useState(initialRating);
 
   const handleClickStar = (newRating) => {
-    setRating(newRating); 
+    setRating(newRating);
   };
 
-  const starElements = []; 
-  for (let i = 1; i <= 5; i++) { 
-    const filled = i <= rating; 
+  const starElements = [];
+  for (let i = 1; i <= 5; i++) {
+    const filled = i <= rating;
     starElements.push(
       <span key={i} onClick={() => handleClickStar(i)}>
-        {filled ? ( 
-          <i className="fas fa-star " style={{ color:"gold"}}></i>
+        {filled ? (
+          <i className="fas fa-star " style={{ color: "gold" }}></i>
         ) : (
-          <i className="far fa-star" style={{ color:"gold"}}></i>
+          <i className="far fa-star" style={{ color: "gold" }}></i>
         )}
       </span>
     );
@@ -24,7 +24,7 @@ export const Feedback = ({ initialRating = 0 , id,name,imageURL,description}) =>
 
   return (
     <div className="container d-flex space-between m-3 justify-content-center">
-      <div className="card " style={{ width: "18rem" , border: "2px solid blue" }}>
+      <div className="card " style={{ width: "19rem", border: "2px solid blue" }}>
         <img
           src="https://cdn0.recetasgratis.net/es/posts/4/3/6/arroz_con_pollo_al_curry_28634_orig.jpg"
           // {imageURL + id} 
@@ -34,10 +34,10 @@ export const Feedback = ({ initialRating = 0 , id,name,imageURL,description}) =>
         <div className="card-body border-primary">
           <h3 className="card-title text-primary">Descripcion
             {description}</h3>
-		  <p>Plato con enslada de quinoa ,verduras y pollo .</p>
-		  
+          <p>Plato con arroz trozos de pollo y verdura salteada .</p>
+
           <p className="card-text">
-            {starElements} {}
+            {starElements} { }
           </p>
         </div>
       </div>
