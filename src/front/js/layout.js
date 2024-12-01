@@ -10,11 +10,16 @@ import injectContext from "./store/appContext";
 import { Form } from "./component/form";
 import { Navbar } from "./component/loginnavbar";
 import { Footer } from "./component/loginfooter";
+
+import {Register} from "./component/register"
+import { Menu } from "./component/menu";
+=======
 import { Register } from "./component/register"
+
 
 import { Feedback } from "./component/feedback";
 import { PlaceReservations } from "./pages/placeReservations";
-import { Menu } from "./component/menu";
+
 
 
 //create your first component
