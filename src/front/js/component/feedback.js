@@ -23,11 +23,11 @@ export const Feedback = ({ initialRating = 0, id, name, imageURL, description })
   }
 
   return (
-    <div className="container d-flex space-between m-3 justify-content-center">
+    <div className="container d-flex mt-4 mb-3 justify-content-center">
       <div className="card " style={{ width: "19rem", border: "2px solid blue" }}>
         <img
           src="https://cdn0.recetasgratis.net/es/posts/4/3/6/arroz_con_pollo_al_curry_28634_orig.jpg"
-          // {imageURL + id} 
+          // {img + id} 
           className="card-img-top"
           alt={name}
         />
