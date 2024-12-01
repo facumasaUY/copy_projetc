@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
@@ -28,15 +29,17 @@ export const Login = () => {
 						<input type="password" className="form-control" id="exampleInputPassword1" />
 					</div>
 					<div className="text-center">
-						<button type="submit" className="btn btn-primary">Entrar</button>
+						<Link to={"/menu"}>
+						<button type="submit" className="btn btn-primary">Entrar</button></Link>
 					</div>
 
 					<div className="text-center mt-2">
-						<p>¿Olvidaste tu contraseña?</p>
+						<p>¿Olvidase tu contraseña?</p>
 					</div>
 
 					<div className="text-center mt-2">
-						<p className="text-info">Registrarse</p>
+						<Link to={"/register"}>
+						<p className="text-info">Registrarse</p></Link>
 					</div>
 				</form>
 			</div>
