@@ -14,7 +14,7 @@ import {Register} from "./component/register"
 
 import { Feedback } from "./component/card";
 import { PlaceReservations } from "./pages/placeReservations";
-import { Menu } from "./pages/menu";
+import { Menu } from "./component/menu";
 
 
 //create your first component
