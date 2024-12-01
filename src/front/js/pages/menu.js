@@ -51,7 +51,7 @@ export const Menu = () => {
     <div className="container mt-3">
       <nav className="navbar bg-body-tertiary">
 
-        <div className="container-fluid d-flex justify-content-between align-items-center">
+        <div className="container-fluid d-flex justify-content-between align-items-center" >
           <a className="navbar-brand d-flex align-items-center">
             <img src={andalogofood} alt="Anda Food Logo" style={{ width: "50px", height: "50px", marginRight: "10px", "borderRadius": "10px" }} />
           </a>
@@ -76,7 +76,7 @@ export const Menu = () => {
               </div>
 
              {/* Body */}
-              <div className="listCart offcanvas-body" style={{ backgroundColor: "rgb(56, 101, 229, 0.3)"}}>
+              <div className="listCart offcanvas-body position-relative" style={{ backgroundColor: "rgb(56, 101, 229, 0.3)"}}>
 
               {listCart.length === 0 ? (
                   <p>El carrito está vacío.</p>
@@ -126,9 +126,9 @@ export const Menu = () => {
 
                 </div>)))}
 
-                <div className="btn " >
-                  <button type="button" className="close" data-bs-dismiss="offcanvas" aria-label="Close">CERRAR</button>
-                  <button className="pay">PAGAR</button>
+                <div className="btn position-absolute bottom-0 start-0 end-0 d-flex justify-content-between" >
+                  <button type="button" className="close align-self-start" data-bs-dismiss="offcanvas" aria-label="Close">VOLVER</button>
+                  <button className="pay align-self-end">IR A PAGAR</button>
                 </div>
 
               </div>
@@ -158,7 +158,7 @@ export const Menu = () => {
                     <div key={item.id} className="col-12 col-md-4 mb-3">
                       <div className="card h-100 mx-3" style={{ borderRadius: "10px", overflow: "hidden" }}>
                         
-                        {/* Nombre de la comid - actualmente dice solo Opción 1, 2 o 3 */}
+                        {/* Nombre de la comida - actualmente dice solo Opción 1, 2 o 3 */}
                         <div className="position-relative" style={{ backgroundColor: "rgb(56, 101, 229)", color: "white", fontSize: "15px", fontWeight: "bold", textAlign: "center", padding: "10px 0" }}>
                           {item.name}
                         </div>
@@ -166,7 +166,7 @@ export const Menu = () => {
                         {/* Imagen de cada menu */}
                         <img src={item.img} className="card-img-top img-fluid" alt={item.name} style={{ objectFit: "cover", height: "300px" }} />
                        
-                       {/* Precio de cada menu */}
+                       {/* Precio de cada menu - actualmente solo dice Valor 1,2 o 3 */}
                         <div className="position-relative" style={{ backgroundColor: "rgb(56, 101, 229)", color: "white", fontSize: "15px", fontWeight: "bold", textAlign: "center", padding: "10px 0" }}>
                           {item.precio}
                         </div>
@@ -176,7 +176,7 @@ export const Menu = () => {
                           <button className="btn w-50 m-1" onClick={()=>handleClick(item)} style={{
                             backgroundColor: "rgb(56, 101, 229)",
                             color: "white" }}>
-                            Comprar
+                            Añadir al Carrito
                             </button>
                           <button className="btn w-10 m-1" style={{
                             backgroundColor: "#9b51e0",
