@@ -1,4 +1,4 @@
-.shoppingcart{
+/* .shoppingcart{
     width: 400px;
     background-color: white;
     color: #3865e5; 
@@ -6,57 +6,65 @@
     inset: 0 0 0 auto;
     display: grid;
     grid-template-rows: 70px 1fr 70px;
-}
+} */
 
-.shoppingcart h1{
+/* .shoppingcart h1{
     padding: 20px;
     margin: 0;
-}
+} */
 
-.shoppingcart .btn{
+/* .shoppingcart .btn{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10%;
-    
-}
+     */
 
-.shoppingcart .close{
+
+.shoppingCart .close{
     background-color: gray;
     border: none;
     border-radius: 5%;
     cursor: pointer;
 }
 
-.shoppingcart .pay{
+.shoppingCart .pay{
     background-color: green;
     border: none;
     border-radius: 5%;
     cursor: pointer;
 }
 
-.shoppingcart .listCart .foodImage img{
-    width: 50px;;
+.shoppingCart .listCart .foodImage img{
+    width: 50px;
+    padding: 5px;
 }
 
-.shoppingcart .listCart{
+/* .shoppingcart .listCart{
     display: grid;
     grid-template-columns: 70px 150px 50px 1fr;
     gap: 10px;
     text-align: center;
     align-items: center;
-}
+} */
 
-.shoppingcart .listCart span{
+/* .shoppingCart .listCart .cantidad span{
     display: inline-block;
-    width: 25px;
-    height: 25px;
     color: white; 
     background-color: #3865e5;
     border-radius: 50%;
     cursor: pointer;
-}
+    size: 30px;
+} */
 
-.shoppingcart .listCart span:nth-child(2){
+.shoppingCart .listCart .cantidad span:nth-child(2){
     background-color: transparent;
     color: #3865e5;
 }
+
+/* .shoppingcart{
+    overflow: auto;
+}
+
+.shoppingcart::-webkit-scrollbar{
+    width: 0;
+} */

@@ -31,7 +31,7 @@ export const Footer = () => (
 			</div>
 
 			<div className="d-flex align-item-center me-2">
-				<i class="fa-brands fa-linkedin-in mt-1 me-1" style={{color: "#ffffff;"}}></i>
+				<i className="fa-brands fa-linkedin-in mt-1 me-1" style={{color: "#ffffff"}}></i>
 				<p>ANDA</p>
 			</div>
 
