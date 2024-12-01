@@ -4,16 +4,13 @@
 		"node": "16.x"
 	},
 	"version": "1.0.1",
-	"description": "",
+	"description": "Build web applications using React.js for the front end and python/flask for your backend API.",
 	"main": "index.js",
 	"scripts": {
 		"start": "webpack-dev-server --config webpack.dev.js --port 3000",
 		"build": "webpack --config webpack.prod.js"
 	},
-	"author": {
-		"name": "Alejandro Sanchez",
-		"url": "http://alesanchezr.com/"
-	},
+	"author": "Alejandro Sanchez (http://alesanchezr.com/)",
 	"contributors": [
 		{
 			"name": "Alejandro Sanchez",
@@ -52,8 +49,8 @@
 		"prettier": "^2.5.1",
 		"remote-origin-url": "^2.0.0",
 		"style-loader": "^3.3.1",
-		"webpack": "^5.65.0",
-		"webpack-cli": "^4.9.1",
+		"webpack": "^5.96.1",
+		"webpack-cli": "^4.10.0",
 		"webpack-dev-server": "^4.6.0",
 		"webpack-merge": "^5.8.0"
 	},
@@ -74,10 +71,34 @@
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-free": "^6.7.1",
+		"@mercadopago/sdk-react": "^0.0.19",
+		"assert": "^2.1.0",
+		"async_hooks": "^1.0.0",
+		"axios": "^1.7.8",
+		"browserify-zlib": "^0.2.0",
+		"buffer": "^6.0.3",
+		"cors": "^2.8.5",
+		"crypto-browserify": "^3.12.1",
+		"dotenv": "^16.4.5",
+		"express": "^4.21.1",
+		"https-browserify": "^1.0.0",
+		"mercadopago": "^2.0.15",
+		"os-browserify": "^0.3.0",
+		"path-browserify": "^1.0.1",
+		"process": "^0.11.10",
 		"prop-types": "^15.6.1",
 		"react": "^16.8.4",
 		"react-dom": "^16.8.4",
 		"react-polyfills": "0.0.1",
-		"react-router-dom": "^6.3.0"
-	}
+		"react-router-dom": "^6.3.0",
+		"stream-browserify": "^3.0.0",
+		"stream-http": "^3.2.0",
+		"util": "^0.12.5",
+		"vexor": "^0.0.30",
+		"vm-browserify": "^1.1.2"
+	},
+	"directories": {
+		"doc": "docs"
+	},
+	"keywords": []
 }

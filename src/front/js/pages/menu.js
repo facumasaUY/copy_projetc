@@ -2,20 +2,57 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import andalogofood from "../../img/anda.png";
 import "../../styles/shoppingCart.css";
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import { Axios } from "axios"
 
 export const Menu = () => {
+
+  initMercadoPago('TEST-309ffaff-96ff-431f-a465-2b8b243d7054',{
+    locale: "es-UY",
+  });
+
+  const [preferenceId, setPreferenceId] = useState(null)
 
   const [listCart, setListCart] = useState([]);
 
   const handleClick = (item) => {
-    setListCart((carritoActual)=>[...carritoActual,item]);
-    
+    setListCart((carritoActual) => {
+      const existe = carritoActual.some((producto) => producto.id === item.id);
+      if (!existe) {
+        return [...carritoActual, item];
+      }
+      return carritoActual;
+    });
+  };
+
+  const createPreference = async () => {
+    try {
+      const response = await Axios.post("http://localhost:3000/create_preference",{
+        title: "Fideos con Salsa Boloñesa",
+        quantity: 1,
+        price: 100,
+      });
+      const { id } = response.data;
+      return id;
+    } catch  (error) {
+      console.log(error)
+    }};
+
+  const handleCompra = async () => {
+    if (listCart.length === 0) {
+      alert("El carrito está vacío. Por favor, añade productos antes de pagar.");
+      return
+    }
+    const id = await createPreference();
+    if (id){
+      setPreferenceId(id);
+    }
   };
 
   const menuDay2 = {
 
     LUNES: [
-      { id: "Lunes_1", name: "Opción 1", precio: "Valor 1", img: "https://cdn0.recetasgratis.net/es/posts/4/3/6/arroz_con_pollo_al_curry_28634_orig.jpg" },
+      { id: "Lunes_1", name: "Opción 1", precio: 250, img: "https://cdn0.recetasgratis.net/es/posts/4/3/6/arroz_con_pollo_al_curry_28634_orig.jpg" },
       { id: "Lunes_2", name: "Opción 2", precio: "Valor 2", img: "https://www.nutrioli.com/wp-content/uploads/2016/06/Ensalada-de-lechugas-frutas-y-nuez-de-la-india-2.jpg" },
       { id: "Lunes_3", name: "Opción 3", precio: "Valor 3", img: "https://www.lacocinadelila.com/wp-content/uploads/2021/01/albondigas-de-pollo-600x450.jpg" },
     ],
@@ -128,8 +165,9 @@ export const Menu = () => {
 
                 <div className="btn position-absolute bottom-0 start-0 end-0 d-flex justify-content-between" >
                   <button type="button" className="close align-self-start" data-bs-dismiss="offcanvas" aria-label="Close">VOLVER</button>
-                  <button className="pay align-self-end">IR A PAGAR</button>
-                </div>
+                  <button className="pay align-self-end" id="process-checkout" onClick={()=>handleCompra()}>IR A PAGAR</button>
+                  {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} customization={{ texts:{ valueProp: 'smart_option'}}} />}
+                 </div>
 
               </div>
 
@@ -194,6 +232,6 @@ export const Menu = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 

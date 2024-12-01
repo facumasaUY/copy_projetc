@@ -36,7 +36,22 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['*', '.js']
+    extensions: ['*', '.js'],
+    fallback: {
+      path: require.resolve('path-browserify'),
+      zlib: require.resolve('browserify-zlib'),
+      crypto: require.resolve('crypto-browserify'),
+      stream: require.resolve('stream-browserify'),
+      os: require.resolve('os-browserify/browser'),
+      fs: false,
+      net: false,
+      http: require.resolve('stream-http'),
+      "assert": require.resolve("assert/"),
+      "util": require.resolve("util/"),
+      "vm": require.resolve("vm-browserify"),
+      "async_hooks": require.resolve("async_hooks"),
+      "assert": require.resolve("assert/"),
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
