@@ -1,7 +1,85 @@
-import React from "react";
-import andalogofood from "../../img/anda.png";
+import React, { useState } from "react";
+import andalogofood from "../../img/anda.png";import "../../styles/shoppingCart.css";
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import { Axios } from "axios"
 
 export const Menu = () => {
+
+    initMercadoPago('TEST-309ffaff-96ff-431f-a465-2b8b243d7054',{
+      locale: "es-UY",
+    });
+  
+    const [preferenceId, setPreferenceId] = useState(null)
+  
+    const [listCart, setListCart] = useState([]);
+  
+    const [showNotification, setShowNotification] = useState(false)
+
+
+    {/*VER EN CLASE CON SAMUEL, EL CONSOLE LOG FUNCA PERO NO APARECE LA NOTIFICACION*/}
+    const mostrarNotificacion = () => {
+      if (!showNotification) { 
+        console.log("Mostrando notificación...");
+        setShowNotification(true);
+        setTimeout(() => {
+          console.log("Ocultando notificación...");
+          setShowNotification(false);
+        }, 3000);
+      }
+      return (<div>{showNotification && 
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <img src="..." class="rounded me-2" alt="..."/>
+            <strong class="me-auto">Bootstrap</strong>
+            <small>11 mins ago</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            Hello, world! This is a toast message.
+          </div>
+        </div>
+      </div>
+      }</div>)
+    };
+
+    const handleNotificacion = () =>{
+      return mostrarNotificacion()
+    }
+
+    const handleClick = (item) => {
+      setListCart((carritoActual) => {
+        const existe = carritoActual.some((producto) => producto.id === item.id);
+        if (!existe) {
+          return [...carritoActual, item];
+        }
+        return carritoActual;
+      });
+    };
+  
+    const createPreference = async () => {
+      try {
+        const response = await Axios.post("http://localhost:3000/create_preference",{
+          title: "Fideos con Salsa Boloñesa",
+          quantity: 1,
+          price: 100,
+        });
+        const { id } = response.data;
+        return id;
+      } catch  (error) {
+        console.log(error)
+      }};
+  
+    const handleCompra = async () => {
+      if (listCart.length === 0) {
+        alert("El carrito está vacío. Por favor, añade productos antes de pagar.");
+        return
+      }
+      const id = await createPreference();
+      if (id){
+        setPreferenceId(id);
+      }
+    };  
 
   const menuDay2 = {
 
@@ -37,37 +115,100 @@ export const Menu = () => {
     ],
   };
 
-
-
   return (
     <div className="container mt-3">
       <nav className="navbar bg-body-tertiary">
-        <div className="container-fluid d-flex justify-content-between align-items-center">
+
+        <div className="container-fluid d-flex justify-content-between align-items-center" >
           <a className="navbar-brand d-flex align-items-center">
             <img src={andalogofood} alt="Anda Food Logo" style={{ width: "50px", height: "50px", marginRight: "10px", "borderRadius": "10px" }} />
           </a>
-          <div className="flex-direction-column">
-            <p><a className="link-opacity-10-hover m-2  " href="#">Déjanos tu comentario</a></p>
-            <button className="btn m-1 " type="button" style={{ backgroundColor: "rgb(56, 101, 229)", "color": "white" }}><i className="fa-regular fa-clock"></i></button>
-            <button className="btn m-1  " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style={{ "backgroundColor": "rgb(56, 101, 229)", "color": "white" }}>
+
+
+          {/* El carrito de compras */}
+
+          <div className="shoppingCart d-flex">
+
+            {/* Boton de Carrito */}
+            <button className="btn m-1 " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style={{ "backgroundColor": "rgb(56, 101, 229)", "color": "white" }}>
               <i className="fa-solid fa-cart-shopping"></i>
             </button>
-            <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-              <div className="offcanvas-header">
-                <h5 className="offcanvas-title text-primary" id="offcanvasExampleLabel">Lista de Compras</h5>
-                <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+
+            {/* Ventana */}
+            <div className="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+
+              {/* Título */}
+              <div className="offcanvas-header" style={{
+                color: "white",
+                backgroundColor: "#3865e5"
+              }}>
+                <h1>Carrito</h1>
+              </div>
+
+              {/* Body */}
+              <div className="listCart offcanvas-body position-relative" style={{ backgroundColor: "rgb(56, 101, 229, 0.3)" }}>
+
+                {listCart.length === 0 ? (
+                  <p>El carrito está vacío.</p>
+                ) : (
+                  listCart.map((item, index) => (
+
+
+                    <div key={index} className="d-flex align-items justify-content-evenly" style={{ backgroundColor: "white" }}>
+
+                      <div className="foodImage d-flex justify-content-center align-items-center">
+                        <img src={item.img} />
+                      </div>
+
+                      <div className="foodName d-flex justify-content-center align-items-center" style={{ color: "#3865e5" }}>
+                        {item.name}
+                      </div>
+
+                      <div className="precioTotal d-flex justify-content-center align-items-center" style={{ color: "#3865e5" }}>
+                        {item.price}
+                      </div>
+
+                      <div className="cantidad d-flex justify-content-center align-items-center">
+                        <span className="menos" style={{
+                          width: "30px",
+                          height: "30px",
+                          color: "white",
+                          backgroundColor: "#3865e5",
+                          borderRadius: "50%",
+                          cursor: "pointer",
+                          margin: "0 10px",
+                          textAlign: "center"
+                        }}>
+                          {"<"}
+                        </span>
+                        <span>1</span>
+                        <span className="mas" style={{
+                          width: "30px",
+                          height: "30px",
+                          color: "white",
+                          backgroundColor: "#3865e5",
+                          borderRadius: "50%",
+                          cursor: "pointer",
+                          margin: "0 10px",
+                          textAlign: "center"
+                        }}>
+                          {">"}
+                        </span>
+                      </div>
+
+                    </div>)))}
+
+
+                <div className="btn position-absolute bottom-0 start-0 end-0 d-flex justify-content-between" >
+                  <button type="button" className="close align-self-start" data-bs-dismiss="offcanvas" aria-label="Close">VOLVER</button>
+                  <button className="pay align-self-end" id="process-checkout" onClick={() => handleCompra()}>IR A PAGAR</button>
+                  {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} customization={{ texts: { valueProp: 'smart_option' } }} />}
+                </div>
 
               </div>
-              <div className="offcanvas-body">
-                <div>
-                  Menúes
-                </div>
-                <div className="mt-auto d-flex justify-content-end">
-                  <button type="button" className="btn btn-secondary m-1">Cerrar</button>
-                  <button type="button" className="btn btn-success m-1">Pagar</button>
-                </div>
-              </div>
+
             </div>
+
           </div>
         </div>
       </nav>
@@ -135,10 +276,11 @@ export const Menu = () => {
                           >
                             {item.price}
                           </div>
+
                           <div className="card-body text-center p-2">
                             <div className="d-flex justify-content-between">
                               <button
-                                className="btn "
+                                className="btn " onClick={() =>{ handleClick(item); handleNotificacion()}}
                                 style={{
                                   backgroundColor: "rgb(56, 101, 229)",
                                   color: "white",
@@ -146,7 +288,7 @@ export const Menu = () => {
                                   borderRadius: "10px",
                                 }}
                               >
-                                Comprar
+                                Añadir al Carrito
                               </button>
                               <button
                                 className="btn"
@@ -159,6 +301,7 @@ export const Menu = () => {
                               </button>
                             </div>
                           </div>
+
                         </div>
                       </div>
                     ))}
@@ -169,6 +312,10 @@ export const Menu = () => {
           </div>
         </div>
       </div>
+     
+     {/* Notificación */}
+
+     
 
 
       {/* CARRUSEL OTRAS OPCIONES  */}
@@ -194,7 +341,8 @@ export const Menu = () => {
             <button className="btn m-1 " style={{ backgroundColor: "rgb(56, 101, 229)", color: "white", fontSize: "12px", "borderRadius": "10px" }}><i className="fa-solid fa-cart-shopping"></i></button>
           </div>
 
-
+          {/* OTROS PORDUCTOS. Para poder añadirlos al carrito falta crearles  una lista, como los menus de la semana
+         Queda esto pendiente, al ser algo facil lo dejo para solucionar en la proxima semana.*/}
           <div className="text-center" style={{ margin: "10px" }}>
             <img
               src="https://i.pinimg.com/736x/c2/f6/92/c2f692861075c7bbcd97ec594962222d.jpg"

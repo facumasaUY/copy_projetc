@@ -6,7 +6,6 @@ import { BackendURL } from "./component/backendURL";
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
-import { ShoppingCart } from "./pages/shoppingCart";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/loginnavbar";
@@ -38,7 +37,6 @@ const Layout = () => {
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<PlaceReservations />} path="/reservations" />
                         <Route element={<Menu />} path="/menu"/>
-                        <Route element={<ShoppingCart />} path="/shoppingCart" />
                         <Route element={<Feedback />} path="/feedback/:theid"/>
                         <Route element={<h1>Not found!</h1>} />
 

@@ -222,6 +222,7 @@ export const Menu = () => {
                             <i className="fa-regular fa-star"></i>
                           </button>
                         </div>
+                        
                       </div>
                     </div>
                   ))}
