@@ -11,10 +11,9 @@ import { Form } from "./component/form";
 import { Navbar } from "./component/loginnavbar";
 import { Footer } from "./component/loginfooter";
 
-import {Register} from "./component/register"
+import {Register} from "./component/register";
 import { Menu } from "./component/menu";
-=======
-import { Register } from "./component/register"
+
 
 
 import { Feedback } from "./component/feedback";
