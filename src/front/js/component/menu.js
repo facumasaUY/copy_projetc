@@ -1,80 +1,53 @@
 import React from "react";
 import andalogofood from "../../img/anda.png";
+import { useNavigate } from "react-router-dom";
+
 
 export const Menu = () => {
+
+  const navigate = useNavigate();
 
   const menuDay2 = {
 
     LUNES: [
       { id: "lunes_1", name: "Opción 1", img: "https://cdn0.recetasgratis.net/es/posts/4/3/6/arroz_con_pollo_al_curry_28634_orig.jpg", price: "$350" },
-      { id: "lunes_2", name: "Opción 2", img: "https://www.nutrioli.com/wp-content/uploads/2016/06/Ensalada-de-lechugas-frutas-y-nuez-de-la-india-2.jpg", price: "$350" },
+      { id: "Lunes_2", name: "Opción 2", img: "https://www.nutrioli.com/wp-content/uploads/2016/06/Ensalada-de-lechugas-frutas-y-nuez-de-la-india-2.jpg", price: "$350" },
       { id: "lunes_3", name: "Opción 3", img: "https://www.lacocinadelila.com/wp-content/uploads/2021/01/albondigas-de-pollo-600x450.jpg", price: "$350" },
     ],
     MARTES: [
-      { id: "martes_1", name: "Opción 1", img: "https://content.elmueble.com/medio/2024/10/03/pollo-a-la-plancha-con-verduras-al-pesto_a53bee68_241003155651_1200x1200.webp", price: "$350" },
-      { id: "martes_2", name: "Opción 2", img: "https://upload.wikimedia.org/wikipedia/commons/2/23/Caesar_salad_%282%29.jpg", price: "$350" },
-      { id: "martes_3", name: "Opción 3", img: "https://sinreservas.com.ar/download/multimedia.normal.97a15526e9be66bf.53616e7a61727520283130295f6e6f726d616c2e77656270.webp", price: "$350" },
+      { id: "Martes_1", name: "Opción 1", img: "https://content.elmueble.com/medio/2024/10/03/pollo-a-la-plancha-con-verduras-al-pesto_a53bee68_241003155651_1200x1200.webp", price: "$350" },
+      { id: "Martes_2", name: "Opción 2", img: "https://upload.wikimedia.org/wikipedia/commons/2/23/Caesar_salad_%282%29.jpg", price: "$350" },
+      { id: "Martes_3", name: "Opción 3", img: "https://sinreservas.com.ar/download/multimedia.normal.97a15526e9be66bf.53616e7a61727520283130295f6e6f726d616c2e77656270.webp", price: "$350" },
     ],
     MIÉRCOLES: [
-      { id: "miércoles_1", name: "Opción 1", img: "https://www.deliciosi.com/images/300/378/crema-de-calabaza.jpg", price: "$350" },
-      { id: "miércoles_2", name: "Opción 2", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnrVXtOErESITNnhn9MJMOptSFBKsEPA-9QA&s", price: "$300" },
-      { id: "miércoles_3", name: "Opción 3", img: "https://content.elmueble.com/medio/2024/09/06/arroz-con-verduras_ab2a54ac_240906144446_1200x1200.jpg", price: "$250" },
+      { id: "Miércoles_1", name: "Opción 1", description:"Esto es una descripción...", img: "https://www.deliciosi.com/images/300/378/crema-de-calabaza.jpg", price: "$350" },
+      { id: "Miércoles_2", name: "Opción 2", description:"Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnrVXtOErESITNnhn9MJMOptSFBKsEPA-9QA&s", price: "$300" },
+      { id: "Miércoles_3", name: "Opción 3", description:"Esto es una descripción...", img: "https://content.elmueble.com/medio/2024/09/06/arroz-con-verduras_ab2a54ac_240906144446_1200x1200.jpg", price: "$250" },
     ],
     JUEVES: [
-      { id: "jueves_1", name: "Opción 1", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeL6NmTbnojfQnaiMnYoLpiNqzOYnkNMBQHA&s", price: "$350" },
-      { id: "jueves_2", name: "Opción 2", img: "https://truffle-assets.tastemadecontent.net/cdn-cgi/image/width=360/a2f94f01-742_friedchickensalad_square2.jpg", price: "$350" },
-      { id: "jueves_3", name: "Opción 3", img: "https://www.frutamare.com/wp-content/uploads/2021/04/pasta-a-la-bolonesa.jpg", price: "$300" },
+      { id: "Jueves_1", name: "Opción 1", description:"Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeL6NmTbnojfQnaiMnYoLpiNqzOYnkNMBQHA&s", price: "$350" },
+      { id: "Jueves_2", name: "Opción 2", description:"Esto es una descripción...", img: "https://truffle-assets.tastemadecontent.net/cdn-cgi/image/width=360/a2f94f01-742_friedchickensalad_square2.jpg", price: "$350" },
+      { id: "Jueves_3", name: "Opción 3", description:"Esto es una descripción...", img: "https://www.frutamare.com/wp-content/uploads/2021/04/pasta-a-la-bolonesa.jpg", price: "$300" },
     ],
     VIERNES: [
-      { id: "viernes_1", name: "Opción 1", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7n0A8vIS8MRwnHMZhX-MxS2W_L2b0-6g8Jw&s", price: "$350" },
-      { id: "viernes_2", name: "Opción 2", img: "https://img.freepik.com/fotos-premium/weiner-schnitzel-empanado-casero-papas-fritas-pollo-frito-papas-fritas-estilo-comida-europea_1339-152591.jpg", price: "$250" },
-      { id: "viernes_3", name: "Opción 3", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcpQ3KilaPlZwatN49TzcFTRwbDXQ-VFWsx_tScOJkHuh7zyh8_rIVvc-r72wM6whCNfc&usqp=CAU", price: "$200" },
+      { id: "Viernes_1", name: "Opción 1", description:"Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7n0A8vIS8MRwnHMZhX-MxS2W_L2b0-6g8Jw&s", price: "$350" },
+      { id: "Viernes_2", name: "Opción 2", description:"Esto es una descripción...", img: "https://img.freepik.com/fotos-premium/weiner-schnitzel-empanado-casero-papas-fritas-pollo-frito-papas-fritas-estilo-comida-europea_1339-152591.jpg", price: "$250" },
+      { id: "Viernes_3", name: "Opción 3", description:"Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcpQ3KilaPlZwatN49TzcFTRwbDXQ-VFWsx_tScOJkHuh7zyh8_rIVvc-r72wM6whCNfc&usqp=CAU", price: "$200" },
     ],
     SÁBADO: [
-      { id: "sábado_1", name: "Opción 1", img: "https://cdn0.recetasgratis.net/es/posts/8/9/0/ensalada_de_garbanzos_vegana_59098_600_square.jpg", price: "$350" },
-      { id: "sábado_2", name: "Opción 2", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPnXJcdnE2L04D4PAB0py1DthQJoctIfVfUw&s", price: "$300" },
-      { id: "sábado_3", name: "Opción 3", img: "https://i.pinimg.com/736x/bf/cf/ce/bfcfce36554e902259cbcad00169a51c.jpg", price: "$350" },
+      { id: "Sábado_1", name: "Opción 1", description:"Esto es una descripción...", img: "https://cdn0.recetasgratis.net/es/posts/8/9/0/ensalada_de_garbanzos_vegana_59098_600_square.jpg", price: "$350" },
+      { id: "Sábado_2", name: "Opción 2", description:"Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPnXJcdnE2L04D4PAB0py1DthQJoctIfVfUw&s", price: "$300" },
+      { id: "Sábado_3", name: "Opción 3", description:"Esto es una descripción...", img: "https://i.pinimg.com/736x/bf/cf/ce/bfcfce36554e902259cbcad00169a51c.jpg", price: "$350" },
     ],
   };
 
-  const anotheroptions = [
-    {
-      id: 1,
-      name: "Coca-Cola Común",
-      img: "https://i.pinimg.com/736x/cc/8e/3c/cc8e3cb0ff29ae7c19499124dfea1196.jpg",
-      price: 62,
-    },
-    {
-      id: 2,
-      name: "Coca-Cola Light",
-      img: "https://i.pinimg.com/736x/c2/f6/92/c2f692861075c7bbcd97ec594962222d.jpg",
-      price: 62,
-    },
-    {
-      id: 3,
-      name: "Coca-Cola Zero",
-      img: "https://i.pinimg.com/736x/a1/5e/ab/a15eab3e7c4f254c5b0701d007992599.jpg",
-      price: 62,
-    },
-    {
-      id: 4,
-      name: "Agua Salus",
-      img: "https://molinoagranel.com.uy/wp-content/uploads/2023/06/agua-mineral-salus-600-ml.jpg",
-      price: 42,
-    },
-    {
-      id: 5,
-      name: "Manzanas",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiCLdNje1XoCGFCNiRhbZwFq8ZPJaIY6Xf-Q&s",
-      price: "15 c/u",
-    },
-    {
-      id: 6,
-      name: "Naranjas",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBy2uSUuJbO0wEsgICk3ovc0utf9QibCkMXw&s",
-      price: "15 c/u",
-    },
-  ];
+  const irAFeedback = (item) => {
+    navigate(`/feedback/${item.id}`, { state: item });
+  };
+
+  const irAReservaDeLugar = () => {
+    navigate("/reservations");
+  };
 
 
   return (
@@ -86,7 +59,11 @@ export const Menu = () => {
           </a>
           <div className="flex-direction-column">
             <p><a className="link-opacity-10-hover m-2  " href="#">Déjanos tu comentario</a></p>
-            <button className="btn m-1 " type="button" style={{ backgroundColor: "rgb(56, 101, 229)", "color": "white" }}><i className="fa-regular fa-clock"></i></button>
+            <button className="btn m-1 " type="button" style={{ backgroundColor: "rgb(56, 101, 229)", "color": "white" }}
+              onClick={() => irAReservaDeLugar()}
+            >
+              Reserva de lugar
+            </button>
             <button className="btn m-1  " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style={{ "backgroundColor": "rgb(56, 101, 229)", "color": "white" }}>
               <i className="fa-solid fa-cart-shopping"></i>
             </button>
@@ -192,6 +169,7 @@ export const Menu = () => {
                                   backgroundColor: "transparent",
                                   fontSize: "20px",
                                 }}
+                                onClick={() => irAFeedback(item)}
                               >
                                 ⭐
                               </button>

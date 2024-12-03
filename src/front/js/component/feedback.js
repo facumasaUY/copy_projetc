@@ -1,6 +1,23 @@
-import React, { useState } from "react";
 
-export const Feedback = ({ initialRating = 0, id, name, imageURL, description }) => {
+import React, { useState, useEffect } from "react";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
+
+
+export const Feedback = ({ initialRating = 0 }) => {
+
+  const navigate = useNavigate();
+
+  const { id } = useParams();
+  const location = useLocation();
+  const item = location.state;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const volver = () => {
+    navigate(-1); // Navega a la página anterior
+  };
 
   const [rating, setRating] = useState(initialRating);
 
@@ -25,20 +42,27 @@ export const Feedback = ({ initialRating = 0, id, name, imageURL, description })
   return (
     <div className="container d-flex mt-4 mb-3 justify-content-center">
       <div className="card " style={{ width: "19rem", border: "2px solid blue" }}>
-        <img
-          src="https://cdn0.recetasgratis.net/es/posts/4/3/6/arroz_con_pollo_al_curry_28634_orig.jpg"
-          // {img + id} 
+        <img src={item?.img} alt={item?.name}
           className="card-img-top"
-          alt={name}
         />
         <div className="card-body border-primary">
-          <h3 className="card-title text-primary">Descripcion
-            {description}</h3>
-          <p>Plato con arroz trozos de pollo y verdura salteada .</p>
+          <h3 className="card-title text-primary">Descripcion</h3>
+          <p>{item?.description || "No description available."}</p>
 
-          <p className="card-text">
-            {starElements} { }
-          </p>
+          <div className="d-flex justify-content-between">
+            <p className="card-text">
+              {starElements} { }
+            </p>
+            <button className="text-primary fs-6" style={{ padding: '10px', marginTop: '10px', cursor: 'pointer', backgroundColor: "transparent", border:"none" }}
+              title="Volver al menú"
+              onClick={volver} 
+            >
+              Volver al menú
+            </button>
+          </div>
+
+
+
         </div>
       </div>
     </div>
