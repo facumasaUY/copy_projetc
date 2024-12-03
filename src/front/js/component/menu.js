@@ -1,6 +1,6 @@
 import React from "react";
 import andalogofood from "../../img/anda.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 export const Menu = () => {
@@ -11,7 +11,7 @@ export const Menu = () => {
 
     LUNES: [
       { id: "lunes_1", name: "Opción 1", description:"Platillo de arroz con trozos de pollo y verduras.", img: "https://cdn0.recetasgratis.net/es/posts/4/3/6/arroz_con_pollo_al_curry_28634_orig.jpg", price: "$350" },
-      { id: "Lunes_2", name: "Opción 2", description:"Esto es una descripción...", img: "https://www.nutrioli.com/wp-content/uploads/2016/06/Ensalada-de-lechugas-frutas-y-nuez-de-la-india-2.jpg", price: "$350" },
+      { id: "Lunes_2", name: "Opción 2", description:"Hola", img: "https://www.nutrioli.com/wp-content/uploads/2016/06/Ensalada-de-lechugas-frutas-y-nuez-de-la-india-2.jpg", price: "$350" },
       { id: "lunes_3", name: "Opción 3", description:"Esto es una descripción...", img: "https://www.lacocinadelila.com/wp-content/uploads/2021/01/albondigas-de-pollo-600x450.jpg", price: "$350" },
     ],
     MARTES: [
@@ -58,7 +58,9 @@ export const Menu = () => {
             <img src={andalogofood} alt="Anda Food Logo" style={{ width: "50px", height: "50px", marginRight: "10px", "borderRadius": "10px" }} />
           </a>
           <div className="flex-direction-column">
+            <Link to={"/improve-us"}>
             <p><a className="link-opacity-10-hover m-2  " href="#">Déjanos tu comentario</a></p>
+            </Link>
             <button className="btn m-1 " type="button" style={{ backgroundColor: "rgb(56, 101, 229)", "color": "white" }}
               onClick={() => irAReservaDeLugar()}
             >
@@ -152,6 +154,7 @@ export const Menu = () => {
                           </div>
                           <div className="card-body text-center p-2">
                             <div className="d-flex justify-content-between">
+                              
                               <button
                                 className="btn "
                                 style={{
