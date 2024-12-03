@@ -13,8 +13,7 @@ import { Footer } from "./component/loginfooter";
 
 import {Register} from "./component/register"
 import { Menu } from "./component/menu";
-=======
-import { Register } from "./component/register"
+
 
 
 import { Feedback } from "./component/feedback";
