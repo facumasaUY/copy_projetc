@@ -7,36 +7,74 @@ export const Menu = () => {
 
     LUNES: [
       { id: "lunes_1", name: "Opción 1", img: "https://cdn0.recetasgratis.net/es/posts/4/3/6/arroz_con_pollo_al_curry_28634_orig.jpg", price: "$350" },
-      { id: "Lunes_2", name: "Opción 2", img: "https://www.nutrioli.com/wp-content/uploads/2016/06/Ensalada-de-lechugas-frutas-y-nuez-de-la-india-2.jpg", price: "$350" },
+      { id: "lunes_2", name: "Opción 2", img: "https://www.nutrioli.com/wp-content/uploads/2016/06/Ensalada-de-lechugas-frutas-y-nuez-de-la-india-2.jpg", price: "$350" },
       { id: "lunes_3", name: "Opción 3", img: "https://www.lacocinadelila.com/wp-content/uploads/2021/01/albondigas-de-pollo-600x450.jpg", price: "$350" },
     ],
     MARTES: [
-      { id: "Martes_1", name: "Opción 1", img: "https://content.elmueble.com/medio/2024/10/03/pollo-a-la-plancha-con-verduras-al-pesto_a53bee68_241003155651_1200x1200.webp", price: "$350" },
-      { id: "Martes_2", name: "Opción 2", img: "https://upload.wikimedia.org/wikipedia/commons/2/23/Caesar_salad_%282%29.jpg", price: "$350" },
-      { id: "Martes_3", name: "Opción 3", img: "https://sinreservas.com.ar/download/multimedia.normal.97a15526e9be66bf.53616e7a61727520283130295f6e6f726d616c2e77656270.webp", price: "$350" },
+      { id: "martes_1", name: "Opción 1", img: "https://content.elmueble.com/medio/2024/10/03/pollo-a-la-plancha-con-verduras-al-pesto_a53bee68_241003155651_1200x1200.webp", price: "$350" },
+      { id: "martes_2", name: "Opción 2", img: "https://upload.wikimedia.org/wikipedia/commons/2/23/Caesar_salad_%282%29.jpg", price: "$350" },
+      { id: "martes_3", name: "Opción 3", img: "https://sinreservas.com.ar/download/multimedia.normal.97a15526e9be66bf.53616e7a61727520283130295f6e6f726d616c2e77656270.webp", price: "$350" },
     ],
     MIÉRCOLES: [
-      { id: "Miércoles_1", name: "Opción 1", img: "https://www.deliciosi.com/images/300/378/crema-de-calabaza.jpg", price: "$350" },
-      { id: "Miércoles_2", name: "Opción 2", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnrVXtOErESITNnhn9MJMOptSFBKsEPA-9QA&s", price: "$300" },
-      { id: "Miércoles_3", name: "Opción 3", img: "https://content.elmueble.com/medio/2024/09/06/arroz-con-verduras_ab2a54ac_240906144446_1200x1200.jpg", price: "$250" },
+      { id: "miércoles_1", name: "Opción 1", img: "https://www.deliciosi.com/images/300/378/crema-de-calabaza.jpg", price: "$350" },
+      { id: "miércoles_2", name: "Opción 2", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnrVXtOErESITNnhn9MJMOptSFBKsEPA-9QA&s", price: "$300" },
+      { id: "miércoles_3", name: "Opción 3", img: "https://content.elmueble.com/medio/2024/09/06/arroz-con-verduras_ab2a54ac_240906144446_1200x1200.jpg", price: "$250" },
     ],
     JUEVES: [
-      { id: "Jueves_1", name: "Opción 1", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeL6NmTbnojfQnaiMnYoLpiNqzOYnkNMBQHA&s", price: "$350" },
-      { id: "Jueves_2", name: "Opción 2", img: "https://truffle-assets.tastemadecontent.net/cdn-cgi/image/width=360/a2f94f01-742_friedchickensalad_square2.jpg", price: "$350" },
-      { id: "Jueves_3", name: "Opción 3", img: "https://www.frutamare.com/wp-content/uploads/2021/04/pasta-a-la-bolonesa.jpg", price: "$300" },
+      { id: "jueves_1", name: "Opción 1", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeL6NmTbnojfQnaiMnYoLpiNqzOYnkNMBQHA&s", price: "$350" },
+      { id: "jueves_2", name: "Opción 2", img: "https://truffle-assets.tastemadecontent.net/cdn-cgi/image/width=360/a2f94f01-742_friedchickensalad_square2.jpg", price: "$350" },
+      { id: "jueves_3", name: "Opción 3", img: "https://www.frutamare.com/wp-content/uploads/2021/04/pasta-a-la-bolonesa.jpg", price: "$300" },
     ],
     VIERNES: [
-      { id: "Viernes_1", name: "Opción 1", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7n0A8vIS8MRwnHMZhX-MxS2W_L2b0-6g8Jw&s", price: "$350" },
-      { id: "Viernes_2", name: "Opción 2", img: "https://img.freepik.com/fotos-premium/weiner-schnitzel-empanado-casero-papas-fritas-pollo-frito-papas-fritas-estilo-comida-europea_1339-152591.jpg", price: "$250" },
-      { id: "Viernes_3", name: "Opción 3", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcpQ3KilaPlZwatN49TzcFTRwbDXQ-VFWsx_tScOJkHuh7zyh8_rIVvc-r72wM6whCNfc&usqp=CAU", price: "$200" },
+      { id: "viernes_1", name: "Opción 1", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7n0A8vIS8MRwnHMZhX-MxS2W_L2b0-6g8Jw&s", price: "$350" },
+      { id: "viernes_2", name: "Opción 2", img: "https://img.freepik.com/fotos-premium/weiner-schnitzel-empanado-casero-papas-fritas-pollo-frito-papas-fritas-estilo-comida-europea_1339-152591.jpg", price: "$250" },
+      { id: "viernes_3", name: "Opción 3", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcpQ3KilaPlZwatN49TzcFTRwbDXQ-VFWsx_tScOJkHuh7zyh8_rIVvc-r72wM6whCNfc&usqp=CAU", price: "$200" },
     ],
     SÁBADO: [
-      { id: "Sábado_1", name: "Opción 1", img: "https://cdn0.recetasgratis.net/es/posts/8/9/0/ensalada_de_garbanzos_vegana_59098_600_square.jpg", price: "$350" },
-      { id: "Sábado_2", name: "Opción 2", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPnXJcdnE2L04D4PAB0py1DthQJoctIfVfUw&s", price: "$300" },
-      { id: "Sábado_3", name: "Opción 3", img: "https://i.pinimg.com/736x/bf/cf/ce/bfcfce36554e902259cbcad00169a51c.jpg", price: "$350" },
+      { id: "sábado_1", name: "Opción 1", img: "https://cdn0.recetasgratis.net/es/posts/8/9/0/ensalada_de_garbanzos_vegana_59098_600_square.jpg", price: "$350" },
+      { id: "sábado_2", name: "Opción 2", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPnXJcdnE2L04D4PAB0py1DthQJoctIfVfUw&s", price: "$300" },
+      { id: "sábado_3", name: "Opción 3", img: "https://i.pinimg.com/736x/bf/cf/ce/bfcfce36554e902259cbcad00169a51c.jpg", price: "$350" },
     ],
   };
 
+  const anotheroptions = [
+    {
+      id: 1,
+      name: "Coca-Cola Común",
+      img: "https://i.pinimg.com/736x/cc/8e/3c/cc8e3cb0ff29ae7c19499124dfea1196.jpg",
+      price: 62,
+    },
+    {
+      id: 2,
+      name: "Coca-Cola Light",
+      img: "https://i.pinimg.com/736x/c2/f6/92/c2f692861075c7bbcd97ec594962222d.jpg",
+      price: 62,
+    },
+    {
+      id: 3,
+      name: "Coca-Cola Zero",
+      img: "https://i.pinimg.com/736x/a1/5e/ab/a15eab3e7c4f254c5b0701d007992599.jpg",
+      price: 62,
+    },
+    {
+      id: 4,
+      name: "Agua Salus",
+      img: "https://molinoagranel.com.uy/wp-content/uploads/2023/06/agua-mineral-salus-600-ml.jpg",
+      price: 42,
+    },
+    {
+      id: 5,
+      name: "Manzanas",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiCLdNje1XoCGFCNiRhbZwFq8ZPJaIY6Xf-Q&s",
+      price: "15 c/u",
+    },
+    {
+      id: 6,
+      name: "Naranjas",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBy2uSUuJbO0wEsgICk3ovc0utf9QibCkMXw&s",
+      price: "15 c/u",
+    },
+  ];
 
 
   return (
@@ -170,118 +208,91 @@ export const Menu = () => {
         </div>
       </div>
 
-
-      {/* CARRUSEL OTRAS OPCIONES  */}
-      <div className="container mb-1">
-        <h1 className="text-center" style={{ marginBottom: "20px", fontFamily: "Mulish, sans-serif", color: "rgb(56, 101, 229)" }}>
+      {/* Otras opciones */}
+      <div className="container my-4">
+        <h1
+          className="text-center mb-2"
+          style={{
+            fontFamily: "Mulish, sans-serif",
+            color: "rgb(56, 101, 229)",
+          }}
+        >
           OTRAS OPCIONES
         </h1>
-        <div className="d-flex justify-content-center flex-wrap">
-
-          <div className="text-center" style={{ margin: "10px" }}>
-            <img
-              src="https://i.pinimg.com/736x/cc/8e/3c/cc8e3cb0ff29ae7c19499124dfea1196.jpg"
-              alt="Cocacola común"
-              style={{
-                height: "100px",
-                width: "100px",
-                objectFit: "cover",
-                borderRadius: "50%",
-                marginBottom: "10px",
-                border: "3px solid rgb(56, 101, 229)",
-              }}
-            /><div style={{ fontSize: "14px", fontWeight: "bold", color: "rgb(56, 101, 229)" }}>Precio: $62</div>
-            <button className="btn m-1 " style={{ backgroundColor: "rgb(56, 101, 229)", color: "white", fontSize: "12px", "borderRadius": "10px" }}><i className="fa-solid fa-cart-shopping"></i></button>
-          </div>
-
-
-          <div className="text-center" style={{ margin: "10px" }}>
-            <img
-              src="https://i.pinimg.com/736x/c2/f6/92/c2f692861075c7bbcd97ec594962222d.jpg"
-              alt="Cocacola light"
-              style={{
-                height: "100px",
-                width: "100px",
-                objectFit: "cover",
-                borderRadius: "50%",
-                marginBottom: "10px",
-                border: "3px solid rgb(56, 101, 229)",
-              }}
-            />
-            <div style={{ fontSize: "14px", fontWeight: "bold", color: "rgb(56, 101, 229)" }}>Precio: $62</div>
-            <button className="btn m-1 " style={{ backgroundColor: "rgb(56, 101, 229)", color: "white", fontSize: "12px", "borderRadius": "10px" }}><i className="fa-solid fa-cart-shopping"></i></button>
-          </div>
-
-
-          <div className="text-center" style={{ margin: "10px" }}>
-            <img
-              src="https://i.pinimg.com/736x/a1/5e/ab/a15eab3e7c4f254c5b0701d007992599.jpg"
-              alt="Cocacola zero"
-              style={{
-                height: "100px",
-                width: "100px",
-                objectFit: "cover",
-                borderRadius: "50%",
-                marginBottom: "10px",
-                border: "3px solid rgb(56, 101, 229)",
-              }}
-            />
-            <div style={{ fontSize: "14px", fontWeight: "bold", color: "rgb(56, 101, 229)" }}>Precio: $62</div>
-            <button className="btn m-1 " style={{ backgroundColor: "rgb(56, 101, 229)", color: "white", fontSize: "12px", "borderRadius": "10px" }}><i className="fa-solid fa-cart-shopping"></i></button>
-          </div>
-
-          <div className="text-center" style={{ margin: "10px" }}>
-            <img
-              src="https://molinoagranel.com.uy/wp-content/uploads/2023/06/agua-mineral-salus-600-ml.jpg"
-              alt="Agua salus"
-              style={{
-                height: "100px",
-                width: "100px",
-                objectFit: "cover",
-                borderRadius: "50%",
-                marginBottom: "10px",
-                border: "3px solid rgb(56, 101, 229)",
-              }}
-            />
-            <div style={{ fontSize: "14px", fontWeight: "bold", color: "rgb(56, 101, 229)" }}>Precio: $42</div>
-            <button className="btn m-1 " style={{ backgroundColor: "rgb(56, 101, 229)", color: "white", fontSize: "12px", "borderRadius": "10px" }}><i className="fa-solid fa-cart-shopping"></i></button>
-          </div>
-
-          <div className="text-center" style={{ margin: "10px" }}>
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiCLdNje1XoCGFCNiRhbZwFq8ZPJaIY6Xf-Q&s"
-              alt="Manzanas"
-              style={{
-                height: "100px",
-                width: "100px",
-                objectFit: "cover",
-                borderRadius: "50%",
-                marginBottom: "10px",
-                border: "3px solid rgb(56, 101, 229)",
-              }}
-            />
-            <div style={{ fontSize: "14px", fontWeight: "bold", color: "rgb(56, 101, 229)" }}>Precio: $15 por unidad.</div>
-            <button className="btn m-1 " style={{ backgroundColor: "rgb(56, 101, 229)", color: "white", fontSize: "12px", "borderRadius": "10px" }}><i className="fa-solid fa-cart-shopping"></i></button>
-          </div>
-
-          <div className="text-center" style={{ margin: "10px" }}>
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBy2uSUuJbO0wEsgICk3ovc0utf9QibCkMXw&s"
-              alt="Naranjas"
-              style={{
-                height: "100px",
-                width: "100px",
-                objectFit: "cover",
-                borderRadius: "50%",
-                marginBottom: "10px",
-                border: "3px solid rgb(56, 101, 229)",
-              }}
-            />
-            <div style={{ fontSize: "14px", fontWeight: "bold", color: "rgb(56, 101, 229)" }}>Precio: $15 por unidad.</div>
-            <button className="btn m-1 " style={{ backgroundColor: "rgb(56, 101, 229)", color: "white", fontSize: "12px", "borderRadius": "10px" }}><i className="fa-solid fa-cart-shopping"></i></button>
-          </div>
+        <div
+          className="d-flex justify-content-center flex-wrap gap-4"
+          style={{ rowGap: "20px" }}
+        >
+          {anotheroptions.map((item) => (
+            <div
+              className="d-flex flex-column align-items-center"
+              key={item.id}
+              style={{ width: "150px" }}
+            >
+              <div
+                className="card"
+                style={{
+                  width: "150px",
+                  height: "150px",
+                  borderRadius: "50%",
+                  overflow: "hidden",
+                }}
+              >
+                <img
+                  src={item.img}
+                  className="card-img-top"
+                  alt={item.name}
+                  style={{
+                    objectFit: "cover",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+              </div>
+              <div
+                className="text-center mt-2"
+                style={{
+                  fontSize: "10px",
+                  fontFamily: "Mulish, sans-serif",
+                }}
+              >
+                <h5
+                  className="card-title"
+                  style={{
+                    color: "rgb(56, 101, 229)",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                  }}
+                >
+                  {item.name}
+                </h5>
+                <p
+                  className="card-text m-2"
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: "15px",
+                  }}
+                >
+                  Precio: ${item.price}
+                </p>
+                <button
+                  className="btn mb-4"
+                  style={{
+                    backgroundColor: "rgb(56, 101, 229)",
+                    color: "white",
+                    fontSize: "0.8rem",
+                    borderRadius: "10px",
+                    padding: "5px 10px",
+                  }}
+                >
+                  <i className="fa-solid fa-cart-shopping"></i>
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
+
   );
 };
