@@ -41,6 +41,46 @@ export const Menu = () => {
     ],
   };
 
+  const anotheroptions = [
+    {
+      id: 1,
+      name: "Coca-Cola Común",
+      img: "https://i.pinimg.com/736x/cc/8e/3c/cc8e3cb0ff29ae7c19499124dfea1196.jpg",
+      price: 62,
+    },
+    {
+      id: 2,
+      name: "Coca-Cola Light",
+      img: "https://i.pinimg.com/736x/c2/f6/92/c2f692861075c7bbcd97ec594962222d.jpg",
+      price: 62,
+    },
+    {
+      id: 3,
+      name: "Coca-Cola Zero",
+      img: "https://i.pinimg.com/736x/a1/5e/ab/a15eab3e7c4f254c5b0701d007992599.jpg",
+      price: 62,
+    },
+    {
+      id: 4,
+      name: "Agua Salus",
+      img: "https://molinoagranel.com.uy/wp-content/uploads/2023/06/agua-mineral-salus-600-ml.jpg",
+      price: 42,
+    },
+    {
+      id: 5,
+      name: "Manzanas",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiCLdNje1XoCGFCNiRhbZwFq8ZPJaIY6Xf-Q&s",
+      price: "15 c/u",
+    },
+    {
+      id: 6,
+      name: "Naranjas",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBy2uSUuJbO0wEsgICk3ovc0utf9QibCkMXw&s",
+      price: "15 c/u",
+    },
+  ];
+
+
   const irAFeedback = (item) => {
     navigate(`/feedback/${item.id}`, { state: item });
   };
