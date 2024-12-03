@@ -130,9 +130,15 @@ export const Menu = () => {
           <div className="shoppingCart d-flex">
 
             {/* Boton de Carrito */}
+           
+            <div className="flex-direction-column">
+            <p><a className="link-opacity-10-hover m-1  " href="#">Déjanos tu comentario</a></p>
+
+            <button className="btn m-1 " type="button" style={{ backgroundColor: "rgb(56, 101, 229)", "color": "white" }}><i className="fa-regular fa-clock"></i></button>
             <button className="btn m-1 " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style={{ "backgroundColor": "rgb(56, 101, 229)", "color": "white" }}>
               <i className="fa-solid fa-cart-shopping"></i>
             </button>
+            </div>
 
             {/* Ventana */}
             <div className="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
@@ -144,6 +150,7 @@ export const Menu = () => {
               }}>
                 <h1>Carrito</h1>
               </div>
+              
 
               {/* Body */}
               <div className="listCart offcanvas-body position-relative" style={{ backgroundColor: "rgb(56, 101, 229, 0.3)" }}>
