@@ -1,89 +1,60 @@
 import React, { useState } from "react";
-import andalogofood from "../../img/anda.png";import "../../styles/shoppingCart.css";
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
-import { Axios } from "axios"
+import andalogofood from "../../img/anda.png"; import "../../styles/shoppingCart.css";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "/src/front/styles/home.css"
 
 
 export const Menu = () => {
 
+
   const navigate = useNavigate();
 
-    initMercadoPago('TEST-309ffaff-96ff-431f-a465-2b8b243d7054',{
-      locale: "es-UY",
-    });
-  
-    const [preferenceId, setPreferenceId] = useState(null)
-  
-    const [listCart, setListCart] = useState([]);
-  
-    const [showNotification, setShowNotification] = useState(false)
 
 
-    {/*VER EN CLASE CON SAMUEL, EL CONSOLE LOG FUNCA PERO NO APARECE LA NOTIFICACION*/}
-    const mostrarNotificacion = () => {
-      if (!showNotification) { 
-        console.log("Mostrando notificación...");
-        setShowNotification(true);
-        setTimeout(() => {
-          console.log("Ocultando notificación...");
-          setShowNotification(false);
-        }, 3000);
-      }
-      return (<div>{showNotification && 
-        <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="toast-header">
-            <img src="..." class="rounded me-2" alt="..."/>
-            <strong class="me-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-          </div>
-          <div class="toast-body">
-            Hello, world! This is a toast message.
-          </div>
-        </div>
-      </div>
-      }</div>)
-    };
+  const [listCart, setListCart] = useState([]);
 
-    const handleNotificacion = () =>{
-      return mostrarNotificacion()
+  const [spinner, setSpinner] = useState(false);
+
+  const [showNotification, setShowNotification] = useState(false);
+
+  const mostrarNotificacion = () => {
+    if (!showNotification) {
+      console.log("Mostrando notificación...");
+      setShowNotification(true);
+      setTimeout(() => {
+        console.log("Ocultando notificación...");
+        setShowNotification(false);
+      }, 2000);
     }
+  };
 
-    const handleClick = (item) => {
-      setListCart((carritoActual) => {
-        const existe = carritoActual.some((producto) => producto.id === item.id);
-        if (!existe) {
-          return [...carritoActual, item];
-        }
-        return carritoActual;
-      });
-    };
-  
-    const createPreference = async () => {
-      try {
-        const response = await Axios.post("http://localhost:3000/create_preference",{
-          title: "Fideos con Salsa Boloñesa",
-          quantity: 1,
-          price: 100,
-        });
-        const { id } = response.data;
-        return id;
-      } catch  (error) {
-        console.log(error)
-      }};
-  
-    const handleCompra = async () => {
-      if (listCart.length === 0) {
-        alert("El carrito está vacío. Por favor, añade productos antes de pagar.");
-        return
+  const handleNotificacion = () => {
+    return mostrarNotificacion()
+  }
+
+  const handleClick = (item) => {
+    setListCart((carritoActual) => {
+      const existe = carritoActual.some((producto) => producto.id === item.id);
+      if (!existe) {
+        return [...carritoActual, item];
       }
-      const id = await createPreference();
-      if (id){
-        setPreferenceId(id);
-      }
-    };  
+      return carritoActual;
+    });
+  };
+
+
+  const handleCompra = async () => {
+    if (listCart.length === 0) {
+      alert("El carrito está vacío. Por favor, añade productos antes de pagar.");
+    } else {
+      setSpinner(true)
+      setTimeout(() => {
+        setSpinner(false)
+        irAPayment();
+      }, 2000)
+    }
+  };
 
   const menuDay2 = {
 
@@ -98,24 +69,24 @@ export const Menu = () => {
       { id: "Martes_3", name: "Opción 3", img: "https://sinreservas.com.ar/download/multimedia.normal.97a15526e9be66bf.53616e7a61727520283130295f6e6f726d616c2e77656270.webp", price: "$350" },
     ],
     MIÉRCOLES: [
-      { id: "Miércoles_1", name: "Opción 1", description:"Esto es una descripción...", img: "https://www.deliciosi.com/images/300/378/crema-de-calabaza.jpg", price: "$350" },
-      { id: "Miércoles_2", name: "Opción 2", description:"Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnrVXtOErESITNnhn9MJMOptSFBKsEPA-9QA&s", price: "$300" },
-      { id: "Miércoles_3", name: "Opción 3", description:"Esto es una descripción...", img: "https://content.elmueble.com/medio/2024/09/06/arroz-con-verduras_ab2a54ac_240906144446_1200x1200.jpg", price: "$250" },
+      { id: "Miércoles_1", name: "Opción 1", description: "Esto es una descripción...", img: "https://www.deliciosi.com/images/300/378/crema-de-calabaza.jpg", price: "$350" },
+      { id: "Miércoles_2", name: "Opción 2", description: "Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnrVXtOErESITNnhn9MJMOptSFBKsEPA-9QA&s", price: "$300" },
+      { id: "Miércoles_3", name: "Opción 3", description: "Esto es una descripción...", img: "https://content.elmueble.com/medio/2024/09/06/arroz-con-verduras_ab2a54ac_240906144446_1200x1200.jpg", price: "$250" },
     ],
     JUEVES: [
-      { id: "Jueves_1", name: "Opción 1", description:"Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeL6NmTbnojfQnaiMnYoLpiNqzOYnkNMBQHA&s", price: "$350" },
-      { id: "Jueves_2", name: "Opción 2", description:"Esto es una descripción...", img: "https://truffle-assets.tastemadecontent.net/cdn-cgi/image/width=360/a2f94f01-742_friedchickensalad_square2.jpg", price: "$350" },
-      { id: "Jueves_3", name: "Opción 3", description:"Esto es una descripción...", img: "https://www.frutamare.com/wp-content/uploads/2021/04/pasta-a-la-bolonesa.jpg", price: "$300" },
+      { id: "Jueves_1", name: "Opción 1", description: "Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeL6NmTbnojfQnaiMnYoLpiNqzOYnkNMBQHA&s", price: "$350" },
+      { id: "Jueves_2", name: "Opción 2", description: "Esto es una descripción...", img: "https://truffle-assets.tastemadecontent.net/cdn-cgi/image/width=360/a2f94f01-742_friedchickensalad_square2.jpg", price: "$350" },
+      { id: "Jueves_3", name: "Opción 3", description: "Esto es una descripción...", img: "https://www.frutamare.com/wp-content/uploads/2021/04/pasta-a-la-bolonesa.jpg", price: "$300" },
     ],
     VIERNES: [
-      { id: "Viernes_1", name: "Opción 1", description:"Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7n0A8vIS8MRwnHMZhX-MxS2W_L2b0-6g8Jw&s", price: "$350" },
-      { id: "Viernes_2", name: "Opción 2", description:"Esto es una descripción...", img: "https://img.freepik.com/fotos-premium/weiner-schnitzel-empanado-casero-papas-fritas-pollo-frito-papas-fritas-estilo-comida-europea_1339-152591.jpg", price: "$250" },
-      { id: "Viernes_3", name: "Opción 3", description:"Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcpQ3KilaPlZwatN49TzcFTRwbDXQ-VFWsx_tScOJkHuh7zyh8_rIVvc-r72wM6whCNfc&usqp=CAU", price: "$200" },
+      { id: "Viernes_1", name: "Opción 1", description: "Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7n0A8vIS8MRwnHMZhX-MxS2W_L2b0-6g8Jw&s", price: "$350" },
+      { id: "Viernes_2", name: "Opción 2", description: "Esto es una descripción...", img: "https://img.freepik.com/fotos-premium/weiner-schnitzel-empanado-casero-papas-fritas-pollo-frito-papas-fritas-estilo-comida-europea_1339-152591.jpg", price: "$250" },
+      { id: "Viernes_3", name: "Opción 3", description: "Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcpQ3KilaPlZwatN49TzcFTRwbDXQ-VFWsx_tScOJkHuh7zyh8_rIVvc-r72wM6whCNfc&usqp=CAU", price: "$200" },
     ],
     SÁBADO: [
-      { id: "Sábado_1", name: "Opción 1", description:"Esto es una descripción...", img: "https://cdn0.recetasgratis.net/es/posts/8/9/0/ensalada_de_garbanzos_vegana_59098_600_square.jpg", price: "$350" },
-      { id: "Sábado_2", name: "Opción 2", description:"Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPnXJcdnE2L04D4PAB0py1DthQJoctIfVfUw&s", price: "$300" },
-      { id: "Sábado_3", name: "Opción 3", description:"Esto es una descripción...", img: "https://i.pinimg.com/736x/bf/cf/ce/bfcfce36554e902259cbcad00169a51c.jpg", price: "$350" },
+      { id: "Sábado_1", name: "Opción 1", description: "Esto es una descripción...", img: "https://cdn0.recetasgratis.net/es/posts/8/9/0/ensalada_de_garbanzos_vegana_59098_600_square.jpg", price: "$350" },
+      { id: "Sábado_2", name: "Opción 2", description: "Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPnXJcdnE2L04D4PAB0py1DthQJoctIfVfUw&s", price: "$300" },
+      { id: "Sábado_3", name: "Opción 3", description: "Esto es una descripción...", img: "https://i.pinimg.com/736x/bf/cf/ce/bfcfce36554e902259cbcad00169a51c.jpg", price: "$350" },
     ],
   };
 
@@ -167,9 +138,15 @@ export const Menu = () => {
     navigate("/reservations");
   };
 
+  const irAPayment = () => {
+    navigate("/payment");
+  };
+
 
   return (
+    
     <div className="container mt-3">
+      
       <nav className="navbar bg-body-tertiary">
 
         <div className="container-fluid d-flex justify-content-between align-items-center" >
@@ -183,18 +160,18 @@ export const Menu = () => {
           <div className="shoppingCart d-flex">
 
             {/* Boton de Carrito */}
-           
-            <div className="flex-direction-column">
-            <p><a className="link-opacity-10-hover m-1  " href="#">Déjanos tu comentario</a></p>
 
-            <button className="btn m-1 " type="button" style={{ backgroundColor: "rgb(56, 101, 229)", "color": "white" }}
-              onClick={() => irAReservaDeLugar()}
-            >
-              Reserva de lugar
-            </button>
-            <button className="btn m-1 " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style={{ "backgroundColor": "rgb(56, 101, 229)", "color": "white" }}>
-              <i className="fa-solid fa-cart-shopping"></i>
-            </button>
+            <div className="flex-direction-column">
+              <Link to={"/form/:theid"}><p><a className="link-opacity-10-hover m-1  " href="#">Déjanos tu comentario</a></p></Link>
+
+              <button className="btn m-1 " type="button" style={{ backgroundColor: "rgb(56, 101, 229)", "color": "white" }}
+                onClick={() => irAReservaDeLugar()}
+              >
+                Reserva de lugar
+              </button>
+              <button className="btn m-1 " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style={{ "backgroundColor": "rgb(56, 101, 229)", "color": "white" }}>
+                <i className="fa-solid fa-cart-shopping"></i>
+              </button>
             </div>
 
             {/* Ventana */}
@@ -207,10 +184,13 @@ export const Menu = () => {
               }}>
                 <h1>Carrito</h1>
               </div>
-              
 
               {/* Body */}
               <div className="listCart offcanvas-body position-relative" style={{ backgroundColor: "rgb(56, 101, 229, 0.3)" }}>
+              
+                {spinner && (<div className="spinner-grow d-flex justify-content-center" role="status" style={{backgroundColor: "#3865e5"}}>
+                  <span className="visually-hidden">Loading...</span>
+                </div>)}
 
                 {listCart.length === 0 ? (
                   <p>El carrito está vacío.</p>
@@ -262,20 +242,24 @@ export const Menu = () => {
 
                     </div>)))}
 
-
                 <div className="btn position-absolute bottom-0 start-0 end-0 d-flex justify-content-between" >
                   <button type="button" className="close align-self-start" data-bs-dismiss="offcanvas" aria-label="Close">VOLVER</button>
-                  <button className="pay align-self-end" id="process-checkout" onClick={() => handleCompra()}>IR A PAGAR</button>
-                  {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} customization={{ texts: { valueProp: 'smart_option' } }} />}
+                  <button className="pay align-self-end" id="process-checkout" onClick={() => handleCompra()}>IR A PAGAR</button>   
                 </div>
+                
 
               </div>
+
+
 
             </div>
 
           </div>
         </div>
       </nav>
+
+      
+
 
       {/* Menu del dia */}
       <div className="menudeldia2" style={{ marginBottom: "20px", fontFamily: "Mulish, sans-serif" }}>
@@ -344,7 +328,7 @@ export const Menu = () => {
                           <div className="card-body text-center p-2">
                             <div className="d-flex justify-content-between">
                               <button
-                                className="btn " onClick={() =>{ handleClick(item); handleNotificacion()}}
+                                className="btn " onClick={() => { handleClick(item); handleNotificacion() }}
                                 style={{
                                   backgroundColor: "rgb(56, 101, 229)",
                                   color: "white",
@@ -377,35 +361,28 @@ export const Menu = () => {
           </div>
         </div>
       </div>
-     
-     {/* Notificación */}
 
-     {showNotification && (
-      <div className="toast-container position-fixed bottom-0 end-0 p-3">
-        <div
-          id="liveToast"
-          className="toast show" // Clase 'show' para que sea visible
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
-        >
-          <div className="toast-header">
-            <img src="..." className="rounded me-2" alt="icon" />
-            <strong className="me-auto">Notificación</strong>
-            <small>Ahora</small>
-            <button
-              type="button"
-              className="btn-close"
-              onClick={() => setShowNotification(false)} // Oculta el Toast
-              aria-label="Close"
-            ></button>
-          </div>
-          <div className="toast-body">
-            ¡Producto agregado al carrito correctamente!
+      {/* Notificación */}
+
+
+      {showNotification && (
+        <div className="toast-container position-fixed bottom-0 end-0 p-3">
+          <div
+            id="liveToast"
+            className="toast show" // Clase 'show' para que sea visible
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+          >
+            <div className="toast-header" style={{ backgroundColor: "rgb(56, 101, 229)", color: "white" }}>
+              <strong className="me-auto">Notificación</strong>
+            </div>
+            <div className="toast-body">
+              ¡Producto agregado al carrito correctamente!
+            </div>
           </div>
         </div>
-      </div>
-    )}
+      )}
 
       {/* Otras opciones */}
       <div className="container my-4">
