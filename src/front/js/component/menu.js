@@ -11,6 +11,7 @@ export const Menu = () => {
   const navigate = useNavigate();
 
 
+  const [quantity, setQuantity] = useState(1);
 
   const [listCart, setListCart] = useState([]);
 
@@ -54,6 +55,14 @@ export const Menu = () => {
         irAPayment();
       }, 2000)
     }
+  };
+
+  const decrecer = () => {
+    
+  };
+
+  const acrecentar = () => {
+
   };
 
   const menuDay2 = {
@@ -150,9 +159,16 @@ export const Menu = () => {
       <nav className="navbar bg-body-tertiary">
 
         <div className="container-fluid d-flex justify-content-between align-items-center" >
-          <a className="navbar-brand d-flex align-items-center">
-            <img src={andalogofood} alt="Anda Food Logo" style={{ width: "50px", height: "50px", marginRight: "10px", "borderRadius": "10px" }} />
-          </a>
+          <div className="dropdown">
+            <a className="navbar-brand d-flex align-items-center dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src={andalogofood} alt="Anda Food Logo" style={{ width: "50px", height: "50px", marginRight: "10px", "borderRadius": "10px" }} />
+            </a>
+            <ul className="dropdown-menu">
+              <li><a className="dropdown-item" href="#">Mi cuenta</a></li>
+              <li><a className="dropdown-item" href="#">Mis compras</a></li>
+              <li><a className="dropdown-item" href="#">Cerrar Sesión</a></li>
+            </ul>
+          </div>
 
 
           {/* El carrito de compras */}
@@ -262,7 +278,7 @@ export const Menu = () => {
 
 
       {/* Menu del dia */}
-      <div className="menudeldia2" style={{ marginBottom: "20px", fontFamily: "Mulish, sans-serif" }}>
+      <div className="menudeldia2 mt-3" style={{ marginBottom: "20px", fontFamily: "Mulish, sans-serif" }}>
         <div className="mb-5">
           <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>MENÚ DE LA SEMANA</h2>
           <div className="row">
@@ -452,7 +468,7 @@ export const Menu = () => {
                   Precio: ${item.price}
                 </p>
                 <button
-                  className="btn mb-4"
+                  className="btn " onClick={() => { handleClick(item); handleNotificacion() }}
                   style={{
                     backgroundColor: "rgb(56, 101, 229)",
                     color: "white",

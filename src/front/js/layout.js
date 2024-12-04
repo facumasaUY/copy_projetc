@@ -13,6 +13,7 @@ import { Footer } from "./component/loginfooter";
 
 import {Register} from "./component/register";
 import { Menu } from "./component/menu";
+import { Payment } from "./component/payment";
 
 
 
@@ -43,6 +44,7 @@ const Layout = () => {
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<PlaceReservations />} path="/reservations" />
                         <Route element={<Menu />} path="/menu" />
+                        <Route element={<Payment />} path="/payment" />
                         <Route element={<Form />} path="/form/:theid" />
                         <Route element={<Feedback />} path="/feedback/:theid" />
                         <Route element={<h1>Not found!</h1>} />

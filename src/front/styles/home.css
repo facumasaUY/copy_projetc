@@ -52,3 +52,6 @@ body{
     z-index: 1050;
   }
   
+.dropdown-item{
+    color: rgb(56, 101, 229);
+}

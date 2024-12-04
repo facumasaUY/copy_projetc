@@ -72,9 +72,11 @@
 	"dependencies": {
 		"@fortawesome/fontawesome-free": "^6.7.1",
 		"@mercadopago/sdk-react": "^0.0.19",
+		"@popperjs/core": "^2.11.8",
 		"assert": "^2.1.0",
 		"async_hooks": "^1.0.0",
 		"axios": "^1.7.8",
+		"bootstrap": "^5.3.3",
 		"browserify-zlib": "^0.2.0",
 		"buffer": "^6.0.3",
 		"cors": "^2.8.5",
