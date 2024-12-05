@@ -6,23 +6,11 @@ from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import mercadopago
+import json
 
 sdk = mercadopago.SDK("TEST-7033493027347872-120109-447e5e8cbdd1b8f28a34bcd75ac8f9b0-71923886")
 
-@api.route('/create_preference', methods=['POST'])
-def create_preference():
-    preference_data = {
-        "items": [
-            {
-                "title": "Mi producto",
-                "quantity": 1,
-                "unit_price": 200
-            }
-        ]
-    }
 
-    preference_response = sdk.preference().create(preference_data)
-    return jsonify(preference_response), 200
 
 
 
@@ -40,3 +28,33 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+@api.route("/preference", methods=["POST"]) 
+def preference(): 
+    # body = json.loads(request.data)
+    # total = body["total"]
+    # Crea un ítem en la preferencia 
+    preference_data = { 
+        "items": [ 
+            { 
+                "title": "Mi producto", 
+                "quantity": 1,  
+                "unit_price": 75.76   
+            } 
+        ],
+        "payer": { 
+            "email": "test_user_17805074@testuser.com"
+        },
+        "back_urls": { 
+            "success": "https://crispy-rotary-phone-x59p57vpggwjfv5x5-3000.app.github.dev/menu", 
+            "failure": "https://crispy-rotary-phone-x59p57vpggwjfv5x5-3000.app.github.dev/menu", 
+            "pending": "https://crispy-rotary-phone-x59p57vpggwjfv5x5-3000.app.github.dev/menu"
+        },
+        "auto_return": "approved"
+    }
+
+    preference_response = sdk.preference().create(preference_data) 
+    preference = preference_response["response"] 
+    return jsonify(preference), 200
+    # return jsonify({"init_point": preference["init_point"]}), 200
+
