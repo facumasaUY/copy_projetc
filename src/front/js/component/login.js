@@ -25,7 +25,7 @@ export const Login = () => {
 
 					</div>
 					<div className="mb-3">
-						<label for="exampleInputPassword1" className="form-label">Contraseña</label>
+						<label htmlFor="exampleInputPassword1" className="form-label">Contraseña</label>
 						<input type="password" className="form-control" id="exampleInputPassword1" />
 					</div>
 					<div className="text-center">
@@ -34,7 +34,9 @@ export const Login = () => {
 					</div>
 
 					<div className="text-center mt-2">
+						<Link to= { " "}>
 						<p>¿Olvidase tu contraseña?</p>
+						</Link>
 					</div>
 
 					<div className="text-center mt-2">
