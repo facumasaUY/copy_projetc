@@ -78,7 +78,7 @@ def register():
     new_user = User(
         name = name,
         email = email , 
-        last_name=last_name
+        last_name=last_name,
         password = password 
     )
     db.session.add(new_user)
@@ -102,15 +102,7 @@ def login():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token, user=user.serialize()),200
 
-@api.route('/private', methods=['GET'])
-@jwt_required()
-def private():
 
-    email=get_jwt_identity()
-    user=User.query.filter_by(email=email).first()
-    if not user:
-        return jsonify({"msg": "User not found"}), 404
-    return jsonify(user.serialize()), 200
 
 
 
