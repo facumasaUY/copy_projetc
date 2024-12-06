@@ -1,8 +1,6 @@
 import axios from 'axios';
 
 const getState = ({ getStore, getActions, setStore }) => {
-	
-	const back = "http://localhost:3000"; // O la URL que uses para tu backend
 
 	return {
 		store: {

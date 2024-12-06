@@ -9,7 +9,7 @@ export const Payment = () => {
 
     const { actions, store } = useContext(Context);
 
-    initMercadoPago('TEST-309ffaff-96ff-431f-a465-2b8b243d7054', { locale: "es-UY", });
+    initMercadoPago('APP_USR-95548522-114d-4404-9dfd-408bd646ee05', { locale: "es-UY", });
     const [preferenceId, setPreferenceId] = useState(null)
 
     // const createPreference = async () => { 

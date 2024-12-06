@@ -8,7 +8,7 @@ from flask_cors import CORS
 import mercadopago
 import json
 
-sdk = mercadopago.SDK("TEST-7033493027347872-120109-447e5e8cbdd1b8f28a34bcd75ac8f9b0-71923886")
+sdk = mercadopago.SDK("APP_USR-7717264634749554-120508-c40d3f9932b4e9f7de4477bfa5ef733b-2136972767")
 
 
 
