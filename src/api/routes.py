@@ -34,7 +34,6 @@ def handle_hello():
 def create_new_menu():
     body = request.form
 
-   
     if not body or "day" not in body or "name" not in body or "description" not in body or "price" not in body:
         raise APIException("Missing name, price, description, or img", status_code=400)
 
@@ -45,12 +44,11 @@ def create_new_menu():
 
     img = request.files.get("img")
 
-    
-
-    #Upload img to Cloudinary
-    upload_result = cloudinary.uploader.upload("img")
-    img_url = upload_result["secure_url"]
-
+    if img:
+        upload_result = cloudinary.uploader.upload(img)
+        img_url = upload_result["secure_url"]
+    else:
+        img_url = None  # You can set a default image if required
 
     new_menu = Menu(
         day=day,
@@ -66,5 +64,25 @@ def create_new_menu():
     return jsonify({"msg": "Menu created successfully"}), 200
 
 
+@api.route('/menu', methods=['GET'])
+def get_menus():
+
+    menus = Menu.query.all()
 
 
+    if not menus:
+        return jsonify({"msg": "No menus found"}), 404
+
+    menu_list = []
+    for menu in menus:
+        menu_list.append({
+            "id": menu.id,
+            "day": menu.day,
+            "name": menu.name,
+            "description": menu.description,
+            "price": menu.price,
+            "img": menu.img
+        })
+
+    return jsonify(menu_list), 200
+    
