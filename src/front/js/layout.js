@@ -42,10 +42,15 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Register />} path="/register" />
                         <Route element={<Single />} path="/single/:theid" />
+                        {/* <Route element={<Private/>} path="/private" /> */}
                         <Route element={<PlaceReservations />} path="/reservations" />
                         <Route element={<Menu />} path="/menu" />
+
                         <Route element={<Payment />} path="/payment" />
                         <Route element={<Form />} path="/form/:theid" />
+
+                        <Route element={<Form />} path="/improve-us/" />
+
                         <Route element={<Feedback />} path="/feedback/:theid" />
                         <Route element={<h1>Not found!</h1>} />
 
