@@ -15,5 +15,25 @@ class User(db.Model):
         return {
             "id": self.id,
             "email": self.email,
-            # do not serialize the password, its a security breach
+            
+        }
+
+class Menu(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    day = db.Column(db.String(50), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(255), nullable=True)
+    img = db.Column(db.String(1000), nullable=False)
+    price = db.Column(db.String(20), nullable=False)  
+
+    def __repr__(self):
+        return f'<Menu {self.name}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "img": self.img,
+            "price": self.price,
         }
