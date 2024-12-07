@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 
-export const PlaceReservationCard = ({ dia }) => {
+export const PlaceReservationCard = ({ dia, actualizarReserva }) => {
 
     const [horaSeleccionada, setHoraSeleccionada] = useState("");
     const [reserva, setReserva] = useState("Sin reserva");
@@ -9,11 +9,13 @@ export const PlaceReservationCard = ({ dia }) => {
     const seleccionarHora = (hora) => {
         setHoraSeleccionada(hora);
         setReserva("Tienes reserva"); 
+        actualizarReserva(dia, hora);
     };
 
     const eliminarReserva = () => {
         setHoraSeleccionada("");
         setReserva("Sin reserva");
+        actualizarReserva(dia, "");
     };
 
     const listaHoras=["11:30", "12:00", "12:30", "13:00", "13:30"];
