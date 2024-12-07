@@ -12,14 +12,6 @@ export const Payment = () => {
     initMercadoPago('APP_USR-95548522-114d-4404-9dfd-408bd646ee05', { locale: "es-UY", });
     const [preferenceId, setPreferenceId] = useState(null)
 
-    // const createPreference = async () => { 
-    //     try { const response = await Axios.post("http://localhost:3000/create_preference", { 
-    //         title: "Fideos con Salsa Boloñesa", 
-    //         quantity: 1, 
-    //         price: 100, }); 
-    //         const { id } = response.data; 
-    //         return id; } 
-    //         catch (error) { console.log(error) } };
 
             const pagar = async () => {
                 // const subtotal = 100; 
