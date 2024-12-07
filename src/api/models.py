@@ -40,6 +40,13 @@ class Menu(db.Model):
 
     def __repr__(self):
         return f'<Menu {self.name}>'
+     
+    def __init__(self, day,name,description, img, price):
+        self.day = day
+        self.name=name
+        self.description = description
+        self.img = img
+        self.price= price
 
     def serialize(self):
         return {

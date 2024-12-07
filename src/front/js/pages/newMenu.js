@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 export const NewMenu = () => {
-
     const [image, setImage] = useState(null);
 
     const handleImageUpload = (event) => {
@@ -25,11 +24,11 @@ export const NewMenu = () => {
 
         const formData = new FormData();
 
-        formData.append('day', product.day); 
-        formData.append('name', product.name); 
-        formData.append('description', product.description); 
-        formData.append('img', image); 
-        formData.append('price', product.price); 
+        formData.append('day', product.day);
+        formData.append('name', product.name);
+        formData.append('description', product.description);
+        formData.append('img', image);
+        formData.append('price', product.price);
 
         const resp = await fetch(process.env.BACKEND_URL + '/api/newMenu', {
             method: 'POST',
@@ -39,19 +38,20 @@ export const NewMenu = () => {
             body: formData
         });
 
-        if (resp.ok) {
+        if (!resp.ok) {
+            alert('Failed to publish product');
+        } else {
+            const data = await resp.json();
+            console.log(data);
             alert('Product Published');
         }
-
-        const data = await resp.json();
-        console.log(data);
     };
 
     return (
         <div className="d-flex justify-content-center align-items-center vh-100">
             <div className="col-md-8 col-lg-6 order-md-1 bg-light p-4 rounded">
                 <h4 className="mt-5">MENÚ NUEVO</h4>
-                <form className="needs-validation" noValidate>
+                <form className="needs-validation" noValidate onSubmit={handlePublish}>
                     <div className="row">
                         <div className="col-md-6 mb-3">
                             <label htmlFor="day">Día</label>
@@ -63,7 +63,7 @@ export const NewMenu = () => {
                                 required
                                 onChange={(event) => setProduct({ ...product, day: event.target.value })}
                             />
-                            <div className="invalid-feedback">Valid first name is required.</div>
+                            <div className="invalid-feedback">Valid day is required.</div>
                         </div>
                         <div className="col-md-6 mb-3">
                             <label htmlFor="Name">Nombre del Menú</label>
@@ -75,25 +75,21 @@ export const NewMenu = () => {
                                 required
                                 onChange={(event) => setProduct({ ...product, name: event.target.value })}
                             />
-                            <div className="invalid-feedback">Valid last name is required.</div>
+                            <div className="invalid-feedback">Valid name is required.</div>
                         </div>
                     </div>
 
                     <div className="mb-3">
-                        <label htmlFor="username">Descripción del Menú</label>
-                        <div className="input-group">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder=""
-                                value={product.description || ''}
-                                required
-                                onChange={(event) => setProduct({ ...product, description: event.target.value })}
-                            />
-                            <div className="invalid-feedback" style={{ width: "100%" }}>
-                                Your username is required.
-                            </div>
-                        </div>
+                        <label htmlFor="description">Descripción del Menú</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder=""
+                            value={product.description || ''}
+                            required
+                            onChange={(event) => setProduct({ ...product, description: event.target.value })}
+                        />
+                        <div className="invalid-feedback">Description is required.</div>
                     </div>
 
                     <div className="mb-3">
@@ -106,9 +102,7 @@ export const NewMenu = () => {
                             required
                             onChange={(event) => setProduct({ ...product, price: event.target.value })}
                         />
-                        <div className="invalid-feedback">
-                            Please enter a valid price.
-                        </div>
+                        <div className="invalid-feedback">Please enter a valid price.</div>
                     </div>
 
                     {!image && (
@@ -147,7 +141,7 @@ export const NewMenu = () => {
                     )}
 
                     <div className="d-grid gap-2 mb-2">
-                        <button className="btn btn-primary" type="submit" onClick={handlePublish}>
+                        <button className="btn btn-primary" type="submit">
                             Subir Menú
                         </button>
                     </div>

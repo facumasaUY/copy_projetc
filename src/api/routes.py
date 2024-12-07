@@ -47,12 +47,10 @@ def create_new_menu():
 
     img = request.files.get("img")
 
-    if img:
-        upload_result = cloudinary.uploader.upload(img)
-        img_url = upload_result["secure_url"]
-    else:
-        img_url = None  # You can set a default image if required
-
+   
+    upload_result = cloudinary.uploader.upload(img)
+    img_url = upload_result["secure_url"]
+   
     new_menu = Menu(
         day=day,
         name=name,
