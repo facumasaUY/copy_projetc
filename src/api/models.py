@@ -22,9 +22,39 @@ class User(db.Model):
 
     def serialize(self):
         return {
-            "id":self.id,
+           "id":self.id,
             "name":self.name,
             "last_name":self.last_name,
             "email":self.email,
             "is_active":self.is_active
+            
         }
+
+class Menu(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    day = db.Column(db.String(50), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(255), nullable=True)
+    img = db.Column(db.String(1000), nullable=False)
+    price = db.Column(db.String(20), nullable=False)  
+
+    def __repr__(self):
+        return f'<Menu {self.name}>'
+     
+    def __init__(self, day,name,description, img, price):
+        self.day = day
+        self.name=name
+        self.description = description
+        self.img = img
+        self.price= price
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "img": self.img,
+            "price": self.price,
+        }
+            
+        
