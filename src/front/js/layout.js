@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
@@ -11,8 +11,9 @@ import { Form } from "./component/form";
 import { Navbar } from "./component/loginnavbar";
 import { Footer } from "./component/loginfooter";
 
-import {Register} from "./component/register"
+import {Register} from "./component/register";
 import { Menu } from "./component/menu";
+import { Payment } from "./component/payment";
 
 
 
@@ -33,8 +34,8 @@ const Layout = () => {
     return (
         <div>
             <BrowserRouter basename={basename}>
-                <ScrollToTop>
-                    <Navbar />
+                <ScrollToTop> 
+                {location.pathname !== "/menu" && <Navbar />} {/* Es un condicional que hace que el navbar de login no se vea en menu, si hay duda, consultar a Facu */}
                     <Routes>
 
                         <Route element={<Home />} path="/" />
@@ -44,7 +45,12 @@ const Layout = () => {
                         {/* <Route element={<Private/>} path="/private" /> */}
                         <Route element={<PlaceReservations />} path="/reservations" />
                         <Route element={<Menu />} path="/menu" />
+
+                        <Route element={<Payment />} path="/payment" />
+                        <Route element={<Form />} path="/form/:theid" />
+
                         <Route element={<Form />} path="/improve-us/" />
+
                         <Route element={<Feedback />} path="/feedback/:theid" />
                         <Route element={<h1>Not found!</h1>} />
 
