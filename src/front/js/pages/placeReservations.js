@@ -25,6 +25,14 @@ export const PlaceReservations = () => {
                     </div>
                 </button>
                 <h2 className="text-center" style={{ color: "rgb(56, 101, 229)"}}>RESERVAR LUGAR EN COMEDOR</h2>
+                <button className="btn btn-white" style={{ padding: '10px', marginLeft:'10px', marginRight: '30px', cursor: 'pointer', borderRadius:'25px', borderColor:'green', backgroundColor:"lightgreen" }}
+                    title="Guardar reserva"
+                >
+                    <div ClassName="d-flex flex-column">
+                        Guardar
+                    </div>
+                </button>
+
             </div>
             {/* <img className="mt-4" src="https://lambdatres.com/wp-content/uploads/2011/12/mobiliario-zona-office-01.jpg" alt="..." style={{width:"40%"}}/> */}
 
