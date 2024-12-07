@@ -17,3 +17,20 @@ class User(db.Model):
             "email": self.email,
             # do not serialize the password, its a security breach
         }
+
+class Reserva(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user = db.Column(db.String(100), nullable=False)
+    dia = db.Column(db.String(20), nullable=False)
+    hora = db.Column(db.String(10), nullable=False)
+
+    def __repr__(self):
+        return f'<Reserva {self.user}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user": self.user,
+            "dia": self.dia,
+            "hora":self.hora
+        }
