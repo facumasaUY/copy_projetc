@@ -1,11 +1,74 @@
+
+import React, { useState } from "react";
+import andalogofood from "../../img/anda.png"; import "../../styles/shoppingCart.css";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "/src/front/styles/home.css"
 import React from "react";
 import andalogofood from "../../img/anda.png";
 import { Link, useNavigate } from "react-router-dom";
 
 
+
 export const Menu = () => {
 
+
   const navigate = useNavigate();
+
+
+  const [quantity, setQuantity] = useState(1);
+
+  const [listCart, setListCart] = useState([]);
+
+  const [spinner, setSpinner] = useState(false);
+
+  const [showNotification, setShowNotification] = useState(false);
+
+  const mostrarNotificacion = () => {
+    if (!showNotification) {
+      console.log("Mostrando notificación...");
+      setShowNotification(true);
+      setTimeout(() => {
+        console.log("Ocultando notificación...");
+        setShowNotification(false);
+      }, 2000);
+    }
+  };
+
+  const handleNotificacion = () => {
+    return mostrarNotificacion()
+  }
+
+  const handleClick = (item) => {
+    setListCart((carritoActual) => {
+      const existe = carritoActual.some((producto) => producto.id === item.id);
+      if (!existe) {
+        return [...carritoActual, item];
+      }
+      return carritoActual;
+    });
+  };
+
+
+  const handleCompra = async () => {
+    if (listCart.length === 0) {
+      alert("El carrito está vacío. Por favor, añade productos antes de pagar.");
+    } else {
+      setSpinner(true)
+      setTimeout(() => {
+        setSpinner(false)
+        irAPayment();
+      }, 2000)
+    }
+  };
+
+  const decrecer = () => {
+    
+  };
+
+  const acrecentar = () => {
+
+  };
 
   const menuDay2 = {
 
@@ -20,6 +83,25 @@ export const Menu = () => {
       { id: "Martes_3", name: "Opción 3",description:"Panchos con panceta ahumada morron picadito y salsa ahumada", img: "https://sinreservas.com.ar/download/multimedia.normal.97a15526e9be66bf.53616e7a61727520283130295f6e6f726d616c2e77656270.webp", price: "$350" },
     ],
     MIÉRCOLES: [
+
+      { id: "Miércoles_1", name: "Opción 1", description: "Esto es una descripción...", img: "https://www.deliciosi.com/images/300/378/crema-de-calabaza.jpg", price: "$350" },
+      { id: "Miércoles_2", name: "Opción 2", description: "Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnrVXtOErESITNnhn9MJMOptSFBKsEPA-9QA&s", price: "$300" },
+      { id: "Miércoles_3", name: "Opción 3", description: "Esto es una descripción...", img: "https://content.elmueble.com/medio/2024/09/06/arroz-con-verduras_ab2a54ac_240906144446_1200x1200.jpg", price: "$250" },
+    ],
+    JUEVES: [
+      { id: "Jueves_1", name: "Opción 1", description: "Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeL6NmTbnojfQnaiMnYoLpiNqzOYnkNMBQHA&s", price: "$350" },
+      { id: "Jueves_2", name: "Opción 2", description: "Esto es una descripción...", img: "https://truffle-assets.tastemadecontent.net/cdn-cgi/image/width=360/a2f94f01-742_friedchickensalad_square2.jpg", price: "$350" },
+      { id: "Jueves_3", name: "Opción 3", description: "Esto es una descripción...", img: "https://www.frutamare.com/wp-content/uploads/2021/04/pasta-a-la-bolonesa.jpg", price: "$300" },
+    ],
+    VIERNES: [
+      { id: "Viernes_1", name: "Opción 1", description: "Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7n0A8vIS8MRwnHMZhX-MxS2W_L2b0-6g8Jw&s", price: "$350" },
+      { id: "Viernes_2", name: "Opción 2", description: "Esto es una descripción...", img: "https://img.freepik.com/fotos-premium/weiner-schnitzel-empanado-casero-papas-fritas-pollo-frito-papas-fritas-estilo-comida-europea_1339-152591.jpg", price: "$250" },
+      { id: "Viernes_3", name: "Opción 3", description: "Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcpQ3KilaPlZwatN49TzcFTRwbDXQ-VFWsx_tScOJkHuh7zyh8_rIVvc-r72wM6whCNfc&usqp=CAU", price: "$200" },
+    ],
+    SÁBADO: [
+      { id: "Sábado_1", name: "Opción 1", description: "Esto es una descripción...", img: "https://cdn0.recetasgratis.net/es/posts/8/9/0/ensalada_de_garbanzos_vegana_59098_600_square.jpg", price: "$350" },
+      { id: "Sábado_2", name: "Opción 2", description: "Esto es una descripción...", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPnXJcdnE2L04D4PAB0py1DthQJoctIfVfUw&s", price: "$300" },
+      { id: "Sábado_3", name: "Opción 3", description: "Esto es una descripción...", img: "https://i.pinimg.com/736x/bf/cf/ce/bfcfce36554e902259cbcad00169a51c.jpg", price: "$350" },
       { id: "Miércoles_1", name: "Opción 1", description:"Sopa crema de zapallo ,zanahoria, cebolla, morron y remolacha", img: "https://www.deliciosi.com/images/300/378/crema-de-calabaza.jpg", price: "$350" },
       { id: "Miércoles_2", name: "Opción 2", description:"Cazuela de matambre con porotos y verudras", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnrVXtOErESITNnhn9MJMOptSFBKsEPA-9QA&s", price: "$300" },
       { id: "Miércoles_3", name: "Opción 3", description:"Arroz primavera con choclo ,zanahoria ,arveja y tomate", img: "https://content.elmueble.com/medio/2024/09/06/arroz-con-verduras_ab2a54ac_240906144446_1200x1200.jpg", price: "$250" },
@@ -38,6 +120,7 @@ export const Menu = () => {
       { id: "Sábado_1", name: "Opción 1", description:"Ensalda de garbanzos, tomate , brocoli y esparragos", img: "https://cdn0.recetasgratis.net/es/posts/8/9/0/ensalada_de_garbanzos_vegana_59098_600_square.jpg", price: "$350" },
       { id: "Sábado_2", name: "Opción 2", description:"Pastel de canre con salsa blanca ", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPnXJcdnE2L04D4PAB0py1DthQJoctIfVfUw&s", price: "$300" },
       { id: "Sábado_3", name: "Opción 3", description:"Brochet de verduras con carne de cerdo ", img: "https://i.pinimg.com/736x/bf/cf/ce/bfcfce36554e902259cbcad00169a51c.jpg", price: "$350" },
+
     ],
   };
 
@@ -89,10 +172,17 @@ export const Menu = () => {
     navigate("/reservations");
   };
 
+  const irAPayment = () => {
+    navigate("/payment");
+  };
+
 
   return (
+    
     <div className="container mt-3">
+      
       <nav className="navbar bg-body-tertiary">
+
         <div className="container-fluid d-flex justify-content-between align-items-center">
           <a className="navbar-brand d-flex align-items-center">
             <img src={andalogofood} alt="Anda Food Logo" style={{ width: "50px", height: "50px", marginRight: "10px", "borderRadius": "10px" }} />
@@ -114,23 +204,128 @@ export const Menu = () => {
                 <h5 className="offcanvas-title text-primary" id="offcanvasExampleLabel">Lista de Compras</h5>
                 <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 
-              </div>
-              <div className="offcanvas-body">
-                <div>
-                  Menúes
-                </div>
-                <div className="mt-auto d-flex justify-content-end">
-                  <button type="button" className="btn btn-secondary m-1">Cerrar</button>
-                  <button type="button" className="btn btn-success m-1">Pagar</button>
-                </div>
-              </div>
+
+        <div className="container-fluid d-flex justify-content-between align-items-center" >
+          <div className="dropdown">
+            <a className="navbar-brand d-flex align-items-center dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src={andalogofood} alt="Anda Food Logo" style={{ width: "50px", height: "50px", marginRight: "10px", "borderRadius": "10px" }} />
+            </a>
+            <ul className="dropdown-menu">
+              <li><a className="dropdown-item" href="#">Mi cuenta</a></li>
+              <li><a className="dropdown-item" href="#">Mis compras</a></li>
+              <li><a className="dropdown-item" href="#">Cerrar Sesión</a></li>
+            </ul>
+          </div>
+
+
+          {/* El carrito de compras */}
+
+          <div className="shoppingCart d-flex">
+
+            {/* Boton de Carrito */}
+
+            <div className="flex-direction-column">
+              <Link to={"/form/:theid"}><p><a className="link-opacity-10-hover m-1  " href="#">Déjanos tu comentario</a></p></Link>
+
+              <button className="btn m-1 " type="button" style={{ backgroundColor: "rgb(56, 101, 229)", "color": "white" }}
+                onClick={() => irAReservaDeLugar()}
+              >
+                Reserva de lugar
+              </button>
+              <button className="btn m-1 " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style={{ "backgroundColor": "rgb(56, 101, 229)", "color": "white" }}>
+                <i className="fa-solid fa-cart-shopping"></i>
+              </button>
             </div>
+
+            {/* Ventana */}
+            <div className="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+
+              {/* Título */}
+              <div className="offcanvas-header" style={{
+                color: "white",
+                backgroundColor: "#3865e5"
+              }}>
+                <h1>Carrito</h1>
+              </div>
+
+              {/* Body */}
+              <div className="listCart offcanvas-body position-relative" style={{ backgroundColor: "rgb(56, 101, 229, 0.3)" }}>
+              
+                {spinner && (<div className="spinner-grow d-flex justify-content-center" role="status" style={{backgroundColor: "#3865e5"}}>
+                  <span className="visually-hidden">Loading...</span>
+                </div>)}
+
+                {listCart.length === 0 ? (
+                  <p>El carrito está vacío.</p>
+                ) : (
+                  listCart.map((item, index) => (
+
+
+                    <div key={index} className="d-flex align-items justify-content-evenly" style={{ backgroundColor: "white" }}>
+
+                      <div className="foodImage d-flex justify-content-center align-items-center">
+                        <img src={item.img} />
+                      </div>
+
+                      <div className="foodName d-flex justify-content-center align-items-center" style={{ color: "#3865e5" }}>
+                        {item.name}
+                      </div>
+
+                      <div className="precioTotal d-flex justify-content-center align-items-center" style={{ color: "#3865e5" }}>
+                        {item.price}
+                      </div>
+
+                      <div className="cantidad d-flex justify-content-center align-items-center">
+                        <span className="menos" style={{
+                          width: "30px",
+                          height: "30px",
+                          color: "white",
+                          backgroundColor: "#3865e5",
+                          borderRadius: "50%",
+                          cursor: "pointer",
+                          margin: "0 10px",
+                          textAlign: "center"
+                        }}>
+                          {"<"}
+                        </span>
+                        <span>1</span>
+                        <span className="mas" style={{
+                          width: "30px",
+                          height: "30px",
+                          color: "white",
+                          backgroundColor: "#3865e5",
+                          borderRadius: "50%",
+                          cursor: "pointer",
+                          margin: "0 10px",
+                          textAlign: "center"
+                        }}>
+                          {">"}
+                        </span>
+                      </div>
+
+                    </div>)))}
+
+                <div className="btn position-absolute bottom-0 start-0 end-0 d-flex justify-content-between" >
+                  <button type="button" className="close align-self-start" data-bs-dismiss="offcanvas" aria-label="Close">VOLVER</button>
+                  <button className="pay align-self-end" id="process-checkout" onClick={() => handleCompra()}>IR A PAGAR</button>   
+                </div>
+                
+
+              </div>
+
+
+
+            </div>
+
           </div>
         </div>
       </nav>
 
+      
+
+
       {/* Menu del dia */}
-      <div className="menudeldia2" style={{ marginBottom: "20px", fontFamily: "Mulish, sans-serif" }}>
+      <div className="menudeldia2 mt-3" style={{ marginBottom: "20px", fontFamily: "Mulish, sans-serif" }}>
         <div className="mb-5">
           <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>MENÚ DE LA SEMANA</h2>
           <div className="row">
@@ -192,11 +387,12 @@ export const Menu = () => {
                           >
                             {item.price}
                           </div>
+
                           <div className="card-body text-center p-2">
                             <div className="d-flex justify-content-between">
                               
                               <button
-                                className="btn "
+                                className="btn " onClick={() => { handleClick(item); handleNotificacion() }}
                                 style={{
                                   backgroundColor: "rgb(56, 101, 229)",
                                   color: "white",
@@ -204,7 +400,7 @@ export const Menu = () => {
                                   borderRadius: "10px",
                                 }}
                               >
-                                Comprar
+                                Añadir al Carrito
                               </button>
                               <button
                                 className="btn"
@@ -218,6 +414,7 @@ export const Menu = () => {
                               </button>
                             </div>
                           </div>
+
                         </div>
                       </div>
                     ))}
@@ -228,6 +425,28 @@ export const Menu = () => {
           </div>
         </div>
       </div>
+
+      {/* Notificación */}
+
+
+      {showNotification && (
+        <div className="toast-container position-fixed bottom-0 end-0 p-3">
+          <div
+            id="liveToast"
+            className="toast show" // Clase 'show' para que sea visible
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+          >
+            <div className="toast-header" style={{ backgroundColor: "rgb(56, 101, 229)", color: "white" }}>
+              <strong className="me-auto">Notificación</strong>
+            </div>
+            <div className="toast-body">
+              ¡Producto agregado al carrito correctamente!
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Otras opciones */}
       <div className="container my-4">
@@ -297,7 +516,7 @@ export const Menu = () => {
                   Precio: ${item.price}
                 </p>
                 <button
-                  className="btn mb-4"
+                  className="btn " onClick={() => { handleClick(item); handleNotificacion() }}
                   style={{
                     backgroundColor: "rgb(56, 101, 229)",
                     color: "white",
