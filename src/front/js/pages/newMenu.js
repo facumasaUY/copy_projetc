@@ -14,12 +14,12 @@ export const NewMenu = () => {
         day: "",
         name: "",
         description: "",
-        img: null,
-        price: ""
+        price: "",
+        img: null
     });
 
     const handlePublish = async (event) => {
-        event.preventDefault();
+        event.preventDefault(); // Prevenir la acción por defecto del formulario
         console.log("Publish the new product", product, image);
 
         const formData = new FormData();
@@ -30,11 +30,8 @@ export const NewMenu = () => {
         formData.append('img', image);
         formData.append('price', product.price);
 
-        const resp = await fetch(process.env.BACKEND_URL + '/api/newMenu', {
+        const resp = await fetch(process.env.BACKEND_URL + 'api/menu', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
             body: formData
         });
 
@@ -95,7 +92,7 @@ export const NewMenu = () => {
                     <div className="mb-3">
                         <label htmlFor="price">Precio</label>
                         <input
-                            type="text"
+                            type="number"
                             className="form-control"
                             placeholder=""
                             value={product.price || ''}

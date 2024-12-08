@@ -72,36 +72,26 @@ def create_new_menu():
 
     return jsonify({"msg": "Menu created successfully"}), 200
 
-
 @api.route('/menu', methods=['GET'])
 def get_menus():
-
     menus = Menu.query.all()
-
 
     if not menus:
         return jsonify({"msg": "No menus found"}), 404
 
-    menu_list = []
-    for menu in menus:
-        menu_list.append({
+    def serialize(menu):
+        return {
             "id": menu.id,
             "day": menu.day,
             "name": menu.name,
             "description": menu.description,
             "price": menu.price,
-            "img": menu.img
-        })
+            "img": menu.img,
+        }
 
-    return jsonify(menu_list), 200
+    return jsonify([serialize(menu) for menu in menus]), 200
+
     
-
-
-
-
-
-
-
 
 @api.route("/preference", methods=["POST"]) 
 def preference(): 

@@ -10,7 +10,7 @@ export const Home = () => {
     const [product, setProduct] = useState([]);
 
     const getProducts = async () => {
-        const resp = await fetch(process.env.BACKEND_URL + "api/newMenu");
+        const resp = await fetch(process.env.BACKEND_URL + "api/menu");
         const data = await resp.json();
         setProduct(data);
     };
