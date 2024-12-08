@@ -14,7 +14,6 @@ export const NewMenu = () => {
         day: "",
         name: "",
         description: "",
-        img: null,
         price: ""
     });
 
@@ -22,21 +21,24 @@ export const NewMenu = () => {
         event.preventDefault();
         console.log("Publish the new product", product, image);
 
-        const formData = new FormData();
+        if (!product.day || !product.name || !product.description || !product.price || !image) {
+            alert("Por favor, complete todos los campos y suba una imagen.");
+            return;
+        }
+    
 
+        const formData = new FormData();
         formData.append('day', product.day);
         formData.append('name', product.name);
         formData.append('description', product.description);
         formData.append('img', image);
         formData.append('price', product.price);
 
-        const resp = await fetch(process.env.BACKEND_URL + '/api/newMenu', {
+        const resp = await fetch(process.env.BACKEND_URL + 'api/menu', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
             body: formData
         });
+        
 
         if (!resp.ok) {
             alert('Failed to publish product');

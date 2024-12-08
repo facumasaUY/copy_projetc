@@ -30,6 +30,7 @@ class User(db.Model):
             
         }
 
+#Menú
 class Menu(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     day = db.Column(db.String(50), nullable=False)

@@ -20,6 +20,9 @@ from cloudinary.utils import cloudinary_url
 
 import os 
 
+frontendurl = os.getenv("FRONTEND_URL")
+
+
 cloudinary.config( 
     cloud_name = "dqspjepfs", 
     api_key = "992526845141794", 
@@ -43,6 +46,7 @@ def handle_hello():
 
 @api.route('/menu', methods=['POST'])
 def create_new_menu():
+    
     body = request.form
 
     if not body or "day" not in body or "name" not in body or "description" not in body or "price" not in body:
@@ -119,10 +123,12 @@ def preference():
         "payer": { 
             "email": "test_user_17805074@testuser.com"
         },
-        "back_urls": { 
-            "success": "https://crispy-rotary-phone-x59p57vpggwjfv5x5-3000.app.github.dev/menu", 
-            "failure": "https://crispy-rotary-phone-x59p57vpggwjfv5x5-3000.app.github.dev/menu", 
-            "pending": "https://crispy-rotary-phone-x59p57vpggwjfv5x5-3000.app.github.dev/menu"
+       "back_urls": { 
+            "success": f"{frontendurl}/menu", 
+            "failure": f"{frontendurl}/menu", 
+            "pending": f"{frontendurl}/menu"
+
+            # que url es la que va aca . o implementar backendurl
         },
         "auto_return": "approved"
     }
