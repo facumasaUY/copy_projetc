@@ -20,7 +20,7 @@ import { Payment } from "./component/payment";
 import { Feedback } from "./component/feedback";
 import { PlaceReservations } from "./pages/placeReservations";
 import {NewMenu} from "./pages/newMenu";
-import { ViewMenu } from "./pages/viewMenus"
+
 
 
 
@@ -55,7 +55,6 @@ const Layout = () => {
 
                         <Route element={<Feedback />} path="/feedback/:theid" />
                         <Route element={<NewMenu />} path="/newMenu" />
-                        <Route element={<ViewMenu />} path="/viewMenus" />
                         <Route element={<h1>Not found!</h1>} />
 
                     </Routes>
