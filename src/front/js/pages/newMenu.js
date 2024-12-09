@@ -1,7 +1,16 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 
 export const NewMenu = () => {
     const [image, setImage] = useState(null);
+    const [product, setProduct] = useState({
+        day: "",
+        name: "",
+        description: "",
+        price: ""
+    });
+
+    const navigate = useNavigate(); 
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
@@ -10,23 +19,17 @@ export const NewMenu = () => {
         }
     };
 
-    const [product, setProduct] = useState({
-        day: "",
-        name: "",
-        description: "",
-        price: ""
-    });
-
     const handlePublish = async (event) => {
         event.preventDefault();
         console.log("Publish the new product", product, image);
 
+        
         if (!product.day || !product.name || !product.description || !product.price || !image) {
             alert("Por favor, complete todos los campos y suba una imagen.");
             return;
         }
-    
 
+        
         const formData = new FormData();
         formData.append('day', product.day);
         formData.append('name', product.name);
@@ -34,18 +37,25 @@ export const NewMenu = () => {
         formData.append('img', image);
         formData.append('price', product.price);
 
-        const resp = await fetch(process.env.BACKEND_URL + 'api/menu', {
-            method: 'POST',
-            body: formData
-        });
-        
+        try {
+            const resp = await fetch(process.env.BACKEND_URL + 'api/menu', {
+                method: 'POST',
+                body: formData
+            });
 
-        if (!resp.ok) {
-            alert('Failed to publish product');
-        } else {
-            const data = await resp.json();
-            console.log(data);
-            alert('Product Published');
+            if (!resp.ok) {
+                alert('Failed to publish product');
+            } else {
+                const data = await resp.json();
+                console.log(data);
+                alert('Producto publicado exitosamente');
+                
+               
+                navigate("/menu");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Hubo un error al publicar el producto.");
         }
     };
 
