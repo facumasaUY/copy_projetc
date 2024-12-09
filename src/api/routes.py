@@ -4,10 +4,7 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import mercadopago
 import json
-
-sdk = mercadopago.SDK("APP_USR-7717264634749554-120508-c40d3f9932b4e9f7de4477bfa5ef733b-2136972767")
-
-
+import os
 
 
 from flask_jwt_extended import create_access_token
@@ -18,7 +15,13 @@ import cloudinary
 import cloudinary.uploader
 from cloudinary.utils import cloudinary_url
 
-import os 
+frontendurl = os.getenv("FRONTEND_URL")
+
+sdk = mercadopago.SDK("APP_USR-7717264634749554-120508-c40d3f9932b4e9f7de4477bfa5ef733b-2136972767")
+
+
+
+
 
 cloudinary.config( 
     cloud_name = "dqspjepfs", 
@@ -120,9 +123,11 @@ def preference():
             "email": "test_user_17805074@testuser.com"
         },
         "back_urls": { 
-            "success": "https://crispy-rotary-phone-x59p57vpggwjfv5x5-3000.app.github.dev/menu", 
-            "failure": "https://crispy-rotary-phone-x59p57vpggwjfv5x5-3000.app.github.dev/menu", 
-            "pending": "https://crispy-rotary-phone-x59p57vpggwjfv5x5-3000.app.github.dev/menu"
+            "success": f"{frontendurl}", 
+            "failure": f"{frontendurl}/menu", 
+            "pending": f"{frontendurl}/menu"
+
+            # que url es la que va aca . o implementar backendurl
         },
         "auto_return": "approved"
     }
@@ -143,6 +148,7 @@ def register():
     last_name=data.get("last_name")
     email = data.get("email")
     password = data.get("password")
+    num_funcionario=data.get("num_funcionario")
 
     exist_user = User.query.filter_by(email=email).first()
     if exist_user:
@@ -152,11 +158,12 @@ def register():
         name = name,
         email = email , 
         last_name=last_name,
-        password = password 
+        password = password ,
+        num_funcionario = num_funcionario
     )
     db.session.add(new_user)
     db.session.commit()
-    return jsonify({"message":"User created successfully"}),200
+    return jsonify({"message":"User created successfully"}),201
 
 
         #ceci tengo una pregunta en el post de arriba 

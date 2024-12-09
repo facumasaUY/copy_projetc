@@ -9,16 +9,18 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+    num_funcionario = db.Column(db.Integer, unique=True, nullable=False)
 
     def __repr__(self):
         return f'<User {self.email}>'
 
-    def __init__(self, name, email,last_name, password):
+    def __init__(self, name, email,last_name, password,num_funcionario):
         self.name = name
         self.last_name=last_name
         self.email = email
         self.password = password
         self.is_active = True
+        self.num_funcionario = num_funcionario
 
     def serialize(self):
         return {
@@ -26,7 +28,8 @@ class User(db.Model):
             "name":self.name,
             "last_name":self.last_name,
             "email":self.email,
-            "is_active":self.is_active
+            "is_active":self.is_active,
+            "num_funcionario":self.num_funcionario
             
         }
 

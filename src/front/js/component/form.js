@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import "../../styles/home.css";
 import salonComedor from "../../img/salonComedor.png";
 
 export const Form = () => {
+
+  const navigate = useNavigate();
+  const volver = () => {
+      navigate(-1);
+  };
+
   return (
     
     <div className="container p-5 " >
@@ -34,6 +41,10 @@ export const Form = () => {
           />
           <div className="container d-flex  justify-content-end my-3">
             <button type="button" className="btn btn-primary">Enviar</button>
+            <button type="button"  onClick={volver}  className="btn btn-primary ms-2">Volver</button>
+
+            
+            
           </div>
         </div>
       </div>

@@ -178,7 +178,7 @@ export const Menu = () => {
             {/* Boton de Carrito */}
 
             <div className="flex-direction-column">
-              <Link to={"/form/:theid"}><p><a className="link-opacity-10-hover m-1  " href="#">Déjanos tu comentario</a></p></Link>
+              <Link to={"/form/"}><p><a className="link-opacity-10-hover m-1  " href="#">Déjanos tu comentario</a></p></Link>
 
               <button className="btn m-1 " type="button" style={{ backgroundColor: "rgb(56, 101, 229)", "color": "white" }}
                 onClick={() => irAReservaDeLugar()}

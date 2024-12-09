@@ -95,6 +95,7 @@
 		"react-router-dom": "^6.3.0",
 		"stream-browserify": "^3.0.0",
 		"stream-http": "^3.2.0",
+		"sweetalert2": "^11.14.5",
 		"util": "^0.12.5",
 		"vexor": "^0.0.30",
 		"vm-browserify": "^1.1.2"
