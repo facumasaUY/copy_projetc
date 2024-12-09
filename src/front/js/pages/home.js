@@ -11,7 +11,6 @@ export const Home = () => {
     return (
         <div>
             <Login />
-            <Menu /> 
             </div>
     );
 };
