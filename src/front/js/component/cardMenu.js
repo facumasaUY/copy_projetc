@@ -2,6 +2,7 @@ import React from "react";
 
 export const CardMenu = ({menu}) => {
     return (
+        
         <div key={menu.id} className="col-12 col-md-6 col-lg-4 mb-3">
             <div
                 className="card mx-auto"
@@ -70,7 +71,7 @@ export const CardMenu = ({menu}) => {
                                 backgroundColor: "transparent",
                                 fontSize: "20px",
                             }}
-                            // onClick={() => irAFeedback(menu)}
+                            onClick={() => irAFeedback(item)}
                         >
                             ⭐
                         </button>

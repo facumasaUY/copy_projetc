@@ -6,6 +6,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			menuLunes: [],
 			menuMartes: [],
+			menuMiercoles: [],
+			menuJueves: [],
+			menuViernes: [],
+			menuSabado: [],
 
 			mercadoPago: {},
 
@@ -53,20 +57,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const response = await fetch(process.env.BACKEND_URL + "api/menu/" + menuDay)
 					const data = await response.json()
 					console.log(data)
-					if (menuDay =="Lunes"){
-						setStore({ menuLunes: data })
+					if (menuDay === "Lunes") {
+						setStore({ menuLunes: data });
 					}
-					if (menuDay =="Martes"){
-						setStore({ menuMartes: data })
+					if (menuDay === "Martes") {
+						setStore({ menuMartes: data });
 					}
+					if (menuDay === "Miercoles") {
+						setStore({ menuMiercoles: data });
+					}
+					if (menuDay === "Jueves") {
+						setStore({ menuJueves: data });
+					}
+					if (menuDay === "Viernes") {
+						setStore({ menuViernes: data });
+					}
+					if (menuDay === "Sabado") {
+						setStore({ menuSabado: data });
+					}
+			
 				} catch (error) {
-					console.log(error)
-					return false
+					console.log(error);
+					return false;
 				}
-
-			}
-
-
+			},
 		}
 	};
 };

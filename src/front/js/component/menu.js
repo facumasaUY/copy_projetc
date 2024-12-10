@@ -75,9 +75,13 @@ export const Menu = () => {
   };
 
   useEffect(() => {
-   
+
     actions.getMenu("Lunes")
     actions.getMenu("Martes")
+    actions.getMenu("Miercoles")
+    actions.getMenu("Jueves")
+    actions.getMenu("Viernes")
+    actions.getMenu("Sabado")
   }, []);
 
 
@@ -116,42 +120,42 @@ export const Menu = () => {
   };
 
   const anotheroptions = [
-    {
-      id: 1,
-      name: "Coca-Cola Común",
-      img: "https://i.pinimg.com/736x/cc/8e/3c/cc8e3cb0ff29ae7c19499124dfea1196.jpg",
-      price: 62,
-    },
-    {
-      id: 2,
-      name: "Coca-Cola Light",
-      img: "https://i.pinimg.com/736x/c2/f6/92/c2f692861075c7bbcd97ec594962222d.jpg",
-      price: 62,
-    },
-    {
-      id: 3,
-      name: "Coca-Cola Zero",
-      img: "https://i.pinimg.com/736x/a1/5e/ab/a15eab3e7c4f254c5b0701d007992599.jpg",
-      price: 62,
-    },
-    {
-      id: 4,
-      name: "Agua Salus",
-      img: "https://molinoagranel.com.uy/wp-content/uploads/2023/06/agua-mineral-salus-600-ml.jpg",
-      price: 42,
-    },
-    {
-      id: 5,
-      name: "Manzanas",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiCLdNje1XoCGFCNiRhbZwFq8ZPJaIY6Xf-Q&s",
-      price: "15 c/u",
-    },
-    {
-      id: 6,
-      name: "Naranjas",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBy2uSUuJbO0wEsgICk3ovc0utf9QibCkMXw&s",
-      price: "15 c/u",
-    },
+     {
+       id: 1,
+       name: "Coca-Cola Común",
+       img: "https://i.pinimg.com/736x/cc/8e/3c/cc8e3cb0ff29ae7c19499124dfea1196.jpg",
+       price: 62,
+     },
+     {
+       id: 2,
+       name: "Coca-Cola Light",
+       img: "https://i.pinimg.com/736x/c2/f6/92/c2f692861075c7bbcd97ec594962222d.jpg",
+       price: 62,
+     },
+     {
+       id: 3,
+       name: "Coca-Cola Zero",
+       img: "https://i.pinimg.com/736x/a1/5e/ab/a15eab3e7c4f254c5b0701d007992599.jpg",
+       price: 62,
+     },
+     {
+       id: 4,
+       name: "Agua Salus",
+       img: "https://molinoagranel.com.uy/wp-content/uploads/2023/06/agua-mineral-salus-600-ml.jpg",
+       price: 42,
+     },
+     {
+       id: 5,
+       name: "Manzanas",
+       img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiCLdNje1XoCGFCNiRhbZwFq8ZPJaIY6Xf-Q&s",
+       price: "15 c/u",
+     },
+     {
+       id: 6,
+       name: "Naranjas",
+       img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBy2uSUuJbO0wEsgICk3ovc0utf9QibCkMXw&s",
+       price: "15 c/u",
+     },
   ];
 
 
@@ -166,7 +170,7 @@ export const Menu = () => {
   const irAPayment = () => {
     navigate("/payment");
   };
-//Sacar el menuNavbar para otro componente.
+  //Sacar el menuNavbar para otro componente.
   const MenuNavbar = (props) => {
     return (
       <nav className="navbar bg-body-tertiary">
@@ -290,148 +294,218 @@ export const Menu = () => {
   };
 
 
-  return (<div className="container mt-3">
+  return (
+    <div className="container mt-3">
+      <MenuNavbar spinner={spinner} />
 
-    <MenuNavbar spinner={spinner} />
+      {/* Menu del dia */}
 
-    {/* Menu del dia */}
-    <div className="menudeldia2 mt-3" style={{ marginBottom: "20px", fontFamily: "Mulish, sans-serif" }}>
-      <div className="mb-5">
-        <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>MENÚ DE LA SEMANA</h2>
-        <div className="row">
-          {store.menuLunes.map((menu) => (
-            <CardMenu
-            key={menu.id}
-            menu={menu}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-    <div className="menudeldia2 mt-3" style={{ marginBottom: "20px", fontFamily: "Mulish, sans-serif" }}>
-      <div className="mb-5">
-        <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>MENÚ DE LA SEMANA</h2>
-        <div className="row">
-          {store.menuMartes.map((menu) => (
- 
-            <CardMenu
-            key={menu.id}
-            menu={menu}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-
-
-
-    {/* Notificación */}
-
-
-    {showNotification && (
-      <div className="toast-container position-fixed bottom-0 end-0 p-3">
-        <div
-          id="liveToast"
-          className="toast show" // Clase 'show' para que sea visible
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
-        >
-          <div className="toast-header" style={{ backgroundColor: "rgb(56, 101, 229)", color: "white" }}>
-            <strong className="me-auto">Notificación</strong>
-          </div>
-          <div className="toast-body">
-            ¡Producto agregado al carrito correctamente!
-          </div>
-        </div>
-      </div>
-    )}
-
-    {/* Otras opciones */}
-    <div className="container my-4">
-      <h1
-        className="text-center mb-2"
+      <div
+        className="menudeldia2 mt-3"
         style={{
+          marginBottom: "20px",
           fontFamily: "Mulish, sans-serif",
-          color: "rgb(56, 101, 229)",
+          backgroundColor: "rgba(56, 101, 229, 0.2)",
+          padding: "20px",
+          borderRadius: "10px",
         }}
       >
-        OTRAS OPCIONES
-      </h1>
+        <div className="mb-5">
+          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Lunes</h2>
+          <div className="row">
+            {store.menuLunes.map((menu) => (
+              <CardMenu key={menu.id} menu={menu} />
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div
-        className="d-flex justify-content-center flex-wrap gap-4"
-        style={{ rowGap: "20px" }}
+        className="menudeldia2 mt-3"
+        style={{
+          marginBottom: "20px",
+          fontFamily: "Mulish, sans-serif",
+          backgroundColor: "rgba(56, 101, 229, 0.2)",
+          padding: "20px",
+          borderRadius: "10px",
+        }}
       >
-        {anotheroptions.map((item) => (
-          <div
-            className="d-flex flex-column align-items-center"
-            key={item.id}
-            style={{ width: "150px" }}
-          >
+        <div className="mb-5">
+          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Martes</h2>
+          <div className="row">
+            {store.menuMartes.map((menu) => (
+              <CardMenu key={menu.id} menu={menu} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="menudeldia2 mt-3"
+        style={{
+          marginBottom: "20px",
+          fontFamily: "Mulish, sans-serif",
+          backgroundColor: "rgba(56, 101, 229, 0.2)",
+          padding: "20px",
+          borderRadius: "10px",
+        }}
+      >
+        <div className="mb-5">
+          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Miércoles</h2>
+          <div className="row">
+            {store.menuMiercoles.map((menu) => (
+              <CardMenu key={menu.id} menu={menu} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="menudeldia2 mt-3"
+        style={{
+          marginBottom: "20px",
+          fontFamily: "Mulish, sans-serif",
+          backgroundColor: "rgba(56, 101, 229, 0.2)",
+          padding: "20px",
+          borderRadius: "10px",
+        }}
+      >
+        <div className="mb-5">
+          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Jueves</h2>
+          <div className="row">
+            {store.menuJueves.map((menu) => (
+              <CardMenu key={menu.id} menu={menu} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="menudeldia2 mt-3"
+        style={{
+          marginBottom: "20px",
+          fontFamily: "Mulish, sans-serif",
+          backgroundColor: "rgba(56, 101, 229, 0.2)",
+          padding: "20px",
+          borderRadius: "10px",
+        }}
+      >
+        <div className="mb-5">
+          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Viernes</h2>
+          <div className="row">
+            {store.menuViernes.map((menu) => (
+              <CardMenu key={menu.id} menu={menu} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="menudeldia2 mt-3"
+        style={{
+          marginBottom: "20px",
+          fontFamily: "Mulish, sans-serif",
+          backgroundColor: "rgba(56, 101, 229, 0.2)",
+          padding: "20px",
+          borderRadius: "10px",
+        }}
+      >
+        <div className="mb-5">
+          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Sábado</h2>
+          <div className="row">
+            {store.menuSabado.map((menu) => (
+              <CardMenu key={menu.id} menu={menu} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+
+      {/* Otras opciones */}
+      <div className="container my-4">
+        <h1
+          className="text-center mb-2"
+          style={{
+            fontFamily: "Mulish, sans-serif",
+            color: "rgb(56, 101, 229)",
+          }}
+        >
+          OTRAS OPCIONES
+        </h1>
+        <div
+          className="d-flex justify-content-center flex-wrap gap-4"
+          style={{ rowGap: "20px" }}
+        >
+          {anotheroptions.map((item) => (
             <div
-              className="card"
-              style={{
-                width: "150px",
-                height: "150px",
-                borderRadius: "50%",
-                overflow: "hidden",
-              }}
+              className="d-flex flex-column align-items-center"
+              key={item.id}
+              style={{ width: "150px" }}
             >
-              <img
-                src={item.img}
-                className="card-img-top"
-                alt={item.name}
+              <div
+                className="card"
                 style={{
-                  objectFit: "cover",
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
-            </div>
-            <div
-              className="text-center mt-2"
-              style={{
-                fontSize: "10px",
-                fontFamily: "Mulish, sans-serif",
-              }}
-            >
-              <h5
-                className="card-title"
-                style={{
-                  color: "rgb(56, 101, 229)",
-                  whiteSpace: "nowrap",
+                  width: "150px",
+                  height: "150px",
+                  borderRadius: "50%",
                   overflow: "hidden",
                 }}
               >
-                {item.name}
-              </h5>
-              <p
-                className="card-text m-2"
+                <img
+                  src={item.img}
+                  className="card-img-top"
+                  alt={item.name}
+                  style={{
+                    objectFit: "cover",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+              </div>
+              <div
+                className="text-center mt-2"
                 style={{
-                  fontWeight: "bold",
-                  fontSize: "15px",
+                  fontSize: "10px",
+                  fontFamily: "Mulish, sans-serif",
                 }}
               >
-                Precio: ${item.price}
-              </p>
-              <button
-                className="btn " onClick={() => { handleClick(item); handleNotificacion() }}
-                style={{
-                  backgroundColor: "rgb(56, 101, 229)",
-                  color: "white",
-                  fontSize: "0.8rem",
-                  borderRadius: "10px",
-                  padding: "5px 10px",
-                }}
-              >
-                <i className="fa-solid fa-cart-shopping"></i>
-              </button>
+                <h5
+                  className="card-title"
+                  style={{
+                    color: "rgb(56, 101, 229)",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                  }}
+                >
+                  {item.name}
+                </h5>
+                <p
+                  className="card-text m-2"
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: "15px",
+                  }}
+                >
+                  Precio: ${item.price}
+                </p>
+                <button
+                  className="btn " onClick={() => { handleClick(item); handleNotificacion() }}
+                  style={{
+                    backgroundColor: "rgb(56, 101, 229)",
+                    color: "white",
+                    fontSize: "0.8rem",
+                    borderRadius: "10px",
+                    padding: "5px 10px",
+                  }}
+                >
+                  <i className="fa-solid fa-cart-shopping"></i>
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
-  </div>
 
   );
 };
