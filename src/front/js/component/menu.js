@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 
 import "/src/front/styles/home.css";
 import { CardMenu } from "./cardMenu";
+import { CardOption } from "./cardOptions";
 
 
 export const Menu = () => {
@@ -82,6 +83,12 @@ export const Menu = () => {
     actions.getMenu("Jueves")
     actions.getMenu("Viernes")
     actions.getMenu("Sabado")
+    actions.getOptions("CocaCola")
+    actions.getOptions("CocaCola Zero")
+    actions.getOptions("CocaCola Light")
+    actions.getOptions("Agua")
+    actions.getOptions("Naranja")
+    actions.getOptions("Manzana")
   }, []);
 
 
@@ -120,42 +127,42 @@ export const Menu = () => {
   };
 
   const anotheroptions = [
-     {
-       id: 1,
-       name: "Coca-Cola Común",
-       img: "https://i.pinimg.com/736x/cc/8e/3c/cc8e3cb0ff29ae7c19499124dfea1196.jpg",
-       price: 62,
-     },
-     {
-       id: 2,
-       name: "Coca-Cola Light",
-       img: "https://i.pinimg.com/736x/c2/f6/92/c2f692861075c7bbcd97ec594962222d.jpg",
-       price: 62,
-     },
-     {
-       id: 3,
-       name: "Coca-Cola Zero",
-       img: "https://i.pinimg.com/736x/a1/5e/ab/a15eab3e7c4f254c5b0701d007992599.jpg",
-       price: 62,
-     },
-     {
-       id: 4,
-       name: "Agua Salus",
-       img: "https://molinoagranel.com.uy/wp-content/uploads/2023/06/agua-mineral-salus-600-ml.jpg",
-       price: 42,
-     },
-     {
-       id: 5,
-       name: "Manzanas",
-       img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiCLdNje1XoCGFCNiRhbZwFq8ZPJaIY6Xf-Q&s",
-       price: "15 c/u",
-     },
-     {
-       id: 6,
-       name: "Naranjas",
-       img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBy2uSUuJbO0wEsgICk3ovc0utf9QibCkMXw&s",
-       price: "15 c/u",
-     },
+    //  {
+    //    id: 1,
+    //    name: "Coca-Cola Común",
+    //    img: "https://i.pinimg.com/736x/cc/8e/3c/cc8e3cb0ff29ae7c19499124dfea1196.jpg",
+    //    price: 62,
+    //  },
+    //  {
+    //    id: 2,
+    //    name: "Coca-Cola Light",
+    //    img: "https://i.pinimg.com/736x/c2/f6/92/c2f692861075c7bbcd97ec594962222d.jpg",
+    //    price: 62,
+    //  },
+    //  {
+    //    id: 3,
+    //    name: "Coca-Cola Zero",
+    //    img: "https://i.pinimg.com/736x/a1/5e/ab/a15eab3e7c4f254c5b0701d007992599.jpg",
+    //    price: 62,
+    //  },
+    //  {
+    //    id: 4,
+    //    name: "Agua Salus",
+    //    img: "https://molinoagranel.com.uy/wp-content/uploads/2023/06/agua-mineral-salus-600-ml.jpg",
+    //    price: 42,
+    //  },
+    //  {
+    //    id: 5,
+    //    name: "Manzanas",
+    //    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiCLdNje1XoCGFCNiRhbZwFq8ZPJaIY6Xf-Q&s",
+    //    price: "15 c/u",
+    //  },
+    //  {
+    //    id: 6,
+    //    name: "Naranjas",
+    //    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBy2uSUuJbO0wEsgICk3ovc0utf9QibCkMXw&s",
+    //    price: "15 c/u",
+    //  },
   ];
 
 
@@ -420,91 +427,135 @@ export const Menu = () => {
         </div>
       </div>
 
-
-      {/* Otras opciones */}
-      <div className="container my-4">
-        <h1
-          className="text-center mb-2"
-          style={{
-            fontFamily: "Mulish, sans-serif",
-            color: "rgb(56, 101, 229)",
-          }}
-        >
-          OTRAS OPCIONES
-        </h1>
-        <div
-          className="d-flex justify-content-center flex-wrap gap-4"
-          style={{ rowGap: "20px" }}
-        >
-          {anotheroptions.map((item) => (
-            <div
-              className="d-flex flex-column align-items-center"
-              key={item.id}
-              style={{ width: "150px" }}
-            >
-              <div
-                className="card"
-                style={{
-                  width: "150px",
-                  height: "150px",
-                  borderRadius: "50%",
-                  overflow: "hidden",
-                }}
-              >
-                <img
-                  src={item.img}
-                  className="card-img-top"
-                  alt={item.name}
-                  style={{
-                    objectFit: "cover",
-                    width: "100%",
-                    height: "100%",
-                  }}
-                />
-              </div>
-              <div
-                className="text-center mt-2"
-                style={{
-                  fontSize: "10px",
-                  fontFamily: "Mulish, sans-serif",
-                }}
-              >
-                <h5
-                  className="card-title"
-                  style={{
-                    color: "rgb(56, 101, 229)",
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                  }}
-                >
-                  {item.name}
-                </h5>
-                <p
-                  className="card-text m-2"
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: "15px",
-                  }}
-                >
-                  Precio: ${item.price}
-                </p>
-                <button
-                  className="btn " onClick={() => { handleClick(item); handleNotificacion() }}
-                  style={{
-                    backgroundColor: "rgb(56, 101, 229)",
-                    color: "white",
-                    fontSize: "0.8rem",
-                    borderRadius: "10px",
-                    padding: "5px 10px",
-                  }}
-                >
-                  <i className="fa-solid fa-cart-shopping"></i>
-                </button>
-              </div>
-            </div>
-          ))}
+{/* Otras Opciones*/}
+     
+<div
+        className="menudeldia2 mt-3"
+        style={{
+          marginBottom: "20px",
+          fontFamily: "Mulish, sans-serif",
+          backgroundColor: "rgba(56, 101, 229, 0.2)",
+          padding: "20px",
+          borderRadius: "10px",
+        }}
+      >
+        <div className="mb-5">
+          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>CocaCola</h2>
+          <div className="row">
+            {store.optionCocaCola.map((menu) => (
+              <CardOption key={menu.id} menu={menu} />
+            ))}
+          </div>
         </div>
       </div>
+
+      <div
+        className="menudeldia2 mt-3"
+        style={{
+          marginBottom: "20px",
+          fontFamily: "Mulish, sans-serif",
+          backgroundColor: "rgba(56, 101, 229, 0.2)",
+          padding: "20px",
+          borderRadius: "10px",
+        }}
+      >
+        <div className="mb-5">
+          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>CocaCola Zero</h2>
+          <div className="row">
+            {store.optionCocaColaZ.map((menu) => (
+              <CardOption key={menu.id} menu={menu} />
+            ))}
+          </div>
+        </div>
+      </div>
+      <div
+        className="menudeldia2 mt-3"
+        style={{
+          marginBottom: "20px",
+          fontFamily: "Mulish, sans-serif",
+          backgroundColor: "rgba(56, 101, 229, 0.2)",
+          padding: "20px",
+          borderRadius: "10px",
+        }}
+      >
+        <div className="mb-5">
+          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>CocaCola Light</h2>
+          <div className="row">
+            {store.optionCocaColaL.map((menu) => (
+              <CardOption key={menu.id} menu={menu} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="menudeldia2 mt-3"
+        style={{
+          marginBottom: "20px",
+          fontFamily: "Mulish, sans-serif",
+          backgroundColor: "rgba(56, 101, 229, 0.2)",
+          padding: "20px",
+          borderRadius: "10px",
+        }}
+      >
+        <div className="mb-5">
+          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Agua</h2>
+          <div className="row">
+            {store.optionAgua.map((menu) => (
+              <CardOption  key={menu.id} menu={menu} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="menudeldia2 mt-3"
+        style={{
+          marginBottom: "20px",
+          fontFamily: "Mulish, sans-serif",
+          backgroundColor: "rgba(56, 101, 229, 0.2)",
+          padding: "20px",
+          borderRadius: "10px",
+        }}
+      >
+        <div className="mb-5">
+          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Naranja</h2>
+          <div className="row">
+            {store.optionNaranja.map((menu) => (
+              <CardOption  key={menu.id} menu={menu} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="menudeldia2 mt-3"
+        style={{
+          marginBottom: "20px",
+          fontFamily: "Mulish, sans-serif",
+          backgroundColor: "rgba(56, 101, 229, 0.2)",
+          padding: "20px",
+          borderRadius: "10px",
+        }}
+      >
+        <div className="mb-5">
+          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Manzana</h2>
+          <div className="row">
+            {store.optionManzana.map((menu) => (
+              <CardOption key={menu.id} menu={menu} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+     
     </div>
 
   );

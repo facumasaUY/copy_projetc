@@ -44,9 +44,10 @@ def handle_hello():
     }
     return jsonify(response_body), 200
 
+#Menu
+
 @api.route('/menu', methods=['POST'])
-def create_new_menu():
-    
+def create_menu():
     body = request.form
 
     if not body or "day" not in body or "name" not in body or "description" not in body or "price" not in body:
@@ -55,32 +56,101 @@ def create_new_menu():
     day = body.get("day")
     name = body.get("name")
     description = body.get("description")
-    price = body.get("price") 
-
+    price = body.get("price")
     img = request.files.get("img")
 
-   
-    upload_result = cloudinary.uploader.upload(img)
-    img_url = upload_result["secure_url"]
-   
+    try:
+        upload_result = cloudinary.uploader.upload(img)
+        img_url = upload_result["secure_url"]
+    except:
+        raise APIException("Image upload failed", status_code=500)
+
     new_menu = Menu(
         day=day,
         name=name,
         description=description,
         img=img_url,
-        price=price 
+        price=price
     )
-    
+
     db.session.add(new_menu)
     db.session.commit()
 
     return jsonify({"msg": "Menu created successfully"}), 200
 
 
+@api.route('/menu/<string:day>', methods=['GET'])
+def get_menu_by_day(day):
+    menu = Menu.query.filter_by(day=day).all()
+
+    if not menu:
+        return jsonify({"msg": "No menus found"}), 404
+
+    menu_list = []
+    for item in menu:
+        menu_list.append({
+            "id": item.id,
+            "day": item.day,
+            "name": item.name,
+            "description": item.description,
+            "price": item.price,
+            "img": item.img
+        })
+
+    return jsonify(menu_list), 200
 
 
+@api.route('/menuoptions', methods=['POST'])
+def create_options():
+    body = request.form
+
+    if not body or "name" not in body or "price" not in body or "img" not in request.files:
+        raise APIException("Missing name, price, or img", status_code=400)
+
+    name = body.get("name")
+    price = body.get("price")
+    img = request.files["img"]
+
+    # Verificar si el archivo es una imagen
+    if not img or not img.filename.lower().endswith(('png', 'jpg', 'jpeg')):
+        raise APIException("Invalid image file", status_code=400)
+
+    try:
+        upload_result = cloudinary.uploader.upload(img)
+        img_url = upload_result["secure_url"]
+    except:
+        raise APIException("Image upload failed", status_code=500)
+
+    new_option = Menu(
+        name=name,
+        img=img_url,
+        price=price
+    )
+
+    db.session.add(new_option)
+    db.session.commit()
+
+    return jsonify({"msg": "Menu option created successfully"}), 200
 
 
+@api.route('/menuoptions', methods=['GET'])
+def get_option():
+   
+    options = Menu.query.all()
+
+    if not options:
+        return jsonify({"msg": "No menus found"}), 404
+
+    option_list = [] 
+    for item in options:
+        option_list.append({
+            "id": item.id,
+            "name": item.name,
+            "price": item.price,
+            "img": item.img
+        })
+
+    return jsonify(option_list), 200
 
 
 
@@ -159,22 +229,3 @@ def login():
     return jsonify(access_token=access_token, user=user.serialize()),200
 
 
-@api.route('/menu/<string:day>', methods=['GET'])
-def get_menus_by_days(day):
-    menu = Menu.query.filter_by(day=day).all()
-    
-    if not menu:
-        return jsonify({"msg": "No menus found"}), 404
-
-    menu_list = []
-    for menu in menu:
-        menu_list.append({
-            "id": menu.id,
-            "day": menu.day,
-            "name": menu.name,
-            "description": menu.description,
-            "price": menu.price,
-            "img": menu.img
-        })
-
-    return jsonify(menu_list), 200

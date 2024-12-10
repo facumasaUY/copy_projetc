@@ -61,6 +61,33 @@ class Menu(db.Model):
         }
 
 
+
+#MenuOptions
+class MenuOptions(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    img = db.Column(db.String(1000), nullable=False)
+    price = db.Column(db.String(20), nullable=False)  
+
+    def __repr__(self):
+        return f'<MenuOptions {self.name}>'
+     
+    def __init__(self,name, img, price):
+        self.name=name
+        self.img = img
+        self.price= price
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "img": self.img,
+            "price": self.price,
+        }
+
+
+
+
 #user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  es asi, cada menú está asociado a un único usuario?????
 
 
