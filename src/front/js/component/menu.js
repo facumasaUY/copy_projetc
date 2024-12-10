@@ -177,6 +177,8 @@ export const Menu = () => {
   const irAPayment = () => {
     navigate("/payment");
   };
+
+
   //Sacar el menuNavbar para otro componente.
   const MenuNavbar = (props) => {
     return (
@@ -427,9 +429,9 @@ export const Menu = () => {
         </div>
       </div>
 
-{/* Otras Opciones*/}
-     
-<div
+      {/* Otras Opciones*/}
+
+      <div
         className="menudeldia2 mt-3"
         style={{
           marginBottom: "20px",
@@ -502,7 +504,7 @@ export const Menu = () => {
           <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Agua</h2>
           <div className="row">
             {store.optionAgua.map((menu) => (
-              <CardOption  key={menu.id} menu={menu} />
+              <CardOption key={menu.id} menu={menu} />
             ))}
           </div>
         </div>
@@ -522,7 +524,7 @@ export const Menu = () => {
           <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Naranja</h2>
           <div className="row">
             {store.optionNaranja.map((menu) => (
-              <CardOption  key={menu.id} menu={menu} />
+              <CardOption key={menu.id} menu={menu} />
             ))}
           </div>
         </div>
@@ -555,7 +557,7 @@ export const Menu = () => {
 
 
 
-     
+
     </div>
 
   );

@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Menu
+from api.models import db, User, Menu, MenuOptions
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import mercadopago
@@ -104,24 +104,23 @@ def get_menu_by_day(day):
 def create_options():
     body = request.form
 
-    if not body or "name" not in body or "price" not in body or "img" not in request.files:
+    if not body or "name" not in body or "price" not in body :
         raise APIException("Missing name, price, or img", status_code=400)
 
     name = body.get("name")
     price = body.get("price")
+
     img = request.files["img"]
 
-    # Verificar si el archivo es una imagen
-    if not img or not img.filename.lower().endswith(('png', 'jpg', 'jpeg')):
-        raise APIException("Invalid image file", status_code=400)
-
+   
     try:
         upload_result = cloudinary.uploader.upload(img)
         img_url = upload_result["secure_url"]
     except:
         raise APIException("Image upload failed", status_code=500)
 
-    new_option = Menu(
+
+    new_option = MenuOptions(
         name=name,
         img=img_url,
         price=price
@@ -136,7 +135,7 @@ def create_options():
 @api.route('/menuoptions', methods=['GET'])
 def get_option():
    
-    options = Menu.query.all()
+    options = MenuOptions.query.all()
 
     if not options:
         return jsonify({"msg": "No menus found"}), 404
@@ -173,7 +172,10 @@ def preference():
        "back_urls": { 
             "success": f"{frontendurl}/menu", 
             "failure": f"{frontendurl}/menu", 
-            "pending": f"{frontendurl}/menu"
+            "pending": f"{frontendurl}/menu",
+            "success": f"{frontendurl}/menuoptions", 
+            "failure": f"{frontendurl}/menuoptions", 
+            "pending": f"{frontendurl}/menuoptions"
 
             # que url es la que va aca . o implementar backendurl
         },
