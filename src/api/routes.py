@@ -182,5 +182,22 @@ def login():
     return jsonify(access_token=access_token, user=user.serialize()),200
 
 
+@api.route('/menu/<string:day>', methods=['GET'])
+def get_menus_by_days(day):
+    menu = Menu.query.filter_by(day=day).all()
+    
+    if not menu:
+        return jsonify({"msg": "No menus found"}), 404
 
+    menu_list = []
+    for menu in menu:
+        menu_list.append({
+            "id": menu.id,
+            "day": menu.day,
+            "name": menu.name,
+            "description": menu.description,
+            "price": menu.price,
+            "img": menu.img
+        })
 
+    return jsonify(menu_list), 200

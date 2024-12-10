@@ -1,16 +1,18 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import andalogofood from "../../img/anda.png";
 import "../../styles/shoppingCart.css";
-
+import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import "/src/front/styles/home.css";
+import { CardMenu } from "./cardMenu";
 
 
 export const Menu = () => {
 
+  const { actions, store } = useContext(Context)
 
   const navigate = useNavigate();
 
@@ -73,18 +75,10 @@ export const Menu = () => {
   };
 
   useEffect(() => {
-    const fetchMenus = async () => {
-        try {
-            const response = await fetch(process.env.BACKEND_URL + 'api/menu');
-            const data = await response.json();
-            setMenus(data);
-        } catch (error) {
-            console.error("Error fetching menus:", error);
-        }
-    };
-
-    fetchMenus();
-}, []);
+   
+    actions.getMenu("Lunes")
+    actions.getMenu("Martes")
+  }, []);
 
 
 
@@ -172,7 +166,7 @@ export const Menu = () => {
   const irAPayment = () => {
     navigate("/payment");
   };
-
+//Sacar el menuNavbar para otro componente.
   const MenuNavbar = (props) => {
     return (
       <nav className="navbar bg-body-tertiary">
@@ -298,64 +292,37 @@ export const Menu = () => {
 
   return (<div className="container mt-3">
 
-    <MenuNavbar spinner={spinner}/>
+    <MenuNavbar spinner={spinner} />
 
     {/* Menu del dia */}
-    <div className="container">
-  <h2>MENÚ DE LA SEMANA </h2>
-  <div className="row">
-    {menus.map((menu) => (
-      <div key={menu.id} className="col-md-4">
-        <div className="card">
-          <img
-            src={menu.img}
-            alt={menu.name}
-            className="card-img-top"
-          />
-          <div className="card-body">
-            <h5 className="card-title">{menu.name}</h5>
-            <p className="card-text">{menu.description}</p>
-            <p className="card-text">
-              <strong>Precio:</strong> {menu.price}
-            </p>
-            <p className="card-text">
-              <strong>Día:</strong> {menu.day}
-            </p>
-            <div className="card-body text-center p-2">
-              <div className="d-flex justify-content-between">
-                <button
-                  className="btn"
-                  onClick={() => {
-                    handleClick(menu);
-                    handleNotificacion();
-                  }}
-                  style={{
-                    backgroundColor: "rgb(56, 101, 229)",
-                    color: "white",
-                    fontSize: "12px",
-                    borderRadius: "10px",
-                  }}
-                >
-                  Añadir al Carrito
-                </button>
-                <button
-                  className="btn"
-                  style={{
-                    backgroundColor: "transparent",
-                    fontSize: "20px",
-                  }}
-                  onClick={() => irAFeedback(menu)}
-                >
-                  ⭐
-                </button>
-              </div>
-            </div>
-          </div>
+    <div className="menudeldia2 mt-3" style={{ marginBottom: "20px", fontFamily: "Mulish, sans-serif" }}>
+      <div className="mb-5">
+        <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>MENÚ DE LA SEMANA</h2>
+        <div className="row">
+          {store.menuLunes.map((menu) => (
+            <CardMenu
+            key={menu.id}
+            menu={menu}
+            />
+          ))}
         </div>
       </div>
-    ))}
-  </div>
-</div>
+    </div>
+    <div className="menudeldia2 mt-3" style={{ marginBottom: "20px", fontFamily: "Mulish, sans-serif" }}>
+      <div className="mb-5">
+        <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>MENÚ DE LA SEMANA</h2>
+        <div className="row">
+          {store.menuMartes.map((menu) => (
+ 
+            <CardMenu
+            key={menu.id}
+            menu={menu}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+
 
 
     {/* Notificación */}
