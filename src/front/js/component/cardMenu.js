@@ -1,6 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const CardMenu = ({menu}) => {
+    
+    const navigate = useNavigate();
+
+    const irAFeedback = (menu) => {
+        navigate(`/feedback/${menu.id}`, { state: menu });
+
+      };
+      
+
     return (
         
         <div key={menu.id} className="col-12 col-md-6 col-lg-4 mb-3">
@@ -71,7 +82,7 @@ export const CardMenu = ({menu}) => {
                                 backgroundColor: "transparent",
                                 fontSize: "20px",
                             }}
-                            onClick={() => irAFeedback(item)}
+                            onClick={() => irAFeedback(menu)}
                         >
                             ⭐
                         </button>
