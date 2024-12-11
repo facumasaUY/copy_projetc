@@ -26,9 +26,29 @@ export const Payment = () => {
 
     return (
 
-    <div className="d-flex align-items-center justify-content-center" style={{backgroundColor: "rgba(56, 101, 229, 0.5)", borderRadius: "10px", padding: "15px", margin: "50px", height:"auto"}}>
-        <button onClick={pagar}>Pagar con Mercado Pago</button>
+
+    <div className="d-flex justify-content-between" style={{backgroundColor: "rgba(56, 101, 229, 0.5)", borderRadius: "10px", padding: "15px", margin: "50px", height:"auto"}}>
+       <div>
+        <h1>Tu pedido:</h1>
+        <ul>
+            <li>Comida 1</li>
+            <li>Comida 2</li>
+            <li>Comida 3</li>
+            <li>Comida 4</li>
+        </ul>
+       </div>
+       
+            <div d-flex align-items-center justify-content-center>
+                <h1>Elegí tu forma de pago:</h1>
+                <div>        
+                    <button onClick={pagar}>Pagar con Mercado Pago</button>
+                </div>
+                <div className="ms-3">
+                    <button>Pagar en Caja al Retirar</button>
+                </div>
+            </div>
     </div>
+   
 
 )}
      
