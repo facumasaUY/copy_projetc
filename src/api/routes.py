@@ -1,5 +1,5 @@
-from flask import request, jsonify, url_for, Blueprint
-from api.models import db, User, Menu
+from flask import Flask, request, jsonify, url_for, Blueprint
+from api.models import db, User, Menu, MenuOptions
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import mercadopago
@@ -9,9 +9,11 @@ from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_requir
 import cloudinary
 import cloudinary.uploader
 from cloudinary.utils import cloudinary_url
-import os
+
+import os 
 
 frontendurl = os.getenv("FRONTEND_URL")
+
 
 cloudinary.config(
     cloud_name = "dqspjepfs",
@@ -33,7 +35,7 @@ def handle_hello():
 
 # Para crear los menu
 @api.route('/menu', methods=['POST'])
-def create_new_menu():
+def create_menu():
     body = request.form
     if not body or "day" not in body or "name" not in body or "description" not in body or "price" not in  body or "img" not in body:
         raise APIException("Missing name, price, description, or img", status_code=400)
@@ -42,8 +44,13 @@ def create_new_menu():
     description = body.get("description")
     price = body.get("price")
     img = request.files.get("img")
-    upload_result = cloudinary.uploader.upload(img)
-    img_url = upload_result["secure_url"]
+
+    try:
+        upload_result = cloudinary.uploader.upload(img)
+        img_url = upload_result["secure_url"]
+    except:
+        raise APIException("Image upload failed", status_code=500)
+
     new_menu = Menu(
         day=day,
         name=name,
@@ -51,30 +58,86 @@ def create_new_menu():
         img=img_url,
         price=price
     )
+
     db.session.add(new_menu)
     db.session.commit()
     return jsonify({"msg": "Menu created successfully"}), 200
 
-@api.route('/menu', methods=['GET'])
-def get_menus():
-    menus = Menu.query.all()
-    if not menus:
+
+@api.route('/menu/<string:day>', methods=['GET'])
+def get_menu_by_day(day):
+    menu = Menu.query.filter_by(day=day).all()
+
+    if not menu:
         return jsonify({"msg": "No menus found"}), 404
     menu_list = []
-    for menu in menus:
+    for item in menu:
         menu_list.append({
-            "id": menu.id,
-            "day": menu.day,
-            "name": menu.name,
-            "description": menu.description,
-            "price": menu.price,
-            "img": menu.img
+            "id": item.id,
+            "day": item.day,
+            "name": item.name,
+            "description": item.description,
+            "price": item.price,
+            "img": item.img
         })
     return jsonify(menu_list), 200
 
-# Para Mercado Pago
-@api.route("/preference", methods=["POST"])
-def preference():
+
+@api.route('/menuoptions', methods=['POST'])
+def create_options():
+    body = request.form
+
+    if not body or "name" not in body or "price" not in body :
+        raise APIException("Missing name, price, or img", status_code=400)
+
+    name = body.get("name")
+    price = body.get("price")
+
+    img = request.files["img"]
+
+   
+    try:
+        upload_result = cloudinary.uploader.upload(img)
+        img_url = upload_result["secure_url"]
+    except:
+        raise APIException("Image upload failed", status_code=500)
+
+
+    new_option = MenuOptions(
+        name=name,
+        img=img_url,
+        price=price
+    )
+
+    db.session.add(new_option)
+    db.session.commit()
+
+    return jsonify({"msg": "Menu option created successfully"}), 200
+
+
+@api.route('/menuoptions', methods=['GET'])
+def get_option():
+   
+    options = MenuOptions.query.all()
+
+    if not options:
+        return jsonify({"msg": "No menus found"}), 404
+
+    option_list = [] 
+    for item in options:
+        option_list.append({
+            "id": item.id,
+            "name": item.name,
+            "price": item.price,
+            "img": item.img
+        })
+
+    return jsonify(option_list), 200
+
+
+
+@api.route("/preference", methods=["POST"]) 
+def preference(): 
     # body = json.loads(request.data)
     # total = body["total"]
     # Crea un ítem en la preferencia
@@ -89,10 +152,15 @@ def preference():
         "payer": {
             "email": "test_user_17805074@testuser.com"
         },
-        "back_urls": {
-            "success": f"{frontendurl}",
-            "failure": f"{frontendurl}",
-            "pending": f"{frontendurl}"
+       "back_urls": { 
+            "success": f"{frontendurl}/menu", 
+            "failure": f"{frontendurl}/menu", 
+            "pending": f"{frontendurl}/menu",
+            "success": f"{frontendurl}/menuoptions", 
+            "failure": f"{frontendurl}/menuoptions", 
+            "pending": f"{frontendurl}/menuoptions"
+
+            # que url es la que va aca . o implementar backendurl
         },
         "auto_return": "approved"
     }
