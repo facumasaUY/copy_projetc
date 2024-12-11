@@ -3,6 +3,13 @@ import axios from 'axios';
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			token: null,
+			message: null,
+			user: null,
+			auth: false,
+
+			mercadoPago: {},
+
 			menuLunes: [],
 			menuMartes: [],
 			menuMiercoles: [],
@@ -15,7 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			optionAgua: [],
 			optionNaranja: [],
 			optionManzana: [],
-			mercadoPago: {},
+
 		},
 		actions: {
 			// Use getActions to call a function within a function
@@ -34,24 +41,50 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error("Error al crear la preferencia:", error);
 				}
 			},
+			login: async (useNew) => {
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "api/login", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(useNew)
+					})
+					console.log(resp.status)
+					const data = await resp.json()
+					if (resp.ok) {
 
-			signup: (user) => {
-				const myHeaders = new Headers();
-				myHeaders.append("Content-Type", "application/json");
+						console.log(data, "token")
+						setStore({ user: data.user, token: data.access_token, auth: true })
 
-				const raw = JSON.stringify(user);
+						localStorage.setItem("access_token", data.access_token)
+						return true;
+					}
+					setStore({ auth: false })
+					return false
+				} catch (error) {
+					console.log("Error loading message from backend", error)
+					setStore({ user: false })
+					return false;
+				}
+			},
+			signup: async (user) => {
+				try {
+					// fetching data from the backend
+					const resp = await fetch(process.env.BACKEND_URL + "api/signup", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(user)
 
-				const requestOptions = {
-					method: "POST",
-					headers: myHeaders,
-					body: raw,
-					redirect: "follow"
-				};
+					})
+					console.log(resp.status)
+					if (resp.status == 201) {
 
-				fetch(process.env.BACKEND_URL + "api/signup", requestOptions)
-					.then((response) => response.json())
-					.then((result) => console.log(result))
-					.catch((error) => console.error(error));
+						return true;
+					} else {
+						return false
+					}
+				} catch (error) {
+					console.log("Error loading message from backend", error)
+				}
 			},
 			getMenu: async (menuDay) => {
 				try {
@@ -81,19 +114,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false;
 				}
 			},
-			
+
 			getOptions: async () => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "api/menuoptions/");
-					
+
 					if (!response.ok) {
 						throw new Error('Error en la respuesta del servidor');
 					}
-			
+
 					const data = await response.json();
 					console.log(data);
-			
-					
+
+
 					if ("CocaCola") {
 						setStore({ optionCocaCola: data });
 					}
@@ -112,15 +145,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if ("Manzana") {
 						setStore({ optionManzana: data });
 					}
-			
+
 				} catch (error) {
 					console.error("Error al obtener opciones:", error);
 				}
 			},
-			
-			},
-		}
-	};
+
+		},
+	}
+};
 
 
 export default getState;

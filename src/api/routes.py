@@ -4,11 +4,11 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import mercadopago
 import json
+import os
 
-sdk = mercadopago.SDK("APP_USR-7717264634749554-120508-c40d3f9932b4e9f7de4477bfa5ef733b-2136972767")
-
-
-
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -18,7 +18,11 @@ import cloudinary
 import cloudinary.uploader
 from cloudinary.utils import cloudinary_url
 
-import os 
+
+
+sdk = mercadopago.SDK("APP_USR-7717264634749554-120508-c40d3f9932b4e9f7de4477bfa5ef733b-2136972767")
+
+
 
 frontendurl = os.getenv("FRONTEND_URL")
 
@@ -36,6 +40,85 @@ api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
 CORS(api)
+
+sender_email = os.getenv("SMTP_USERNAME")
+sender_password = os.getenv("SMTP_APP_PASSWORD")
+smtp_host = os.getenv("SMTP_HOST")
+smtp_port = os.getenv("SMTP_PORT")
+
+receiver_email = ["","",""]
+# linea 59 poner lo mismo en los corchetes
+
+def send_signup_email(receivers_emails):
+    message =MIMEMultipart("alternative")
+
+    message["Subject"]="Prueba de envio de correo - Olvidaste tu contraseña"
+
+    message["from"]="anda@gmail.com"
+
+    message ["To"] = ",".join(receivers_emails)
+
+    html_context = """
+        <html>
+            <body>
+                <h1>Hola</h1>
+                <p>Correo de recuperacion de contraseña</p>
+                <p>Nos alegramos de poder ayudarte a recuperar tu contraseña!</p>
+            </body>
+        </html>
+    """
+
+    text = "Hola ya recuperaste tu contraseña"
+     
+    message.attach(MIMEText(html_context,"html"))
+    message.attach(MIMEText(text ,"plain"))
+
+
+
+    server = smtplib.SMTP(smtp_host,smtp_port)
+    server.starttls()
+    server.login(send_email,sender_password)
+    server.sendmail(sender_email,receiver_email,message.as_string())
+    server.quit()
+
+@api.route('/send-email',methods=['POST'])
+def send_email():
+    
+    message =MIMEMultipart("alternative")
+
+    message["Subject"]="Prueba de envio de correo - Olvidaste tu contraseña"
+
+    message["from"]="anda@gmail.com"
+
+    message ["To"] = ["","",""]
+    # linea 49 poner lo mismo en los corchetes
+    
+    html_context = """
+        <html>
+            <body>
+                <h1>Hola</h1>
+                <p>Correo de recuperacion de contraseña</p>
+                <p>Nos alegramos de poder ayudarte a recuperar tu contraseña!</p>
+            </body>
+        </html>
+    """
+
+    text = "Hola ya recuperaste tu contraseña"
+     
+    message.attach(MIMEText(html_context,"html"))
+    message.attach(MIMEText(text ,"plain"))
+
+
+
+    server = smtplib.SMTP(smtp_host,smtp_port)
+    server.starttls()
+    server.login(send_email,sender_password)
+    server.sendmail(sender_email,receiver_email,message.as_string())
+    server.quit()
+    return jsonify({"msg":"Correo enviado exitosamente"}),200
+        
+
+
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
@@ -75,6 +158,7 @@ def create_menu():
 
     db.session.add(new_menu)
     db.session.commit()
+    send_signup_email([email])
 
     return jsonify({"msg": "Menu created successfully"}), 200
 
@@ -198,6 +282,7 @@ def register():
     last_name=data.get("last_name")
     email = data.get("email")
     password = data.get("password")
+    num_funcionario=data.get("num_funcionario")
 
     exist_user = User.query.filter_by(email=email).first()
     if exist_user:
@@ -207,11 +292,12 @@ def register():
         name = name,
         email = email , 
         last_name=last_name,
-        password = password 
+        password = password ,
+        num_funcionario = num_funcionario
     )
     db.session.add(new_user)
     db.session.commit()
-    return jsonify({"message":"User created successfully"}),200
+    return jsonify({"message":"User created successfully"}),201
 
 
         #ceci tengo una pregunta en el post de arriba 
