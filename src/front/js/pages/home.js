@@ -22,8 +22,8 @@ export const Home = () => {
     return (
         <div>
             <Login />
-            <h1>New Menu</h1>
-            <div className="d-flex justify-content-center">
+    
+            {/* <div className="d-flex justify-content-center">
                 {product.length > 0 ? (
                     product.map((prod, index) => {
                         return (
@@ -40,7 +40,7 @@ export const Home = () => {
                 ) : (
                     <p>No products</p>
                 )}
-            </div>
+            </div> */}
         </div>
     );
 };

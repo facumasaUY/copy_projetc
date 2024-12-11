@@ -33,9 +33,7 @@ footer {
     width:70px;
 }
 
-body{
-    padding-top: 80px
-}
+
 .input{
     border-top:0px;
     border-right:0px;
@@ -54,4 +52,55 @@ body{
   
 .dropdown-item{
     color: rgb(56, 101, 229);
+}
+
+/* boton cerrar sesión */
+.logout{
+    background-color: red;
+    color:white;
+    border-radius: 10px ;
+    border: none;
+    padding:10px;
+}
+
+.logout:hover{
+    background-color: rgb(223, 24, 24);
+    color:white;
+    border-radius: 10px ;
+    border: none;
+    padding:10px;
+
+}
+
+/* link cuestionario */
+.custom-link {
+    text-decoration: none !important; /* Quita el subrayado */
+  
+  }
+  .feedbacklink{
+    padding:10px;
+  }
+
+  .feedbacklink:hover {
+    background-color: #e9ecefb0;
+    border-radius: 10px;
+
+  }
+
+/* cart  */
+
+.canvasheader{
+    background-color:#3865e5;
+}
+
+.close{
+    background-color: rgba(128, 128, 128, 0.438) !important;
+    padding: 6px;
+    border-radius: 10px;
+}
+
+.pay{
+    padding: 6px;
+    border-radius: 10px;
+
 }

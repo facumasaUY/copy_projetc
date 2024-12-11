@@ -160,15 +160,20 @@ def register():
 
 
         #ceci tengo una pregunta en el post de arriba 
+# katte login
 @api.route('/login', methods=['POST'])
 def login():
 
     data= request.json
     #info desde el frontend
-    email = data.get("email")
-    password = data.get("password")
+    email = data.get("email", None)
+    password = data.get("password", None)
 
-    user=User.query.filter_by(email=email).first()
+    user=User.query.filter_by(email=email).one_or_none()
+
+    if user == None:
+        return jsonify({"msg": f"Bad email or password"}), 404
+
     if email != user.email or password != user.password:
         return jsonify({"msg": "Bad username or password"}), 401
 

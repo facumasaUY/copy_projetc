@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import andalogofood from "../../img/anda.png";
+import userlogo from "../../img/user.webp";
 import "../../styles/shoppingCart.css";
 
 import { useNavigate } from "react-router-dom";
@@ -159,16 +160,65 @@ export const Menu = () => {
       <nav className="navbar bg-body-tertiary">
 
         <div className="container-fluid d-flex justify-content-between align-items-center" >
-          <div className="dropdown">
-            <a className="navbar-brand d-flex align-items-center dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src={andalogofood} alt="Anda Food Logo" style={{ width: "50px", height: "50px", marginRight: "10px", "borderRadius": "10px" }} />
-            </a>
-            <ul className="dropdown-menu">
-              <li><a className="dropdown-item" href="#">Mi cuenta</a></li>
-              <li><a className="dropdown-item" href="#">Mis compras</a></li>
-              <li><a className="dropdown-item" href="#">Cerrar Sesión</a></li>
-            </ul>
+
+          <div href="#offcanvasScrolling" data-bs-toggle="offcanvas" role="button" aria-controls="offcanvasScrolling">
+            <img src={andalogofood} alt="Anda Food Logo" style={{ width: "50px", height: "50px", marginRight: "10px", "borderRadius": "10px" }} />
           </div>
+
+          <div className="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+
+            {/* imagen user, perfil usuario */}
+            <div className="offcanvas-header">
+              <div className="d-flex flex-column mx-auto carduser">
+
+                <div className="text-center" >
+                  <img className="rounded" src={userlogo} alt="Anda Food Logo" style={{ width: "80px", height: "80px", "borderRadius": "10px" }} />
+                </div>
+
+                <h6 className="offcanvas-title text-center" id="offcanvasScrollingLabel">Nombre usuario: Katerine Céspedes</h6>
+                <h6 className="offcanvas-title text-center" id="offcanvasScrollingLabel">N° funcionario: 23456</h6>
+                <h6 className="offcanvas-title text-center" id="offcanvasScrollingLabel">Correo: katerine@4geeks.com</h6>
+              </div>
+
+              <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+
+
+
+            <div className="offcanvas-body d-flex flex-column justify-content-between">
+              <div>
+
+                <Link to={"/reservations"} className="custom-link">
+                  <div className="feedbacklink my-2">
+                    <i class="fa-solid fa-calendar-days me-2" style={{ color: "#ffffff;" }}></i> Reservar lugar</div>
+                </Link>
+
+                <Link to={"/form/:theid"} className="custom-link customhover">
+                  <div className="feedbacklink my-2">
+                    <i class="fa-solid fa-envelope me-2" style={{ color: "#ffffff;" }}></i>
+                    Déjanos tu comentario</div>
+                </Link>
+              </div>
+
+
+
+
+              <div className="text-end pb-2">
+                <button className="logout">Cerrar Sesión <i class="fa-solid fa-right-from-bracket" style={{ color: "#ffffff" }}></i></button>
+              </div>
+
+            </div>
+
+
+          </div>
+          {/* fin del offcanvas del logo de ig */}
+
+
+
+
+
+
+
 
 
           {/* El carrito de compras */}
@@ -178,97 +228,134 @@ export const Menu = () => {
             {/* Boton de Carrito */}
 
             <div className="flex-direction-column">
-              <Link to={"/form/:theid"}><p><a className="link-opacity-10-hover m-1  " href="#">Déjanos tu comentario</a></p></Link>
+              {/* <Link to={"/form/:theid"}><p><a className="link-opacity-10-hover m-1  " href="#">Déjanos tu comentario</a></p></Link> */}
 
-              <button className="btn m-1 " type="button" style={{ backgroundColor: "rgb(56, 101, 229)", "color": "white" }}
+              {/* <button className="btn m-1 " type="button" style={{ backgroundColor: "rgb(56, 101, 229)", "color": "white" }}
                 onClick={() => irAReservaDeLugar()}
               >
                 Reserva de lugar
-              </button>
-              <button className="btn m-1 " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style={{ "backgroundColor": "rgb(56, 101, 229)", "color": "white" }}>
+              </button> */}
+
+
+              <button className="btn m-1 " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTwo" aria-controls="offcanvasTwo" style={{ "backgroundColor": "rgb(56, 101, 229)", "color": "white" }}>
                 <i className="fa-solid fa-cart-shopping"></i>
               </button>
             </div>
 
             {/* Ventana */}
-            <div className="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-
+            <div
+              className="offcanvas offcanvas-end"
+              data-bs-scroll="true"
+              data-bs-backdrop="false"
+              tabIndex="-1"
+              id="offcanvasTwo"
+              aria-labelledby="offcanvasTwoLabel"
+            >
               {/* Título */}
-              <div className="offcanvas-header" style={{
-                color: "white",
-                backgroundColor: "#3865e5"
-              }}>
-                <h1>Carrito</h1>
+              <div
+                className="offcanvas-header canvasheader"
+              >
+                <h1 className="text-light"><i className="fa-solid fa-cart-shopping"></i> Carrito</h1>
               </div>
 
               {/* Body */}
-              <div className="listCart offcanvas-body position-relative" style={{ backgroundColor: "rgb(56, 101, 229, 0.3)" }}>
-
-                {props.spinner && (<div className="spinner-grow d-flex justify-content-center" role="status" style={{ backgroundColor: "#3865e5" }}>
-                  <span className="visually-hidden">Loading...</span>
-                </div>)}
+              <div
+                className="listCart offcanvas-body position-relative"               
+              >
+                {props.spinner && (
+                  <div
+                    className="spinner-grow d-flex justify-content-center"
+                    role="status"
+                    style={{ backgroundColor: "#3865e5" }}
+                  >
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                )}
 
                 {listCart.length === 0 ? (
                   <p>El carrito está vacío.</p>
                 ) : (
                   listCart.map((item, index) => (
-
-
-                    <div key={index} className="d-flex align-items justify-content-evenly" style={{ backgroundColor: "white" }}>
-
+                    <div
+                      key={index}
+                      className="d-flex align-items justify-content-evenly"
+                      style={{ backgroundColor: "white" }}
+                    >
                       <div className="foodImage d-flex justify-content-center align-items-center">
-                        <img src={item.img} />
+                        <img src={item.img}/>
                       </div>
 
-                      <div className="foodName d-flex justify-content-center align-items-center" style={{ color: "#3865e5" }}>
+                      <div
+                        className="foodName d-flex justify-content-center align-items-center"
+                        style={{ color: "#3865e5" }}
+                      >
                         {item.name}
                       </div>
 
-                      <div className="precioTotal d-flex justify-content-center align-items-center" style={{ color: "#3865e5" }}>
+                      <div
+                        className="precioTotal d-flex justify-content-center align-items-center"
+                        style={{ color: "#3865e5" }}
+                      >
                         {item.price}
                       </div>
 
                       <div className="cantidad d-flex justify-content-center align-items-center">
-                        <span className="menos" style={{
-                          width: "30px",
-                          height: "30px",
-                          color: "white",
-                          backgroundColor: "#3865e5",
-                          borderRadius: "50%",
-                          cursor: "pointer",
-                          margin: "0 10px",
-                          textAlign: "center"
-                        }}>
+                        <span
+                          className="menos"
+                          style={{
+                            width: "30px",
+                            height: "30px",
+                            color: "white",
+                            backgroundColor: "#3865e5",
+                            borderRadius: "10%",
+                            cursor: "pointer",
+                            margin: "0 10px",
+                            textAlign: "center",
+                          }}
+                        >
                           {"<"}
                         </span>
-                        <span>1</span>
-                        <span className="mas" style={{
-                          width: "30px",
-                          height: "30px",
-                          color: "white",
-                          backgroundColor: "#3865e5",
-                          borderRadius: "50%",
-                          cursor: "pointer",
-                          margin: "0 10px",
-                          textAlign: "center"
-                        }}>
+                        <span className="text-center">1</span>
+                        <span
+                          className="mas"
+                          style={{
+                            width: "30px",
+                            height: "30px",
+                            color: "white",
+                            backgroundColor: "#3865e5",
+                            borderRadius: "10%",
+                            cursor: "pointer",
+                            margin: "0 10px",
+                            textAlign: "center",
+                          }}
+                        >
                           {">"}
                         </span>
                       </div>
+                    </div>
+                  ))
+                )}
 
-                    </div>)))}
-
-                <div className="btn position-absolute bottom-0 start-0 end-0 d-flex justify-content-between" >
-                  <button type="button" className="close align-self-start" data-bs-dismiss="offcanvas" aria-label="Close">VOLVER</button>
-                  <button className="pay align-self-end" id="process-checkout" onClick={() => handleCompra()}>IR A PAGAR</button>
+                <div className="btn position-absolute bottom-0 start-0 end-0 d-flex justify-content-between">
+                  <button
+                    type="button"
+                    className="close align-self-start"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                  >
+                    VOLVER
+                  </button>
+                  <button
+                    className="pay align-self-end text-light btn-success"
+                    id="process-checkout"
+                    onClick={() => handleCompra()}
+                  >
+                    IR A PAGAR
+                  </button>
                 </div>
-
-
               </div>
-
-
-
             </div>
+
 
           </div>
         </div>
@@ -279,7 +366,7 @@ export const Menu = () => {
 
   return (<div className="container mt-3">
 
-    <MenuNavbar spinner={spinner}/>
+    <MenuNavbar spinner={spinner} />
 
     {/* Menu del dia */}
     <div className="menudeldia2 mt-3" style={{ marginBottom: "20px", fontFamily: "Mulish, sans-serif" }}>
