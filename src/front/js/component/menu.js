@@ -165,11 +165,12 @@ export const Menu = () => {
             <img src={andalogofood} alt="Anda Food Logo" style={{ width: "50px", height: "50px", marginRight: "10px", "borderRadius": "10px" }} />
           </div>
 
-          <div className="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+          <div className="offcanvas offcanvas-start coloroffcanvas" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel"
+          >
 
             {/* imagen user, perfil usuario */}
             <div className="offcanvas-header">
-              <div className="d-flex flex-column mx-auto carduser">
+              <div className="d-flex flex-column mx-auto">
 
                 <div className="text-center" >
                   <img className="rounded" src={userlogo} alt="Anda Food Logo" style={{ width: "80px", height: "80px", "borderRadius": "10px" }} />
@@ -230,11 +231,10 @@ export const Menu = () => {
             <div className="flex-direction-column">
               {/* <Link to={"/form/:theid"}><p><a className="link-opacity-10-hover m-1  " href="#">Déjanos tu comentario</a></p></Link> */}
 
-              {/* <button className="btn m-1 " type="button" style={{ backgroundColor: "rgb(56, 101, 229)", "color": "white" }}
-                onClick={() => irAReservaDeLugar()}
-              >
-                Reserva de lugar
-              </button> */}
+              <Link to={"/reservations"} className="custom-link">
+               <button className="btn m-1 " type="button" style={{ backgroundColor: "rgb(56, 101, 229)", "color": "white" }}>
+                Reserva de lugar</button>
+              </Link>
 
 
               <button className="btn m-1 " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTwo" aria-controls="offcanvasTwo" style={{ "backgroundColor": "rgb(56, 101, 229)", "color": "white" }}>

@@ -12,7 +12,7 @@ export const Login = () => {
 
 		return (
 
-			<div className="mt-5 mx-auto d-flex flex-wrap justify-content-center" >
+			<div className="mt-5 mx-auto d-flex flex-wrap justify-content-center login" >
 
 				<div className="text-center">
 					<img className="loginimage" src={homeImage} alt="Descripción de la imagen" />
