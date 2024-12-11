@@ -47,14 +47,15 @@ smtp_port = os.getenv("SMTP_PORT")
 
 receiver_email = ["","",""]
 # linea 59 poner lo mismo en los corchetes
-def send_signup_email(receiver_email):
-     message =MIMEMultipart("alternative")
+
+def send_signup_email(receivers_emails):
+    message =MIMEMultipart("alternative")
 
     message["Subject"]="Prueba de envio de correo - Olvidaste tu contraseña"
 
     message["from"]="anda@gmail.com"
 
-    message ["To"] = ["","",""]
+    message ["To"] = ",".join(receivers_emails)
 
     html_context = """
         <html>
@@ -153,7 +154,7 @@ def create_new_menu():
     
     db.session.add(new_menu)
     db.session.commit()
-    send_signup_email((email))
+    send_signup_email([email])
 
     return jsonify({"msg": "Menu created successfully"}), 200
 
