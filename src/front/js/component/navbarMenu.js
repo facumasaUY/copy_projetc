@@ -6,11 +6,8 @@ const NavbarMenu = () => {
     return (
         <nav className="navbar bg-body-tertiary">
             <div className="container-fluid d-flex justify-content-between align-items-center">
-                <a className="navbar-brand d-flex align-items-center">
-                    <img src={andalogofood} alt="Anda Food Logo"
-                        style={{ width: "50px", height: "50px", marginRight: "10px", "borderRadius": "10px" }}
-                    />
-                </a>
+               
+
                 <div className="flex-direction-column">
                     <Link to={"/improve-us"}>
                         <p><a className="link-opacity-10-hover m-2  " href="#">Déjanos tu comentario</a></p>
