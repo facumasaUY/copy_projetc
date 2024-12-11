@@ -74,18 +74,6 @@ def serve_any_other_file(path):
     response.cache_control.max_age = 0  # avoid cache memory
     return response
 
-# Endpoint para guardar reservas
-@app.route('/reservations', methods=['POST'])
-def guardar_reserva():
-    data = request.json
-    nueva_reserva = Reserva(user=data['user'], dia=data['dia'], hora=data['hora'])
-    db.session.add(nueva_reserva)
-    db.session.commit()
-    return jsonify({"message": "Reserva guardada con éxito"}), 200
-    
-
-
-
 
 
 # this only runs if `$ python src/main.py` is executed
