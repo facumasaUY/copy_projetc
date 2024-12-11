@@ -1,49 +1,81 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const NewMenu = () => {
-    const [image, setImage] = useState(null);
+    const [menus, setMenus] = useState([]);
+    const [currentMenu, setCurrentMenu] = useState({
+        day: "",
+        name: "",
+        description: "",
+        price: "",
+        image: null,
+    });
+
+    const navigate = useNavigate();
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setCurrentMenu((prev) => ({ ...prev, [name]: value }));
+    };
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
         if (file) {
-            setImage(file);
+            setCurrentMenu((prev) => ({ ...prev, image: file }));
         }
     };
 
-    const [product, setProduct] = useState({
-        day: "",
-        name: "",
-        description: "",
-        img: null,
-        price: ""
-    });
+    const addMenu = () => {
+        if (!currentMenu.day || !currentMenu.name || !currentMenu.description || !currentMenu.price || !currentMenu.image) {
+            alert("Por favor, complete todos los campos y suba una imagen.");
+            return;
+        }
 
-    const handlePublish = async (event) => {
-        event.preventDefault();
-        console.log("Publish the new product", product, image);
-
-        const formData = new FormData();
-
-        formData.append('day', product.day);
-        formData.append('name', product.name);
-        formData.append('description', product.description);
-        formData.append('img', image);
-        formData.append('price', product.price);
-
-        const resp = await fetch(process.env.BACKEND_URL + '/api/newMenu', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-            body: formData
+        setMenus((prev) => [...prev, currentMenu]);
+        setCurrentMenu({
+            day: "",
+            name: "",
+            description: "",
+            price: "",
+            image: null,
         });
+    };
 
-        if (!resp.ok) {
-            alert('Failed to publish product');
-        } else {
-            const data = await resp.json();
-            console.log(data);
-            alert('Product Published');
+    const removeMenu = (index) => {
+        setMenus((prev) => prev.filter((_, i) => i !== index));
+    };
+
+    const handlePublishAll = async () => {
+        if (menus.length === 0) {
+            alert("No hay menús para enviar.");
+            return;
+        }
+
+        try {
+            for (const menu of menus) {
+                const formData = new FormData();
+                formData.append("day", menu.day);
+                formData.append("name", menu.name);
+                formData.append("description", menu.description);
+                formData.append("price", menu.price);
+                formData.append("img", menu.image);
+
+                const resp = await fetch(process.env.BACKEND_URL + "api/menu", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                if (!resp.ok) {
+                    alert("Error al enviar un menú");
+                    return;
+                }
+            }
+            alert("Todos los menús fueron enviados exitosamente");
+            setMenus([]);
+            navigate("/menu");
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Hubo un error al enviar los menús.");
         }
     };
 
@@ -51,31 +83,29 @@ export const NewMenu = () => {
         <div className="d-flex justify-content-center align-items-center vh-100">
             <div className="col-md-8 col-lg-6 order-md-1 bg-light p-4 rounded">
                 <h4 className="mt-5">MENÚ NUEVO</h4>
-                <form className="needs-validation" noValidate onSubmit={handlePublish}>
+                <form className="needs-validation" noValidate>
                     <div className="row">
                         <div className="col-md-6 mb-3">
                             <label htmlFor="day">Día</label>
                             <input
                                 type="text"
+                                name="day"
                                 className="form-control"
-                                placeholder=""
-                                value={product.day}
+                                value={currentMenu.day}
+                                onChange={handleInputChange}
                                 required
-                                onChange={(event) => setProduct({ ...product, day: event.target.value })}
                             />
-                            <div className="invalid-feedback">Valid day is required.</div>
                         </div>
                         <div className="col-md-6 mb-3">
-                            <label htmlFor="Name">Nombre del Menú</label>
+                            <label htmlFor="name">Nombre del Menú</label>
                             <input
                                 type="text"
+                                name="name"
                                 className="form-control"
-                                placeholder=""
-                                value={product.name || ''}
+                                value={currentMenu.name}
+                                onChange={handleInputChange}
                                 required
-                                onChange={(event) => setProduct({ ...product, name: event.target.value })}
                             />
-                            <div className="invalid-feedback">Valid name is required.</div>
                         </div>
                     </div>
 
@@ -83,44 +113,40 @@ export const NewMenu = () => {
                         <label htmlFor="description">Descripción del Menú</label>
                         <input
                             type="text"
+                            name="description"
                             className="form-control"
-                            placeholder=""
-                            value={product.description || ''}
+                            value={currentMenu.description}
+                            onChange={handleInputChange}
                             required
-                            onChange={(event) => setProduct({ ...product, description: event.target.value })}
                         />
-                        <div className="invalid-feedback">Description is required.</div>
                     </div>
 
                     <div className="mb-3">
                         <label htmlFor="price">Precio</label>
                         <input
-                            type="text"
+                            type="number"
+                            name="price"
                             className="form-control"
-                            placeholder=""
-                            value={product.price || ''}
+                            value={currentMenu.price}
+                            onChange={handleInputChange}
                             required
-                            onChange={(event) => setProduct({ ...product, price: event.target.value })}
                         />
-                        <div className="invalid-feedback">Please enter a valid price.</div>
                     </div>
 
-                    {!image && (
-                        <div className="input-group mb-3">
-                            <input
-                                type="file"
-                                className="form-control"
-                                id="inputimage"
-                                onChange={handleImageUpload}
-                            />
-                            <label className="input-group-text" htmlFor="inputimage">Upload</label>
-                        </div>
-                    )}
+                    <div className="input-group mb-3">
+                        <input
+                            type="file"
+                            className="form-control"
+                            id="inputimage"
+                            onChange={handleImageUpload}
+                        />
+                        <label className="input-group-text" htmlFor="inputimage">Upload</label>
+                    </div>
 
-                    {image && (
+                    {currentMenu.image && (
                         <div className="col-12 my-2">
                             <img
-                                src={URL.createObjectURL(image)}
+                                src={URL.createObjectURL(currentMenu.image)}
                                 alt="Preview"
                                 className="img-thumbnail"
                                 style={{ maxWidth: "200px", maxHeight: "200px", objectFit: "cover" }}
@@ -128,24 +154,41 @@ export const NewMenu = () => {
                         </div>
                     )}
 
-                    {image && (
-                        <div className="col-12 my-2">
-                            <button
-                                className="btn btn-danger"
-                                type="button"
-                                onClick={() => setImage(null)}
-                            >
-                                Borrar
-                            </button>
-                        </div>
-                    )}
-
                     <div className="d-grid gap-2 mb-2">
-                        <button className="btn btn-primary" type="submit">
-                            Subir Menú
+                        <button
+                            className="btn btn-secondary"
+                            type="button"
+                            onClick={addMenu}
+                        >
+                            Agregar Menú
                         </button>
                     </div>
                 </form>
+
+                <h5 className="mt-4">Menús agregados</h5>
+                <ul className="list-group">
+                    {menus.map((menu, index) => (
+                        <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+                            {menu.name} - {menu.day}
+                            <button
+                                className="btn btn-danger btn-sm"
+                                onClick={() => removeMenu(index)}
+                            >
+                                Eliminar
+                            </button>
+                        </li>
+                    ))}
+                </ul>
+
+                <div className="d-grid gap-2 mt-3">
+                    <button
+                        className="btn btn-primary"
+                        type="button"
+                        onClick={handlePublishAll}
+                    >
+                        Enviar todos los menús
+                    </button>
+                </div>
             </div>
         </div>
     );

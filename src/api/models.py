@@ -4,22 +4,24 @@ db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), unique=True, nullable=False)
-    last_name = db.Column(db.String(100), unique=True, nullable=False)
+    name = db.Column(db.String(100), unique=False, nullable=False)
+    last_name = db.Column(db.String(100), unique=False, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     reserva = db.relationship("Reserva")
+    num_funcionario = db.Column(db.Integer, unique=True, nullable=False)
 
     def __repr__(self):
         return f'<User {self.email}>'
 
-    def __init__(self, name, email,last_name, password):
+    def __init__(self, name, email,last_name, password,num_funcionario):
         self.name = name
         self.last_name=last_name
         self.email = email
         self.password = password
         self.is_active = True
+        self.num_funcionario = num_funcionario
 
     def serialize(self):
         return {
@@ -27,10 +29,14 @@ class User(db.Model):
             "name":self.name,
             "last_name":self.last_name,
             "email":self.email,
-            "is_active":self.is_active
+            "is_active":self.is_active,
+            "num_funcionario":self.num_funcionario
             
         }
 
+       # menus = db.relationship('Menu', backref='user', lazy=True)
+
+#Menú
 class Menu(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     day = db.Column(db.String(50), nullable=False)
@@ -57,6 +63,38 @@ class Menu(db.Model):
             "img": self.img,
             "price": self.price,
         }
+
+
+
+#MenuOptions
+class MenuOptions(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    img = db.Column(db.String(1000), nullable=False)
+    price = db.Column(db.String(20), nullable=False)  
+
+    def __repr__(self):
+        return f'<MenuOptions {self.name}>'
+     
+    def __init__(self,name, img, price):
+        self.name=name
+        self.img = img
+        self.price= price
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "img": self.img,
+            "price": self.price,
+        }
+
+
+
+
+#user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  es asi, cada menú está asociado a un único usuario?????
+
+
 
 
 class Reserva(db.Model):
