@@ -1,95 +1,89 @@
 import axios from 'axios';
 const getState = ({ getStore, getActions, setStore }) => {
-    
-        actions: return {
-            store: {
-                menuLunes: [],
-                menuMartes: [],
-                menuMiercoles: [],
-                menuJueves: [],
-                menuViernes: [],
-                menuSabado: [],
-                optionCocaCola: [],
-                optionCocaColaZ: [],
-                optionCocaColaL: [],
-                optionAgua: [],
-                optionNaranja: [],
-                optionManzana: [],
-                mercadoPago: {},
-            },
-            actions: {
-            // Use getActions to call a function within a fuction
-            pagoMercadoPago: async (total) => {
-                try {
-                    const response = await fetch(process.env.BACKEND_URL + "api/preference", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ total: total })
-                    });
-                    const data = await response.json();
-                    console.log(data)
-                    setStore({ mercadoPago: data })
-                    return true;
-                } catch (error) {
-                    console.error("Error al crear la preferencia:", error);
-                }
-            },
-            login: async (useNew) => {
-                try {
-                    const resp = await fetch(process.env.BACKEND_URL + "api/login", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(useNew)
-                    })
-                    console.log(resp.status)
-                    const data = await resp.json()
-                    if (resp.ok) {
-                        console.log(data,"token")
-                        setStore({user:data.user,token:data.access_token})
-                        localStorage.setItem("access_token",data.access_token)
-                        return true;
-                    }
-                    setStore({user:false})
-                    return false
-                } catch (error) {
-                    console.log("Error loading message from backend", error)
-                    setStore({user:false})
-                    return false;
-                }
-            },
-            signup: async (user) => {
-                try {
-                    // fetching data from the backend
-                    const resp = await fetch(process.env.BACKEND_URL + "api/signup", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(user)
-                    })
-                    console.log(resp.status)
-                    return true;
-                } catch (error) {
-                    console.log("Error loading message from backend", error)
-                    return false;
-                }
-            },
-            
-            signup: (user) => {
-				const myHeaders = new Headers();
-				myHeaders.append("Content-Type", "application/json");
+	return {
+		store: {
+			token: null,
+			message: null,
+			user: null,
+			auth: false,
 
-				const raw = JSON.stringify(user);
+			mercadoPago: {},
 
-				const requestOptions = {
-					method: "POST",
-					headers: myHeaders,
-					body: raw,
-					redirect: "follow"
-				};
+			menuLunes: [],
+			menuMartes: [],
+			menuMiercoles: [],
+			menuJueves: [],
+			menuViernes: [],
+			menuSabado: [],
+			optionCocaCola: [],
+			optionCocaColaZ: [],
+			optionCocaColaL: [],
+			optionAgua: [],
+			optionNaranja: [],
+			optionManzana: [],
 
-				fetch(process.env.BACKEND_URL + "api/signup", requestOptions)
-					.then((response) => response.json())
-					.then((result) => console.log(result))
-					.catch((error) => console.error(error));
+		},
+		actions: {
+			// Use getActions to call a function within a function
+			pagoMercadoPago: async (total) => {
+				try {
+					const response = await fetch("https://crispy-rotary-phone-x59p57vpggwjfv5x5-3001.app.github.dev/api/preference", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({ total: total })
+					});
+					const data = await response.json();
+					console.log(data);
+					setStore({ mercadoPago: data });
+					return true;
+				} catch (error) {
+					console.error("Error al crear la preferencia:", error);
+				}
+			},
+			login: async (useNew) => {
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "api/login", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(useNew)
+					})
+					console.log(resp.status)
+					const data = await resp.json()
+					if (resp.ok) {
+
+						console.log(data, "token")
+						setStore({ user: data.user, token: data.access_token, auth: true })
+
+						localStorage.setItem("access_token", data.access_token)
+						return true;
+					}
+					setStore({ auth: false })
+					return false
+				} catch (error) {
+					console.log("Error loading message from backend", error)
+					setStore({ user: false })
+					return false;
+				}
+			},
+			signup: async (user) => {
+				try {
+					// fetching data from the backend
+					const resp = await fetch(process.env.BACKEND_URL + "api/signup", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(user)
+
+					})
+					console.log(resp.status)
+					if (resp.status == 201) {
+
+						return true;
+					} else {
+						return false
+					}
+				} catch (error) {
+					console.log("Error loading message from backend", error)
+				}
 			},
             
 			getMenu: async (menuDay) => {
@@ -120,19 +114,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false;
 				}
 			},
-			
+
 			getOptions: async () => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "api/menuoptions/");
-					
+
 					if (!response.ok) {
 						throw new Error('Error en la respuesta del servidor');
 					}
-			
+
 					const data = await response.json();
 					console.log(data);
-			
-					
+
+
 					if ("CocaCola") {
 						setStore({ optionCocaCola: data });
 					}
@@ -151,15 +145,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if ("Manzana") {
 						setStore({ optionManzana: data });
 					}
-			
+
 				} catch (error) {
 					console.error("Error al obtener opciones:", error);
 				}
 			},
-			
-			},
-		}
-	};
+
+		},
+	}
+};
 
 
 export default getState
