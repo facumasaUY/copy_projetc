@@ -81,36 +81,46 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false;
 				}
 			},
-			getOptions: async (options) => {
+			
+			getOptions: async () => {
 				try {
-					const response = await fetch(process.env.BACKEND_URL + "api/menuoptions/" + options);
+					const response = await fetch(process.env.BACKEND_URL + "api/menuoptions/");
+					
+					if (!response.ok) {
+						throw new Error('Error en la respuesta del servidor');
+					}
+			
 					const data = await response.json();
 					console.log(data);
-					if (options === "CocaCola") {
+			
+					
+					if ("CocaCola") {
 						setStore({ optionCocaCola: data });
 					}
-					if (options === "CocaCola Zero") {
+					if ("CocaCola Zero") {
 						setStore({ optionCocaColaZ: data });
 					}
-					if (options === "CocaCola Light") {
+					if ("CocaCola Light") {
 						setStore({ optionCocaColaL: data });
 					}
-					if (options === "Agua") {
+					if ("Agua") {
 						setStore({ optionAgua: data });
 					}
-					if (options === "Naranja") {
+					if ("Naranja") {
 						setStore({ optionNaranja: data });
 					}
-					if (options === "Manzana") {
+					if ("Manzana") {
 						setStore({ optionManzana: data });
 					}
+			
 				} catch (error) {
-					console.log(error);
-					return false;
+					console.error("Error al obtener opciones:", error);
 				}
+			},
+			
 			},
 		}
 	};
-};
+
 
 export default getState;

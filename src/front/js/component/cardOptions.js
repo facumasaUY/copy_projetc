@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export const CardOption = ({ menuOption }) => {
+export const CardOption = ({ option }) => {
 
   const navigate = useNavigate();
 
@@ -9,8 +9,8 @@ export const CardOption = ({ menuOption }) => {
     navigate("/payment");
   };
 
-  const handleClick = (menuOption) => {
-    console.log("Item seleccionado: ", menuOption);
+  const handleClick = (option) => {
+    console.log("Item seleccionado: ", option);
   };
 
   const handleNotificacion = () => {
@@ -18,24 +18,13 @@ export const CardOption = ({ menuOption }) => {
   };
 
   return (
-    <div className="container my-4">
-      <h1
-        className="text-center mb-2"
-        style={{
-          fontFamily: "Mulish, sans-serif",
-          color: "rgb(56, 101, 229)",
-        }}
-      >
-        OTRAS OPCIONES
-      </h1>
+      
       <div
         className="d-flex justify-content-center flex-wrap gap-4"
         style={{ rowGap: "20px" }}
       >
-        {menuOption.map((menuOption) => (
           <div
             className="d-flex flex-column align-items-center"
-            key={menuOption.id}
             style={{ width: "150px" }}
           >
             <div
@@ -48,9 +37,9 @@ export const CardOption = ({ menuOption }) => {
               }}
             >
               <img
-                src={menuOption.img}
+                src={option.img}
                 className="card-img-top"
-                alt={menuOption.name}
+                alt=""
                 style={{
                   objectFit: "cover",
                   width: "100%",
@@ -73,7 +62,7 @@ export const CardOption = ({ menuOption }) => {
                   overflow: "hidden",
                 }}
               >
-                {menuOption.name}
+                { option.name}
               </h5>
               <p
                 className="card-text m-2"
@@ -82,12 +71,12 @@ export const CardOption = ({ menuOption }) => {
                   fontSize: "15px",
                 }}
               >
-                Precio: ${menuOption.price}
+                Precio: ${ option.price}
               </p>
               <button
                 className="btn"
                 onClick={() => {
-                  handleClick(menuOption);
+                  handleClick(option);
                   handleNotificacion();
                 }}
                 style={{
@@ -102,24 +91,9 @@ export const CardOption = ({ menuOption }) => {
               </button>
             </div>
           </div>
-        ))}
-      </div>
-
-      <div className="text-center mt-4">
-        <button
-          className="btn"
-          onClick={irAPayment}
-          style={{
-            backgroundColor: "rgb(56, 101, 229)",
-            color: "white",
-            fontSize: "1rem",
-            borderRadius: "10px",
-            padding: "10px 20px",
-          }}
-        >
-          Ir a Pago
-        </button>
-      </div>
+        
+   
     </div>
+    
   );
 };
