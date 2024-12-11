@@ -3,11 +3,6 @@ from api.models import db, User, Menu, MenuOptions
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import mercadopago
-<<<<<<< HEAD
-import json 
-sdk = mercadopago.SDK("APP_USR-7717264634749554-120508-c40d3f9932b4e9f7de4477bfa5ef733b-2136972767")
-from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
-=======
 import json
 import os
 
@@ -19,7 +14,6 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 
->>>>>>> fea9b29321b5fee3106bc933a414bda8760c8845
 import cloudinary
 import cloudinary.uploader
 from cloudinary.utils import cloudinary_url
