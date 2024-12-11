@@ -57,7 +57,7 @@ export const CardMenu = ({menu}) => {
                         height: "120px",
                     }}
                 >
-                    {menu.price}
+                    ${menu.price}
                 </div>
                 <div className="card-body text-center p-2">
                     <div className="d-flex justify-content-between">

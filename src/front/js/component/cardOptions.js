@@ -20,7 +20,8 @@ export const CardOption = ({ option }) => {
   return (
       
       <div
-        className="d-flex justify-content-center flex-wrap gap-4"
+      key={option.id}
+        className ="d-flex justify-content-center flex-wrap gap-4"
         style={{ rowGap: "20px" }}
       >
           <div

@@ -230,6 +230,9 @@ export const Menu = () => {
 
       {/* Menu del dia */}
 
+      <div className="mb-5">
+          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)", padding:"20px" }}>MENÚ SEMANAL</h2>
+          <div className="row">
       <div
         className="menudeldia2 mt-3"
         style={{
@@ -349,162 +352,58 @@ export const Menu = () => {
           </div>
         </div>
       </div>
+      </div>
 
       {/* Otras Opciones*/}
       <div className="container my-4">
-      <h1
-        className="text-center mb-2"
-        style={{
-          fontFamily: "Mulish, sans-serif",
-          color: "rgb(56, 101, 229)",
-        }}
-      >
-        OTRAS OPCIONES
-      </h1>
-      <div
-        className="menudeldia2 mt-3"
-        style={{
-          marginBottom: "20px",
-          fontFamily: "Mulish, sans-serif",
-          backgroundColor: "rgba(56, 101, 229, 0.2)",
-          padding: "20px",
-          borderRadius: "10px",
-        }}
-      >
-         <div className="mb-5">
-          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}></h2>
-          <div className="row">
-            {store.optionCocaCola.map((option) => (
-              <CardOption key={option.id} option={option} />
-            ))}
-          </div>
-        </div>
-      </div>
-      
-
-      {/* <div
-        className="menudeldia2 mt-3"
-        style={{
-          marginBottom: "20px",
-          fontFamily: "Mulish, sans-serif",
-          backgroundColor: "rgba(56, 101, 229, 0.2)",
-          padding: "20px",
-          borderRadius: "10px",
-        }}
-      >
-        <div className="mb-5">
-          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}></h2>
-          <div className="row">
-            {store.optionCocaColaZ.map((option) => (
-              <CardOption key={option.id} option={option} />
-            ))}
-          </div>
-        </div>
-      </div>
-      <div
-        className="menudeldia2 mt-3"
-        style={{
-          marginBottom: "20px",
-          fontFamily: "Mulish, sans-serif",
-          backgroundColor: "rgba(56, 101, 229, 0.2)",
-          padding: "20px",
-          borderRadius: "10px",
-        }}
-      >
-        <div className="mb-5">
-          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}></h2>
-          <div className="row">
-            {store.optionCocaColaL.map((option) => (
-              <CardOption key={option.id} option={option} />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div
-        className="menudeldia2 mt-3"
-        style={{
-          marginBottom: "20px",
-          fontFamily: "Mulish, sans-serif",
-          backgroundColor: "rgba(56, 101, 229, 0.2)",
-          padding: "20px",
-          borderRadius: "10px",
-        }}
-      >
-        <div className="mb-5">
-          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}></h2>
-          <div className="row">
-            {store.optionAgua.map((option) => (
-              <CardOption key={option.id} option={option} />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div
-        className="menudeldia2 mt-3"
-        style={{
-          marginBottom: "20px",
-          fontFamily: "Mulish, sans-serif",
-          backgroundColor: "rgba(56, 101, 229, 0.2)",
-          padding: "20px",
-          borderRadius: "10px",
-        }}
-      >
-        <div className="mb-5">
-          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}></h2>
-          <div className="row">
-            {store.optionNaranja.map((option) => (
-              <CardOption key={option.id} option={option} />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div
-        className="menudeldia2 mt-3"
-        style={{
-          marginBottom: "20px",
-          fontFamily: "Mulish, sans-serif",
-          backgroundColor: "rgba(56, 101, 229, 0.2)",
-          padding: "20px",
-          borderRadius: "10px",
-        }}
-      >
-        <div className="mb-5">
-          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}></h2>
-          <div className="row">
-            {store.optionManzana.map((option) => (
-              <CardOption key={option.id} option={option} />
-            ))}
-          </div>
-        </div>
-      </div> */}
-      <div className="text-center mt-4">
-        <button
-          className="btn"
-          onClick={irAPayment}
+        <h1
+          className="text-center mb-2"
           style={{
-            backgroundColor: "rgb(56, 101, 229)",
-            color: "white",
-            fontSize: "1rem",
-            borderRadius: "10px",
-            padding: "10px 20px",
+            fontFamily: "Mulish, sans-serif",
+            color: "rgb(56, 101, 229)",
           }}
         >
-          Ir a Pago
-        </button>
+          OTRAS OPCIONES
+        </h1>
+        <div
+          className="menudeldia2 mt-3"
+          style={{
+            marginBottom: "20px",
+            fontFamily: "Mulish, sans-serif",
+            backgroundColor: "rgba(56, 101, 229, 0.2)",
+            padding: "10px",
+            borderRadius: "10px",
+          }}
+        >
+          <div className="mb-5">
+            <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}></h2>
+            <div className="d-flex flex-wrap justify-content-center">
+              {store.optionCocaCola.map((option) => (
+                <div className="m-2" style={{ flex: "1 0 auto", maxWidth: "200px" }}>
+                  <CardOption key={option.id} option={option} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center mt-4">
+          <button
+            className="btn"
+            onClick={irAPayment}
+            style={{
+              backgroundColor: "rgb(56, 101, 229)",
+              color: "white",
+              fontSize: "1rem",
+              borderRadius: "10px",
+              padding: "10px 20px",
+            }}
+          >
+            Ir a Pago
+          </button>
+        </div>
       </div>
-
-
-
-
-
-
-
-
-
-    </div>
+      </div>
     </div>
   );
 };
