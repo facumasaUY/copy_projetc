@@ -12,7 +12,7 @@ export const Login = () => {
 
 		return (
 
-			<div className="mt-5 mx-auto d-flex flex-wrap justify-content-center" >
+			<div className="mt-5 mx-auto d-flex flex-wrap justify-content-center login" >
 
 				<div className="text-center">
 					<img className="loginimage" src={homeImage} alt="Descripción de la imagen" />
@@ -22,12 +22,13 @@ export const Login = () => {
 					<div className="mb-3">
 						<label className="form-label">Correo electrónico</label>
 						<input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-
 					</div>
+
 					<div className="mb-3">
 						<label htmlFor="exampleInputPassword1" className="form-label">Contraseña</label>
 						<input type="password" className="form-control" id="exampleInputPassword1" />
 					</div>
+
 					<div className="text-center">
 						<Link to={"/menu"}>
 						<button type="submit" className="btn btn-primary">Entrar</button></Link>
@@ -43,6 +44,7 @@ export const Login = () => {
 						<Link to={"/register"}>
 						<p className="text-info">Registrarse</p></Link>
 					</div>
+					
 				</form>
 			</div>
 		);

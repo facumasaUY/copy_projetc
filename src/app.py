@@ -10,6 +10,11 @@ from api.models import db
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
+
+# Flask register and login
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 
 # from models import Person
@@ -68,6 +73,7 @@ def serve_any_other_file(path):
     response = send_from_directory(static_file_dir, path)
     response.cache_control.max_age = 0  # avoid cache memory
     return response
+
 
 
 # this only runs if `$ python src/main.py` is executed
