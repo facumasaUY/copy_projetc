@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Menu
+from api.models import db, User, Menu, Reserva
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import mercadopago
@@ -176,5 +176,19 @@ def login():
     return jsonify(access_token=access_token, user=user.serialize()),200
 
 
-
+# Endpoint para guardar reservas
+@api.route('/reservations', methods=['POST'])
+def guardar_reserva():
+    data = request.json
+    nueva_reserva = Reserva(user_id=data['user_id'], 
+                            lunes=data['lunes'], 
+                            martes=data['martes'], 
+                            miercoles=data['miercoles'], 
+                            jueves=data['jueves'], 
+                            viernes=data['viernes'], 
+                            sabado=data['sabado'])
+    db.session.add(nueva_reserva)
+    db.session.commit()
+    return jsonify({"message": "Reserva guardada con éxito"}), 200
+    
 

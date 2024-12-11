@@ -51,7 +51,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then((response) => response.json())
 					.then((result) => console.log(result))
 					.catch((error) => console.error(error));
+			},
+
+			guardarReserva: async(reservas) => {
+				try {
+					const user = 1; // Cambiar esto!!! Preguntar!!
+					const response = await fetch("https://refactored-trout-gwx9vg7ggj7c994r-3001.app.github.dev/api/reservations", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(
+							{
+								user_id: user,
+								lunes: reservas["Lunes"] || "",
+								martes: reservas["Martes"] || "",
+								miercoles: reservas["Miercoles"] || "",
+								jueves: reservas["Jueves"] || "",
+								viernes: reservas["Viernes"] || "",
+								sabado: reservas["Sabado"] || "",
+							}
+		
+						),
+					});
+					console.log(response);
+					if ( response.status == 200 ) {
+						return true;
+					}
+				} catch (error) {
+					console.log(error);
+					return false;
+				}
+
 			}
+
 
 
 		}
