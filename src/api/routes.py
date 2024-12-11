@@ -6,6 +6,9 @@ import mercadopago
 import json
 import os
 
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -36,6 +39,84 @@ api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
 CORS(api)
+
+sender_email = os.getenv("SMTP_USERNAME")
+sender_password = os.getenv("SMTP_APP_PASSWORD")
+smtp_host = os.getenv("SMTP_HOST")
+smtp_port = os.getenv("SMTP_PORT")
+
+receiver_email = ["","",""]
+# linea 59 poner lo mismo en los corchetes
+def send_signup_email(receiver_email):
+     message =MIMEMultipart("alternative")
+
+    message["Subject"]="Prueba de envio de correo - Olvidaste tu contraseña"
+
+    message["from"]="anda@gmail.com"
+
+    message ["To"] = ["","",""]
+
+    html_context = """
+        <html>
+            <body>
+                <h1>Hola</h1>
+                <p>Correo de recuperacion de contraseña</p>
+                <p>Nos alegramos de poder ayudarte a recuperar tu contraseña!</p>
+            </body>
+        </html>
+    """
+
+    text = "Hola ya recuperaste tu contraseña"
+     
+    message.attach(MIMEText(html_context,"html"))
+    message.attach(MIMEText(text ,"plain"))
+
+
+
+    server = smtplib.SMTP(smtp_host,smtp_port)
+    server.starttls()
+    server.login(send_email,sender_password)
+    server.sendmail(sender_email,receiver_email,message.as_string())
+    server.quit()
+
+@api.route('/send-email',methods=['POST'])
+def send_email():
+    
+    message =MIMEMultipart("alternative")
+
+    message["Subject"]="Prueba de envio de correo - Olvidaste tu contraseña"
+
+    message["from"]="anda@gmail.com"
+
+    message ["To"] = ["","",""]
+    # linea 49 poner lo mismo en los corchetes
+    
+    html_context = """
+        <html>
+            <body>
+                <h1>Hola</h1>
+                <p>Correo de recuperacion de contraseña</p>
+                <p>Nos alegramos de poder ayudarte a recuperar tu contraseña!</p>
+            </body>
+        </html>
+    """
+
+    text = "Hola ya recuperaste tu contraseña"
+     
+    message.attach(MIMEText(html_context,"html"))
+    message.attach(MIMEText(text ,"plain"))
+
+
+
+    server = smtplib.SMTP(smtp_host,smtp_port)
+    server.starttls()
+    server.login(send_email,sender_password)
+    server.sendmail(sender_email,receiver_email,message.as_string())
+    server.quit()
+    return jsonify({"msg":"Correo enviado exitosamente"}),200
+        
+
+
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
@@ -72,6 +153,7 @@ def create_new_menu():
     
     db.session.add(new_menu)
     db.session.commit()
+    send_signup_email((email))
 
     return jsonify({"msg": "Menu created successfully"}), 200
 

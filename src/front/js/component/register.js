@@ -34,7 +34,7 @@ export const Register = () => {
 
     const signup = async (e) => {
         e.preventDefault()
-        console.log(password, confirmar)
+        
         if (name == "") {
             mensaje("falta ingresar el nombre")
             return
@@ -54,6 +54,11 @@ export const Register = () => {
             mensaje("falta ingresar el contraseña")
             return
         }
+        if (password.length >20 || password.length<8){
+            mensaje("El password debe contenter de 8 a 20 caracteres")
+            return 
+
+        }
         if (confirmar == "") {
             mensaje("falta ingresar la confirmacion de contraseña")
             return
@@ -71,7 +76,7 @@ export const Register = () => {
 
         }
         let resp = await actions.signup(newUser)
-        console.log(resp)
+       
         if (resp) {
             let userLogin = {
                 email: email,
@@ -111,21 +116,25 @@ export const Register = () => {
             </div>
             <div className="mb-2">
                 <label className="form-label">Contraseña</label>
-                <input type={shown ? 'text' : 'password'} value={password} onChange={(event) => setPassword(event.target.value)} id="inputPassword6" className="form-control" aria-describedby="passwordHelpInline" />
-                <button onClick={switchShown}>
-                    {shown ? 'Ocultar' : 'Mostrar'}
-                </button>
+                <div className="d-flex">
+                    <input type={shown ? 'text' : 'password'} value={password} onChange={(event) => setPassword(event.target.value)} id="inputPassword6" className="form-control" aria-describedby="passwordHelpInline" />
+                    <button onClick={switchShown} className="btn btn-outline-primary">
+                        {shown ? <i className="fa fa-eye-slash"></i> : <i className="fa fa-eye"></i>}
+                    </button>
+                </div>
                 <span id="passwordHelpInline" className="form-text">
                     Debe contener de 8 a 20 caracteres.
                 </span>
             </div>
             <div className="mb-3">
                 <label className="form-label">Confirmar contraseña</label>
-                <input type={shown ? 'text' : 'password'} value={confirmar} onChange={(event) => setConfirmar(event.target.value)} id="inputPassword7" className="form-control" aria-describedby="passwordHelpInline" />
+                <div className="d-flex">
+                    <input type={shown ? 'text' : 'password'} value={confirmar} onChange={(event) => setConfirmar(event.target.value)} id="inputPassword7" className="form-control" aria-describedby="passwordHelpInline" />
+                    <button onClick={switchShown} className="btn btn-outline-primary">
+                        {shown ? <i className="fa fa-eye-slash"></i> : <i className="fa fa-eye"></i>}
+                    </button>
+                </div>
             </div>
-            <button onClick={switchShown}>
-                    {shown ? 'Ocultar' : 'Mostrar'}
-                </button>
             <div className="text-center mb-4">
                 <button type="button" onClick={(event) => signup(event)} className="btn btn-primary m-2">Registrarse</button>
                 <button type="button" onClick={volver} className="btn btn-primary ms-2">Volver</button>
