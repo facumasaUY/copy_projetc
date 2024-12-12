@@ -147,9 +147,9 @@ export const Menu = () => {
                     <i class="fa-solid fa-calendar-days me-2" style={{ color: "#ffffff;" }}></i> Reservar lugar</div>
                 </Link>
 
-                <Link to={"/form/:theid"} className="custom-link customhover">
+                <Link to={"/form"} className="custom-link customhover">
                   <div className="feedbacklink my-2">
-                    <i class="fa-solid fa-envelope me-2" style={{ color: "#ffffff;" }}></i>
+                    <i className="fa-solid fa-envelope me-2" style={{ color: "#ffffff" }}></i>
                     Déjanos tu comentario</div>
                 </Link>
               </div>
@@ -321,7 +321,6 @@ export const Menu = () => {
     <div className="container mt-3">
       <MenuNavbar spinner={spinner} />
 
-    <MenuNavbar spinner={spinner} />
 
       <div className="mb-5">
           <h2 className="text-center" style={{ color: "rgb(56, 101, 229)", padding:"20px" }}>MENÚ SEMANAL</h2>
