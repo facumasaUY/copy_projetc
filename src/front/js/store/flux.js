@@ -56,14 +56,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ user: data.user, token: data.access_token, auth: true })
 
 						localStorage.setItem("access_token", data.access_token)
-						return true;
+						return {
+							status: true,
+							rol: data.user.is_admin
+						};
 					}
 					setStore({ auth: false })
-					return false
+					return {
+						status:false
+					}
 				} catch (error) {
 					console.log("Error loading message from backend", error)
 					setStore({ user: false })
-					return false;
+					return {
+						status:false
+					};
 				}
 			},
 			signup: async (user) => {

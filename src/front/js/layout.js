@@ -10,7 +10,7 @@ import injectContext from "./store/appContext";
 import { Form } from "./component/form";
 import { Navbar } from "./component/loginnavbar";
 import { Footer } from "./component/loginfooter";
-
+import { Admin } from "./component/admin.js";
 import {Register} from "./component/register";
 import { Menu } from "./component/menu";
 import { Payment } from "./component/payment";
@@ -38,7 +38,7 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop> 
-                {location.pathname !== "/menu" && <Navbar />} {/* Es un condicional que hace que el navbar de login no se vea en menu, si hay duda, consultar a Facu */}
+                {/* {location.pathname !== "/menu" && <Navbar />} Es un condicional que hace que el navbar de login no se vea en menu, si hay duda, consultar a Facu */}
                     <Routes>
 
                         <Route element={<Home />} path="/" />
@@ -48,10 +48,10 @@ const Layout = () => {
                         {/* <Route element={<Private/>} path="/private" /> */}
                         <Route element={<PlaceReservations />} path="/reservations" />
                         <Route element={<Menu />} path="/menu" />
+                        <Route element={<Admin/>} path="/admin" />
 
                         <Route element={<Payment />} path="/payment" />
                         <Route element={<Form />} path="/form/" />                    
-
                         <Route element={<Feedback />} path="/feedback/:theid" />
                         <Route element={<NewMenu />} path="/newMenu" />
                         <Route element={<NewOption />} path="/newOptions" />

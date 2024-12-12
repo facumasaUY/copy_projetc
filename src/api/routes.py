@@ -14,6 +14,7 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 
+
 import cloudinary
 import cloudinary.uploader
 from cloudinary.utils import cloudinary_url
@@ -158,7 +159,7 @@ def create_menu():
 
     db.session.add(new_menu)
     db.session.commit()
-    send_signup_email([email])
+    # send_signup_email([email])
 
     return jsonify({"msg": "Menu created successfully"}), 200
 
@@ -301,6 +302,7 @@ def register():
 
 
         #ceci tengo una pregunta en el post de arriba 
+
 # katte login
 @api.route('/login', methods=['POST'])
 def login():
@@ -322,3 +324,9 @@ def login():
     return jsonify(access_token=access_token, user=user.serialize()),200
 
 
+@api.route("/protected", methods=["GET"])
+@jwt_required()
+def protected():
+    # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
