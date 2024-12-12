@@ -9,7 +9,6 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
-    reserva = db.relationship("Reserva")
     num_funcionario = db.Column(db.Integer, unique=True, nullable=False)
 
     def __repr__(self):
@@ -30,7 +29,8 @@ class User(db.Model):
             "last_name":self.last_name,
             "email":self.email,
             "is_active":self.is_active,
-            "num_funcionario":self.num_funcionario
+            "num_funcionario":self.num_funcionario,
+            # "reserva":self.reserva.serialize()
             
         }
 
@@ -100,6 +100,7 @@ class MenuOptions(db.Model):
 class Reserva(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    user = db.relationship("User", backref="reserva")
     lunes = db.Column(db.String(20), nullable=True)
     martes = db.Column(db.String(20), nullable=True)
     miercoles = db.Column(db.String(20), nullable=True)
@@ -113,6 +114,7 @@ class Reserva(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "user":self.user.serialize(),            
             "user_id": self.user_id,
             "lunes":self.lunes,
             "martes":self.martes,

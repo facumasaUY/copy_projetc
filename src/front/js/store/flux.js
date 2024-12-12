@@ -7,9 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			user: null,
 			auth: false,
-
 			mercadoPago: {},
-
 			menuLunes: [],
 			menuMartes: [],
 			menuMiercoles: [],

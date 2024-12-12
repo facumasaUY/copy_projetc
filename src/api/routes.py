@@ -158,7 +158,7 @@ def create_menu():
 
     db.session.add(new_menu)
     db.session.commit()
-    send_signup_email([email])
+    # send_signup_email([email])
 
     return jsonify({"msg": "Menu created successfully"}), 200
 
@@ -337,4 +337,14 @@ def guardar_reserva():
     db.session.commit()
     return jsonify({"message": "Reserva guardada con éxito"}), 200
     
+
+# Endpoint para traer reservas
+@api.route('/reservations', methods=['GET'])
+def get_reservas():
+    try:
+        reservas = Reserva.query.all()
+        reservas_serializadas = [reserva.serialize() for reserva in reservas]
+        return jsonify(reservas_serializadas), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
 
