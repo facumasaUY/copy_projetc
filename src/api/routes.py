@@ -158,7 +158,7 @@ def create_menu():
 
     db.session.add(new_menu)
     db.session.commit()
-    send_signup_email([email])
+    # send_signup_email([email])
 
     return jsonify({"msg": "Menu created successfully"}), 200
 

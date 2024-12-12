@@ -52,7 +52,7 @@ const Layout = () => {
                         <Route element={<Payment />} path="/payment" />
                         <Route element={<Form />} path="/form/" />                    
 
-                        <Route element={<Feedback />} path="/feedback/:theid" />
+                        <Route element={<Feedback />} path="/feedback/" />
                         <Route element={<NewMenu />} path="/newMenu" />
                         <Route element={<NewOption />} path="/newOptions" />
                         <Route element={<h1>Not found!</h1>} />
