@@ -158,7 +158,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json",
-							"Authorization":"Bearer " + token
+							"Authorization": "Bearer " + token
 						},
 						body: JSON.stringify(
 							{
@@ -190,7 +190,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						method: "GET",
 						headers: {
 							"Content-Type": "application/json",
-							"Authorization":"Bearer " + token
+							"Authorization": "Bearer " + token
 						},
 
 					});
@@ -199,6 +199,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 						const data = await response.json()
 						console.log(data)
 						return true;
+					}
+				} catch (error) {
+					console.log(error)
+					return false
+				}
+			},
+
+			restablecerPassword: async (email) => {
+				try {
+
+					const response = await fetch(process.env.BACKEND_URL + "api/send-email", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							email: email
+						}),
+					});
+					console.log(response);
+					if (response.status == 200) {
+						return true;
+					}
+					if (response.status == 404) {
+						return false;
 					}
 				} catch (error) {
 					console.log(error);
@@ -214,7 +237,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						method: "GET",
 						headers: {
 							"Content-Type": "application/json",
-							"Authorization":"Bearer " + token
+							"Authorization": "Bearer " + token
 						},
 
 					});
@@ -230,8 +253,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			},
-
-
 
 		}
 	};

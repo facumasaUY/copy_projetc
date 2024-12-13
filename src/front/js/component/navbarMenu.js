@@ -59,7 +59,7 @@ const NavbarMenu = () => {
                                     </div>
 
                                     {/* Ventana */}
-                                    <div className="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                                    <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
                                         {/* Título */}
                                         <div className="offcanvas-header" style={{
