@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Menu, MenuOptions
+from api.models import db, User, Menu, MenuOptions, Reserva
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import mercadopago
@@ -23,7 +23,7 @@ from cloudinary.utils import cloudinary_url
 
 sdk = mercadopago.SDK("APP_USR-7717264634749554-120508-c40d3f9932b4e9f7de4477bfa5ef733b-2136972767")
 
-
+aleatorio="cucaracha"
 
 frontendurl = os.getenv("FRONTEND_URL")
 
@@ -47,79 +47,72 @@ sender_password = os.getenv("SMTP_APP_PASSWORD")
 smtp_host = os.getenv("SMTP_HOST")
 smtp_port = os.getenv("SMTP_PORT")
 
-receiver_email = ["","",""]
-# linea 59 poner lo mismo en los corchetes
+# receivers_email = "fiorellaviscardi.2412@gmail.com", "natimartalvarez@gmail.com", "eliasmilano@gmail.com"
 
-def send_signup_email(receivers_emails):
-    message =MIMEMultipart("alternative")
+def send_singup_email(receivers_email):
+   message = MIMEMultipart("alternative")
 
-    message["Subject"]="Prueba de envio de correo - Olvidaste tu contraseña"
+   message["Subject"] = "Bienvenido a Anda Food!"
+   message["From"] = os.getenv("SMTP_USERNAME")
+   message["To"] = ",".join(receivers_email)
+    
+   html_content = """
+       <html>
+           <body>
+               <h1>Bienvenido a Anda Food!</h1>
+               <p>¿Olvidaste la contraseña?</p>
+               <p>Por favor, ingresa el correo electrónico que usas en la aplicación para continuar.</p>
+           </body>
+       </html>
+   """
+   text = "Correo enviado desde la API Anda Food. Saludos👋."
 
-    message["from"]="anda@gmail.com"
+   message.attach(MIMEText(text, "plain"))
+   message.attach(MIMEText(html_content, "html"))
 
-    message ["To"] = ",".join(receivers_emails)
+   server = smtplib.SMTP(smtp_host, smtp_port)
+   server.starttls()
+   server.login(sender_email, sender_password)
+   server.sendmail(sender_email, receivers_email, message.as_string())
+   server.quit()
 
-    html_context = """
-        <html>
-            <body>
-                <h1>Hola</h1>
-                <p>Correo de recuperacion de contraseña</p>
-                <p>Nos alegramos de poder ayudarte a recuperar tu contraseña!</p>
-            </body>
-        </html>
-    """
-
-    text = "Hola ya recuperaste tu contraseña"
-     
-    message.attach(MIMEText(html_context,"html"))
-    message.attach(MIMEText(text ,"plain"))
-
-
-
-    server = smtplib.SMTP(smtp_host,smtp_port)
-    server.starttls()
-    server.login(send_email,sender_password)
-    server.sendmail(sender_email,receiver_email,message.as_string())
-    server.quit()
-
-@api.route('/send-email',methods=['POST'])
+@api.route('/send-email', methods=['POST'])
 def send_email():
-    
-    message =MIMEMultipart("alternative")
+   data=request.json
+   receivers_email=data["email"]
+   exist_user=User.query.filter_by(email=receivers_email).first()
+   if exist_user is None :
+       return jsonify({"msg":"usuario no registrado"}),404
 
-    message["Subject"]="Prueba de envio de correo - Olvidaste tu contraseña"
+   message = MIMEMultipart("alternative")
 
-    message["from"]="anda@gmail.com"
+   message["Subject"] = "Olvido de contraseña - Anda Food"
+   message["From"] = "andamanagment@gmail.com"
+   message["To"] = ",".join(receivers_email)
+   
 
-    message ["To"] = ["","",""]
-    # linea 49 poner lo mismo en los corchetes
-    
-    html_context = """
-        <html>
-            <body>
-                <h1>Hola</h1>
-                <p>Correo de recuperacion de contraseña</p>
-                <p>Nos alegramos de poder ayudarte a recuperar tu contraseña!</p>
-            </body>
-        </html>
-    """
+   html_content = f"""
+       <html>
+           <body>
+               <h1>Bienvenido a Anda Food!</h1>
+               <p>¿Olvidaste la contraseña?</p>
+               <p>Tu password aleatorio es :{aleatorio}.</p>
+               <p>Recuerda volver a la aplicacion web para continuar el cambio de contraseña</p>
+           </body>
+       </html>
+   """
+   text = "Correo enviado desde la API Anda Food. Saludos👋."
 
-    text = "Hola ya recuperaste tu contraseña"
-     
-    message.attach(MIMEText(html_context,"html"))
-    message.attach(MIMEText(text ,"plain"))
+   message.attach(MIMEText(text, "plain"))
+   message.attach(MIMEText(html_content, "html"))
 
+   server = smtplib.SMTP(smtp_host, smtp_port)
+   server.starttls()
+   server.login(sender_email, sender_password)
+   server.sendmail(sender_email, receivers_email, message.as_string())
+   server.quit()
 
-
-    server = smtplib.SMTP(smtp_host,smtp_port)
-    server.starttls()
-    server.login(send_email,sender_password)
-    server.sendmail(sender_email,receiver_email,message.as_string())
-    server.quit()
-    return jsonify({"msg":"Correo enviado exitosamente"}),200
-        
-
-
+   return jsonify({"msg": "Correo enviado correctamente"}), 200
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
@@ -159,7 +152,7 @@ def create_menu():
 
     db.session.add(new_menu)
     db.session.commit()
-    # send_signup_email([email])
+    
 
     return jsonify({"msg": "Menu created successfully"}), 200
 
@@ -298,11 +291,11 @@ def register():
     )
     db.session.add(new_user)
     db.session.commit()
+    send_signup_email([email])
     return jsonify({"message":"User created successfully"}),201
 
 
-        #ceci tengo una pregunta en el post de arriba 
-
+        
 # katte login
 @api.route('/login', methods=['POST'])
 def login():
@@ -330,3 +323,20 @@ def protected():
     # Access the identity of the current user with get_jwt_identity
     current_user = get_jwt_identity()
     return jsonify(logged_in_as=current_user), 200
+
+# Endpoint para guardar reservas
+@api.route('/reservations', methods=['POST'])
+def guardar_reserva():
+    data = request.json
+    nueva_reserva = Reserva(user_id=data['user_id'], 
+                            lunes=data['lunes'], 
+                            martes=data['martes'], 
+                            miercoles=data['miercoles'], 
+                            jueves=data['jueves'], 
+                            viernes=data['viernes'], 
+                            sabado=data['sabado'])
+    db.session.add(nueva_reserva)
+    db.session.commit()
+    return jsonify({"message": "Reserva guardada con éxito"}), 200
+    
+

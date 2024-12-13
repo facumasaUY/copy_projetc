@@ -166,8 +166,68 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-		},
-	}
+
+
+			guardarReserva: async (reservas) => {
+				try {
+					const user = 1; // Cambiar esto!!! Preguntar!!
+					const response = await fetch("https://refactored-trout-gwx9vg7ggj7c994r-3001.app.github.dev/api/reservations", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(
+							{
+								user_id: user,
+								lunes: reservas["Lunes"] || "",
+								martes: reservas["Martes"] || "",
+								miercoles: reservas["Miercoles"] || "",
+								jueves: reservas["Jueves"] || "",
+								viernes: reservas["Viernes"] || "",
+								sabado: reservas["Sabado"] || "",
+							}
+
+						),
+					});
+					console.log(response);
+					if (response.status == 200) {
+						return true;
+					}
+				} catch (error) {
+					console.log(error);
+					return false;
+				}
+
+			},
+			restablecerPassword: async (email) => {
+				try {
+
+					const response = await fetch(process.env.BACKEND_URL + "api/send-email", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							email: email
+						}),
+					});
+					console.log(response);
+					if (response.status == 200) {
+						return true;
+					}
+					if(response.status==404){
+						return false;
+					}
+				} catch (error) {
+					console.log(error);
+					return false;
+				}
+
+			}
+
+
+
+
+		}
+	};
 };
 
 
