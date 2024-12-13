@@ -153,15 +153,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			guardarReserva: async (reservas) => {
 				try {
-					const user = 1; // Cambiar esto!!! Preguntar!!
+					const token = localStorage.getItem("access_token");
 					const response = await fetch("https://refactored-trout-gwx9vg7ggj7c994r-3001.app.github.dev/api/reservations", {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json",
+							"Authorization":"Bearer " + token
 						},
 						body: JSON.stringify(
 							{
-								user_id: user,
 								lunes: reservas["Lunes"] || "",
 								martes: reservas["Martes"] || "",
 								miercoles: reservas["Miercoles"] || "",
@@ -181,7 +181,55 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false;
 				}
 
-			}
+			},
+
+			traerReserva: async () => {
+				try {
+					const token = localStorage.getItem("access_token");
+					const response = await fetch(process.env.BACKEND_URL + "api/reservations", {
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							"Authorization":"Bearer " + token
+						},
+
+					});
+					console.log(response);
+					if (response.status == 200) {
+						const data = await response.json()
+						console.log(data)
+						return true;
+					}
+				} catch (error) {
+					console.log(error);
+					return false;
+				}
+
+			},
+
+			traerTodasLasReservas: async () => {
+				try {
+					const token = localStorage.getItem("access_token");
+					const response = await fetch(process.env.BACKEND_URL + "api/users_reservations", {
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							"Authorization":"Bearer " + token
+						},
+
+					});
+					console.log(response);
+					if (response.status == 200) {
+						const data = await response.json()
+						console.log(data)
+						return true;
+					}
+				} catch (error) {
+					console.log(error);
+					return false;
+				}
+
+			},
 
 
 

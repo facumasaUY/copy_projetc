@@ -324,9 +324,12 @@ def login():
 
 # Endpoint para guardar reservas
 @api.route('/reservations', methods=['POST'])
+@jwt_required()
 def guardar_reserva():
     data = request.json
-    nueva_reserva = Reserva(user_id=data['user_id'], 
+    email = get_jwt_identity()
+    user = User.query.filter_by(email=email).first()
+    nueva_reserva = Reserva(user_id=user.id, 
                             lunes=data['lunes'], 
                             martes=data['martes'], 
                             miercoles=data['miercoles'], 
@@ -351,9 +354,11 @@ def guardar_reserva():
 
 # Endpoint para traer reservas de un usuario
 @api.route('/reservations', methods=['GET'])
+@jwt_required()
 def get_reservas_by_email():
     try:
-        email = request.args.get('email')
+        #email = request.json.get('email')
+        email = get_jwt_identity()
         if not email:
             return jsonify({"error": "Email parameter is required"}), 400
 
@@ -371,10 +376,26 @@ def get_reservas_by_email():
 
 # Endpoint para traer reservas de todos los usuarios
 @api.route('/users_reservations', methods=['GET'])
-def get_users_reservations():
+def get_allReservations():
     try:
-        users = User.query.all()
-        users_list = [user.serialize() for user in users]
-        return jsonify(users_list), 200
+        data = request.json
+        hora = data["hora"]
+        dia = data["dia"]
+        if dia == "Lunes" : 
+            reservas = Reserva.query.filter_by(lunes=hora).all()
+        if dia == "Martes" : 
+            reservas = Reserva.query.filter_by(martes=hora).all()
+        if dia == "Miercoles" : 
+            reservas = Reserva.query.filter_by(miercoles=hora).all()
+        if dia == "Jueves" : 
+            reservas = Reserva.query.filter_by(jueves=hora).all()
+        if dia == "Viernes" : 
+            reservas = Reserva.query.filter_by(viernes=hora).all()
+        if dia == "Sabado" : 
+            reservas = Reserva.query.filter_by(sabado=hora).all()
+
+        reservas_list = [item.serialize() for item in reservas]
+        return jsonify(reservas_list), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+

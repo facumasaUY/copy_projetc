@@ -23,25 +23,13 @@ export const PlaceReservations = () => {
     }]);
 
     useEffect(() => {
-        const fetchReservas = async () => {
-            try {
-                const response = await fetch("https://refactored-trout-gwx9vg7ggj7c994r-3001.app.github.dev/api/reservations");
-                if (!response.ok) throw new Error("Error al obtener reservas");
-                const data = await response.json();
-                const reservaActual = data.length > 0 ? data[0] : reservas;
-                setReservas(reservaActual);
-            } catch (error) {
-                console.error("Error al cargar reservas:", error);
-            }
-        };
         fetchReservas();
     }, []);
 
 
-
-
-
-
+    const fetchReservas = async () => {
+        let resp = await actions.traerReserva()
+    }
 
     const actualizarReserva = (diaSemana, nuevaHora) => {
         console.log(diaSemana, nuevaHora),
