@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
-
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
@@ -10,17 +9,14 @@ import injectContext from "./store/appContext";
 import { Form } from "./component/form";
 import { Navbar } from "./component/loginnavbar";
 import { Footer } from "./component/loginfooter";
-
 import {Register} from "./component/register";
 import { Menu } from "./component/menu";
 import { Payment } from "./component/payment";
-
-
-
-import { Feedback } from "./component/feedback";
 import { PlaceReservations } from "./pages/placeReservations";
 import {NewMenu} from "./pages/newMenu";
 import { NewOption } from "./pages/newOptions";
+import { SendEmail } from "./component/send-email";
+import { RecuperarPassword } from "./component/recuperar-password";
 
 
 
@@ -45,15 +41,13 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Register />} path="/register" />
                         <Route element={<Single />} path="/single/:theid" />
-                        {/* <Route element={<Private/>} path="/private" /> */}
                         <Route element={<PlaceReservations />} path="/reservations" />
                         <Route element={<Menu />} path="/menu" />
-
                         <Route element={<Payment />} path="/payment" />
-                        <Route element={<Form />} path="/form/" />                    
-
-                        <Route element={<Feedback />} path="/feedback/:theid" />
+                        <Route element={<Form />} path="/form" />                    
                         <Route element={<NewMenu />} path="/newMenu" />
+                        <Route element={<RecuperarPassword />} path="/recuperar-password" />
+                        <Route element={<SendEmail />} path="/send-email" />
                         <Route element={<NewOption />} path="/newOptions" />
                         <Route element={<h1>Not found!</h1>} />
 
