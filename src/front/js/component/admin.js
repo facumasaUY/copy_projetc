@@ -8,10 +8,10 @@ import { Link } from "react-router-dom";
 export const Admin = () => {
     return (
         <>
-            <Navbar />
+            
             <div className="adminmenu">
 
-                <h1 className="text-center">Administración de Comedor</h1>
+                <h1 className="admincomedor fs-4"> <i class="fa-solid fa-bowl-food me-2" style= {{color: "#ffffff"}}></i>Administración de Comedor</h1>
                 <div className="d-flex flex-wrap justify-content-center align-items-center adminmenu">
                     <Link to={"/newMenu"} className="custom-link">
                         <div className="cardadmin m-4 p-3">

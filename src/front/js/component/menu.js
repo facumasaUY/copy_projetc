@@ -106,6 +106,10 @@ export const Menu = () => {
     navigate("/payment");
   };
 
+  const handleLogout = () => {
+    actions.logout(); 
+    navigate("/");
+};
 
   //Sacar el menuNavbar para otro componente.
   const MenuNavbar = (props) => {
@@ -144,12 +148,12 @@ export const Menu = () => {
 
                 <Link to={"/reservations"} className="custom-link">
                   <div className="feedbacklink my-2">
-                    <i className="fa-solid fa-calendar-days me-2" style={{ color: "#ffffff" }}></i> Reservar lugar</div>
+                    <i className="fa-solid fa-calendar-days me-2" style={{ color: "#3865e5" }}></i> Reservar lugar</div>
                 </Link>
 
                 <Link to={"/form"} className="custom-link customhover">
                   <div className="feedbacklink my-2">
-                    <i className="fa-solid fa-envelope me-2" style={{ color: "#ffffff" }}></i>
+                    <i className="fa-solid fa-envelope me-2" style={{ color: "#3865e5" }}></i>
                     Déjanos tu comentario</div>
                 </Link>
               </div>
@@ -158,7 +162,7 @@ export const Menu = () => {
 
 
               <div className="text-end pb-2">
-                <button className="logout">Cerrar Sesión <i className="fa-solid fa-right-from-bracket" style={{ color: "#ffffff" }}></i></button>
+                <button className="logout" onClick={handleLogout}>Cerrar Sesión <i className="fa-solid fa-right-from-bracket" style={{ color: "#ffffff" }}></i></button>
               </div>
 
             </div>
@@ -478,21 +482,7 @@ export const Menu = () => {
           </div>
         </div>
 
-        <div className="text-center mt-4">
-          <button
-            className="btn"
-            onClick={irAPayment}
-            style={{
-              backgroundColor: "rgb(56, 101, 229)",
-              color: "white",
-              fontSize: "1rem",
-              borderRadius: "10px",
-              padding: "10px 20px",
-            }}
-          >
-            Ir a Pago
-          </button>
-        </div>
+      
       </div>
       </div>
     </div>

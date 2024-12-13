@@ -93,6 +93,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
+
+			logout: () => {
+				
+				localStorage.removeItem("access_token");
+				setStore({ user: null, token: null, auth: false });			
+				console.log("Sesión cerrada");
+			},
+			
 			getMenu: async (menuDay) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "api/menu/" + menuDay);

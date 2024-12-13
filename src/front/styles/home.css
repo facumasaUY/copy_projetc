@@ -109,12 +109,21 @@ footer {
 }
 
 .coloroffcanvas{
-    background-color: rgba(255, 255, 255, 0.822) !important;
+    background-color: rgb(255, 255, 255) !important;
 }
 /* admin menu */
 .adminmenu{
-    padding: 150px 0px 100px 0px;
+    margin-bottom: 100px;
+    
 }
+
+.admincomedor{
+    margin-bottom: 100px;
+    background-color:#3865e5;
+    padding: 20px;
+    color:white
+}
+
 .menuadmin{
     width: 200px;
 }
@@ -130,5 +139,6 @@ transform: scale(1.2);
 box-shadow: -1px 4px 17px 0px rgba(0,0,0,0.13);
 border-radius: 10px;
 }
+
 
 
