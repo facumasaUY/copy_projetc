@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -86,6 +85,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
+            
 			getMenu: async (menuDay) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "api/menu/" + menuDay);
@@ -216,4 +216,4 @@ const getState = ({ getStore, getActions, setStore }) => {
 };
 
 
-export default getState;
+export default getState

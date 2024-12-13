@@ -1,39 +1,75 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext, createContext } from "react";
+import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
+export const SelectedMenuData = createContext();
 
 export const CardMenu = ({ menu }) => {
+
+    const [selectedMenu, setSelectedMenu] = useState(null);
+
+    const { listCart, setListCart } = useContext(SelectedMenuData);
+
+    const handleClick = (menu) => {
+        setSelectedMenu(menu);
+        setListCart([...listCart, menu]);
+        console.log("Item seleccionado: ", menu);
+    };
+
+    const handleNotificacion = () => {
+        alert("¡Producto agregado!");
+    };
+
+
+
+    const navigate = useNavigate();
+
+    // export const CardMenu = ({ menu }) => {
+        
     const [showModal, setShowModal] = useState(false);
     const [rating, setRating] = useState(0);
 
 
 
     const handleClickStar = (newRating) => {
-        setRating(newRating);
-    };
+            setRating(newRating);
+        };
 
 
     const starElements = [];
-    for (let i = 1; i <= 5; i++) {
-        const filled = i <= rating;
-        starElements.push(
-            <span key={i} onClick={() => handleClickStar(i)}>
-                {filled ? (
-                    <i className="fas fa-star " style={{ color: "gold" }}></i>
-                ) : (
-                    <i className="far fa-star" style={{ color: "gold" }}></i>
-                )}
-            </span>
-        );
-    }
+        for (let i = 1; i <= 5; i++) {
+            const filled = i <= rating;
+            starElements.push(
+                <span key={i} onClick={() => handleClickStar(i)}>
+                    {filled ? (
+                        <i className="fas fa-star " style={{ color: "gold" }}></i>
+                    ) : (
+                        <i className="far fa-star" style={{ color: "gold" }}></i>
+                    )}
+                </span>
+            );
+        };
 
     const toggleModal = () => {
-        setShowModal(!showModal);
-    };
+            setShowModal(!showModal);
+        };
 
+    
 
     return (
-        <>
-            <div key={menu.id} className="col-12 col-md-6 col-lg-4 mb-3">
+        <div key={menu.id} className="col-12 col-md-6 col-lg-4 mb-3">
+            <div
+                className="card mx-auto"
+                style={{
+                    borderRadius: "10px",
+                    overflow: "hidden",
+                    width: "200px",
+                    height: "200px",
+                    border: "none",
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                }}
+            >
                 <div
                     className="card mx-auto"
                     style={{
@@ -103,7 +139,7 @@ export const CardMenu = ({ menu }) => {
                                 }}
                                 onClick={toggleModal}
                             >
-                                ⭐ <span style={{ fontWeight: "bold", color: "rgb(56, 101, 229)",fontSize:"12px" }}>
+                                ⭐ <span style={{ fontWeight: "bold", color: "rgb(56, 101, 229)", fontSize: "12px" }}>
                                     {rating} / 5
                                 </span>
                             </button>
@@ -173,6 +209,6 @@ export const CardMenu = ({ menu }) => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
