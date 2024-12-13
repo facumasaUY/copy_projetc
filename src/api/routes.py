@@ -22,7 +22,7 @@ from cloudinary.utils import cloudinary_url
 
 sdk = mercadopago.SDK("APP_USR-7717264634749554-120508-c40d3f9932b4e9f7de4477bfa5ef733b-2136972767")
 
-
+aleatorio="cucaracha"
 
 frontendurl = os.getenv("FRONTEND_URL")
 
@@ -46,7 +46,7 @@ sender_password = os.getenv("SMTP_APP_PASSWORD")
 smtp_host = os.getenv("SMTP_HOST")
 smtp_port = os.getenv("SMTP_PORT")
 
-receivers_email = "fiorellaviscardi.2412@gmail.com", "natimartalvarez@gmail.com", "eliasmilano@gmail.com"
+# receivers_email = "fiorellaviscardi.2412@gmail.com", "natimartalvarez@gmail.com", "eliasmilano@gmail.com"
 
 def send_singup_email(receivers_email):
    message = MIMEMultipart("alternative")
@@ -54,7 +54,7 @@ def send_singup_email(receivers_email):
    message["Subject"] = "Bienvenido a Anda Food!"
    message["From"] = os.getenv("SMTP_USERNAME")
    message["To"] = ",".join(receivers_email)
-
+    
    html_content = """
        <html>
            <body>
@@ -77,18 +77,26 @@ def send_singup_email(receivers_email):
 
 @api.route('/send-email', methods=['POST'])
 def send_email():
+   data=request.json
+   receivers_email=data["email"]
+   exist_user=User.query.filter_by(email=receivers_email).first()
+   if exist_user is None :
+       return jsonify({"msg":"usuario no registrado"}),404
+
    message = MIMEMultipart("alternative")
 
    message["Subject"] = "Olvido de contraseña - Anda Food"
    message["From"] = "andamanagment@gmail.com"
    message["To"] = ",".join(receivers_email)
+   
 
-   html_content = """
+   html_content = f"""
        <html>
            <body>
                <h1>Bienvenido a Anda Food!</h1>
                <p>¿Olvidaste la contraseña?</p>
-               <p>Por favor, ingresa el correo electrónico que usas en la aplicación para continuar.</p>
+               <p>Tu password aleatorio es :{aleatorio}.</p>
+               <p>Recuerda volver a la aplicacion web para continuar el cambio de contraseña</p>
            </body>
        </html>
    """

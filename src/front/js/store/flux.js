@@ -183,7 +183,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false;
 				}
 
+			},
+			restablecerPassword: async (email) => {
+				try {
+
+					const response = await fetch(process.env.BACKEND_URL + "api/send-email", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							email: email
+						}),
+					});
+					console.log(response);
+					if (response.status == 200) {
+						return true;
+					}
+					if(response.status==404){
+						return false;
+					}
+				} catch (error) {
+					console.log(error);
+					return false;
+				}
+
 			}
+
 
 
 
