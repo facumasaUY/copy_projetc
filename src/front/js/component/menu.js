@@ -85,17 +85,7 @@ const handleNotificacion = () => {
 };
 
 
-  const handleCompra = async () => {
-    if (listCart.length === 0) {
-      alert("El carrito está vacío. Por favor, añade productos antes de pagar.");
-    } else {
-      setSpinner(true)
-      setTimeout(() => {
-        setSpinner(false)
-        irAPayment();
-      }, 2000)
-    }
-  };
+ 
 
   const decrecer = () => {
 
@@ -131,9 +121,7 @@ const handleNotificacion = () => {
     navigate("/reservations");
   };
 
-  const irAPayment = () => {
-    navigate("/payment");
-  };
+  
 
 
   //Sacar el menuNavbar para otro componente.
