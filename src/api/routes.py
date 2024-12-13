@@ -305,9 +305,12 @@ def login():
 
 # Endpoint para guardar reservas
 @api.route('/reservations', methods=['POST'])
+@jwt_required()
 def guardar_reserva():
     data = request.json
-    nueva_reserva = Reserva(user_id=data['user_id'], 
+    email = get_jwt_identity()
+    user = User.query.filter_by(email=email).first()
+    nueva_reserva = Reserva(user_id=user.id, 
                             lunes=data['lunes'], 
                             martes=data['martes'], 
                             miercoles=data['miercoles'], 
@@ -318,4 +321,89 @@ def guardar_reserva():
     db.session.commit()
     return jsonify({"message": "Reserva guardada con éxito"}), 200
     
+
+# # Endpoint para traer reservas de un usuario
+# @api.route('/reservations', methods=['GET'])
+# def get_reservas():
+#     try:
+#         reservas = Reserva.query.all()
+#         reservas_serializadas = [reserva.serialize() for reserva in reservas]
+#         return jsonify(reservas_serializadas), 200
+#     except Exception as e:
+#         return jsonify({"error": str(e)}), 400
+
+
+# Endpoint para traer reservas de un usuario
+@api.route('/reservations', methods=['GET'])
+@jwt_required()
+def get_reservas_by_email():
+    try:
+        #email = request.json.get('email')
+        email = get_jwt_identity()
+        if not email:
+            return jsonify({"error": "Email parameter is required"}), 400
+
+        user = User.query.filter_by(email=email).first()
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+
+        reservas = Reserva.query.filter_by(user_id=user.id).all()
+        reservas_list = [reserva.serialize() for reserva in reservas]
+        
+        return jsonify(reservas_list), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+
+# Endpoint para traer reservas de todos los usuarios
+@api.route('/users_reservations', methods=['GET'])
+def get_allReservations():
+    try:
+        data = request.json
+        hora = data["hora"]
+        dia = data["dia"]
+        if dia == "Lunes" : 
+            reservas = Reserva.query.filter_by(lunes=hora).all()
+        if dia == "Martes" : 
+            reservas = Reserva.query.filter_by(martes=hora).all()
+        if dia == "Miercoles" : 
+            reservas = Reserva.query.filter_by(miercoles=hora).all()
+        if dia == "Jueves" : 
+            reservas = Reserva.query.filter_by(jueves=hora).all()
+        if dia == "Viernes" : 
+            reservas = Reserva.query.filter_by(viernes=hora).all()
+        if dia == "Sabado" : 
+            reservas = Reserva.query.filter_by(sabado=hora).all()
+
+        reservas_list = [item.serialize() for item in reservas]
+        return jsonify(reservas_list), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+# Endpoint para borrar reservas de un usuario
+@api.route('/reservations', methods=['DELETE'])
+def delete_reservation_by_email():
+    # Obtener el email desde los parámetros de la solicitud
+    email = request.json.get('email')
+
+    if not email:
+        return jsonify({"error": "Email is required"}), 400
+
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    try:
+        reservas = Reserva.query.filter_by(user_id=user.id).all()
+        if not reservas:
+            return jsonify({"message": "No hay reservas para este usuario"}), 404
+
+        for reserva in reservas:
+            db.session.delete(reserva)
+        db.session.commit()
+
+        return jsonify({"message": f"Todas las reservas para este usuario han sido borradas exitosamente"}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": "Ha ocurrido un error durante la eliminación de las reservas", "detalles": str(e)}), 500
 

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import { PlaceReservationCard } from "../component/placeReservationCard";
 import { Context } from "../store/appContext"
@@ -21,6 +21,15 @@ export const PlaceReservations = () => {
         "Viernes":"", 
         "Sabado":""
     }]);
+
+    useEffect(() => {
+        fetchReservas();
+    }, []);
+
+
+    const fetchReservas = async () => {
+        let resp = await actions.traerReserva()
+    }
 
     const actualizarReserva = (diaSemana, nuevaHora) => {
         console.log(diaSemana, nuevaHora),
