@@ -153,7 +153,12 @@ export const CardMenu = ({ menu }) => {
                                 <h5>{menu.name}</h5>
                                 <p>Precio: ${menu.price}</p>
                                 <p>Descripción: {menu.description}</p>
-                                <div>{starElements}</div>
+                                <div className="d-flex align-items-center" style={{ gap: "10px" }}>
+                                    <div>{starElements}</div>
+                                    <span style={{ fontWeight: "bold", color: "rgb(56, 101, 229)" }}>
+                                        {rating} / 5
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div className="modal-footer">
