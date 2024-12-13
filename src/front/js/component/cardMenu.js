@@ -175,4 +175,8 @@ export const CardMenu = ({ menu }) => {
             </div>
         </>
     );
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> e32b22d7cb3a96fd5421000284864ee6eb5cc86d

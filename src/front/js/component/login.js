@@ -35,7 +35,7 @@ export const Login = () => {
 					</div>
 
 					<div className="text-center mt-2">
-						<Link to= {" "}>
+						<Link to= {"/send-email"}>
 						<p>¿Olvidaste tu contraseña?</p>
 						</Link>
 					</div>

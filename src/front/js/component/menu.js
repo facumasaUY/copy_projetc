@@ -115,11 +115,15 @@ export const Menu = () => {
         <div className="container-fluid d-flex justify-content-between align-items-center" >
 
           <div href="#offcanvasScrolling" data-bs-toggle="offcanvas" role="button" aria-controls="offcanvasScrolling">
+<<<<<<< HEAD
             <button className="btn " style={{backgroundColor:"transparent", borderColor:"transparent"}}>
+=======
+           <div className="btn btn-ligth">
+>>>>>>> e32b22d7cb3a96fd5421000284864ee6eb5cc86d
             <img src={andalogofood} alt="Anda Food Logo" style={{ width: "50px", height: "50px", marginRight: "10px", "borderRadius": "10px" }} />
             </button>
           </div>
-
+          </div>
           <div className="offcanvas offcanvas-start coloroffcanvas" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel"
           >
 
@@ -321,7 +325,7 @@ export const Menu = () => {
 
   return (
     <div className="container mt-3">
-      <MenuNavbar spinner={spinner} />
+      
 
 
       <div className="mb-5">
