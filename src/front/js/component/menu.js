@@ -321,8 +321,6 @@ export const Menu = () => {
     <div className="container mt-3">
       <MenuNavbar spinner={spinner} />
 
-    <MenuNavbar spinner={spinner} />
-
       <div className="mb-5">
           <h2 className="text-center" style={{ color: "rgb(56, 101, 229)", padding:"20px" }}>MENÚ SEMANAL</h2>
           <div className="row">

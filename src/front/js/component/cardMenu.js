@@ -11,6 +11,14 @@ export const CardMenu = ({menu}) => {
 
       };
       
+    const handleClick = (option) => {
+        console.log("Item seleccionado: ", option);
+      };
+
+    const handleNotificacion = () => {
+        alert("¡Producto agregado!");
+      };
+
 
     return (
         
