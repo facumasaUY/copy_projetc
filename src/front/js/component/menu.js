@@ -135,6 +135,10 @@ export const Menu = () => {
     navigate("/payment");
   };
 
+  const handleLogout = () => {
+    actions.logout(); 
+    navigate("/");
+};
 
   //Sacar el menuNavbar para otro componente.
 

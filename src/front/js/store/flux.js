@@ -53,14 +53,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ user: data.user, token: data.access_token, auth: true })
 
 						localStorage.setItem("access_token", data.access_token)
-						return true;
+						return {
+							status: true,
+							rol: data.user.is_admin
+						};
 					}
 					setStore({ auth: false })
-					return false
+					return {
+						status:false
+					}
 				} catch (error) {
 					console.log("Error loading message from backend", error)
 					setStore({ user: false })
-					return false;
+					return {
+						status:false
+					};
 				}
 			},
 			signup: async (user) => {
@@ -83,7 +90,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
-            
+
+			logout: () => {
+				
+				localStorage.removeItem("access_token");
+				setStore({ user: null, token: null, auth: false });			
+				console.log("Sesión cerrada");
+			},
+			
 			getMenu: async (menuDay) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "api/menu/" + menuDay);
