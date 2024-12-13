@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useState, useEffect, useContext, createContext } from "react";
+import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
+export const SelectedMenuData = createContext();
+
 export const CardMenu = ({menu}) => {
+
+    const [selectedMenu, setSelectedMenu] = useState(null);
+    
+    const { listCart, setListCart } = useContext(SelectedMenuData);
+
+    const handleClick = (menu) => {
+        setSelectedMenu(menu);
+        setListCart([...listCart, menu]);
+        console.log("Item seleccionado: ", menu);
+      };
+    
+      const handleNotificacion = () => {
+        alert("¡Producto agregado!");
+      };
+
+    
     
     const navigate = useNavigate();
 
@@ -10,10 +29,8 @@ export const CardMenu = ({menu}) => {
         navigate(`/feedback/${menu.id}`, { state: menu });
 
       };
-      
 
     return (
-        
         <div key={menu.id} className="col-12 col-md-6 col-lg-4 mb-3">
             <div
                 className="card mx-auto"
@@ -63,15 +80,15 @@ export const CardMenu = ({menu}) => {
                     <div className="d-flex justify-content-between">
                         <button
                             className="btn"
-                            onClick={() => {
-                                handleClick(menu);
-                                handleNotificacion();
-                            }}
                             style={{
                                 backgroundColor: "rgb(56, 101, 229)",
                                 color: "white",
                                 fontSize: "12px",
                                 borderRadius: "10px",
+                            }}
+                            onClick={() => {
+                                handleClick(menu);
+                                handleNotificacion();
                             }}
                         >
                             Añadir al Carrito
@@ -90,5 +107,6 @@ export const CardMenu = ({menu}) => {
                 </div>
             </div>
         </div>
+        
     )
 }
