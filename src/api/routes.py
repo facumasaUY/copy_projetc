@@ -323,9 +323,6 @@ def guardar_reserva():
     db.session.commit()
     return jsonify({"message": "Reserva guardada con éxito"}), 200
     
-<<<<<<< HEAD
-    
-=======
 
 # # Endpoint para traer reservas de un usuario
 # @api.route('/reservations', methods=['GET'])
@@ -412,4 +409,3 @@ def delete_reservation_by_email():
         db.session.rollback()
         return jsonify({"error": "Ha ocurrido un error durante la eliminación de las reservas", "detalles": str(e)}), 500
 
->>>>>>> 93bb39d7c375e58ed5d0e7006962c5844c08bf4b
