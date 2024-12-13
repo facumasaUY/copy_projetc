@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useContext } from "react";
 import andalogofood from "../../img/anda.png";
 import userlogo from "../../img/user.webp";
@@ -10,6 +9,8 @@ import { Link } from "react-router-dom";
 import "/src/front/styles/home.css";
 import { CardMenu } from "./cardMenu";
 import { CardOption } from "./cardOptions";
+import { MenuNavbar } from "./navbarMenu";
+import { SelectedMenuData } from "./cardMenu";
 
 
 export const Menu = () => {
@@ -21,14 +22,27 @@ export const Menu = () => {
 
   const [quantity, setQuantity] = useState(1);
 
-  const [listCart, setListCart] = useState([]);
-
   const [spinner, setSpinner] = useState(false);
-
-  const [showNotification, setShowNotification] = useState(false);
 
   const [menus, setMenus] = useState([]);
 
+  const [listCart, setListCart] = useState([]);
+
+  const [showNotification, setShowNotification] = useState(false);
+
+  const [selectedMenu, setSelectedMenu] = useState(null);
+
+  useEffect(() => {
+    const carritoGuardado = JSON.parse(localStorage.getItem("listCart"));
+    if (carritoGuardado) {
+      setListCart(carritoGuardado);
+    }
+  }, []);
+
+  // Guardar carrito en localStorage cada vez que cambie
+  useEffect(() => {
+    localStorage.setItem("listCart", JSON.stringify(listCart));
+  }, [listCart]);
 
   const mostrarNotificacion = () => {
     if (!showNotification) {
@@ -37,22 +51,37 @@ export const Menu = () => {
       setTimeout(() => {
         console.log("Ocultando notificación...");
         setShowNotification(false);
-      }, 2000);
+      }, 500);
     }
   };
 
-  const handleNotificacion = () => {
-    return mostrarNotificacion()
-  }
-
   const handleClick = (item) => {
+    // Check if item already exists in the cart
+    const exists = listCart.some((producto) => producto.id === item.id);
+
+    // Update cart state
     setListCart((carritoActual) => {
-      const existe = carritoActual.some((producto) => producto.id === item.id);
-      if (!existe) {
+      if (!exists) {
         return [...carritoActual, item];
       }
       return carritoActual;
     });
+  };
+
+  // const handleClick = (item) => {
+  //   setListCart((carritoActual) => {
+  //       console.log("Carrito actual:", carritoActual);
+  //       console.log("Nuevo item:", item);
+  //       const existe = carritoActual.some((producto) => producto.id === item.id);
+  //       if (!existe) {
+  //           return [...carritoActual, item];
+  //       }
+  //       return carritoActual;
+  //   });
+  // };
+
+  const handleNotificacion = () => {
+    return mostrarNotificacion()
   };
 
 
@@ -108,6 +137,7 @@ export const Menu = () => {
 
 
   //Sacar el menuNavbar para otro componente.
+
   const MenuNavbar = (props) => {
     return (
       <nav className="navbar bg-body-tertiary">
@@ -115,15 +145,16 @@ export const Menu = () => {
         <div className="container-fluid d-flex justify-content-between align-items-center" >
 
           <div href="#offcanvasScrolling" data-bs-toggle="offcanvas" role="button" aria-controls="offcanvasScrolling">
-<<<<<<< HEAD
-            <button className="btn " style={{backgroundColor:"transparent", borderColor:"transparent"}}>
-=======
-           <div className="btn btn-ligth">
->>>>>>> e32b22d7cb3a96fd5421000284864ee6eb5cc86d
-            <img src={andalogofood} alt="Anda Food Logo" style={{ width: "50px", height: "50px", marginRight: "10px", "borderRadius": "10px" }} />
+
+            <button className="btn " style={{ backgroundColor: "transparent", borderColor: "transparent" }}>
+
+              <div className="btn btn-ligth">
+
+                <img src={andalogofood} alt="Anda Food Logo" style={{ width: "50px", height: "50px", marginRight: "10px", "borderRadius": "10px" }} />
+              </div>
             </button>
           </div>
-          </div>
+
           <div className="offcanvas offcanvas-start coloroffcanvas" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel"
           >
 
@@ -191,8 +222,8 @@ export const Menu = () => {
               {/* <Link to={"/form/:theid"}><p><a className="link-opacity-10-hover m-1  " href="#">Déjanos tu comentario</a></p></Link> */}
 
               <Link to={"/reservations"} className="custom-link">
-               <button className="btn m-1 " type="button" style={{ backgroundColor: "rgb(56, 101, 229)", "color": "white" }}>
-                Reserva de lugar</button>
+                <button className="btn m-1 " type="button" style={{ backgroundColor: "rgb(56, 101, 229)", "color": "white" }}>
+                  Reserva de lugar</button>
               </Link>
 
 
@@ -219,7 +250,7 @@ export const Menu = () => {
 
               {/* Body */}
               <div
-                className="listCart offcanvas-body position-relative"               
+                className="listCart offcanvas-body position-relative"
               >
                 {props.spinner && (
                   <div
@@ -241,7 +272,7 @@ export const Menu = () => {
                       style={{ backgroundColor: "white" }}
                     >
                       <div className="foodImage d-flex justify-content-center align-items-center">
-                        <img src={item.img}/>
+                        <img src={item.img} />
                       </div>
 
                       <div
@@ -318,174 +349,189 @@ export const Menu = () => {
 
           </div>
         </div>
-      </nav>
+      </nav >
     )
   };
 
 
-  return (
+
+
+
+return (
+  <SelectedMenuData.Provider value={{ selectedMenu, listCart, setListCart }}>
     <div className="container mt-3">
-      
+
+
+
+
+      <div>
+        <MenuNavbar />
+      </div>
 
 
       <div className="mb-5">
-          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)", padding:"20px" }}> <i class="fa-solid fa-calendar-days"></i> MENÚ SEMANAL</h2>
-          <div className="row">
-      <div
-        className="menudeldia2 mt-3"
-        style={{
-          marginBottom: "20px",
-          fontFamily: "Mulish, sans-serif",
-          backgroundColor: "rgba(56, 101, 229, 0.2)",
-          padding: "20px",
-          borderRadius: "10px",
-        }}
-      >
-        <div className="mb-5">
-          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Lunes</h2>
-          <div className="row">
-            {store.menuLunes.map((menu) => (
-              <CardMenu key={menu.id} menu={menu} />
-            ))}
+        <h2 className="text-center" style={{ color: "rgb(56, 101, 229)", padding: "20px" }}> <i class="fa-solid fa-calendar-days"></i> MENÚ SEMANAL</h2>
+        <div className="row">
+          <div
+            className="menudeldia2 mt-3"
+            style={{
+              marginBottom: "20px",
+              fontFamily: "Mulish, sans-serif",
+              backgroundColor: "rgba(56, 101, 229, 0.2)",
+              padding: "20px",
+              borderRadius: "10px",
+            }}
+          >
+            <div className="mb-5">
+              <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Lunes</h2>
+              <div className="row">
+                {store.menuLunes.map((menu) => (
+                  <CardMenu key={menu.id} menu={menu}
+                  //   onClick={() => {
+                  //     handleClick(menu);
+                  //     handleNotificacion();
+                  // }}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div
-        className="menudeldia2 mt-3"
-        style={{
-          marginBottom: "20px",
-          fontFamily: "Mulish, sans-serif",
-          backgroundColor: "rgba(56, 101, 229, 0.2)",
-          padding: "20px",
-          borderRadius: "10px",
-        }}
-      >
-        <div className="mb-5">
-          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Martes</h2>
-          <div className="row">
-            {store.menuMartes.map((menu) => (
-              <CardMenu key={menu.id} menu={menu} />
-            ))}
+          <div
+            className="menudeldia2 mt-3"
+            style={{
+              marginBottom: "20px",
+              fontFamily: "Mulish, sans-serif",
+              backgroundColor: "rgba(56, 101, 229, 0.2)",
+              padding: "20px",
+              borderRadius: "10px",
+            }}
+          >
+            <div className="mb-5">
+              <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Martes</h2>
+              <div className="row">
+                {store.menuMartes.map((menu) => (
+                  <CardMenu key={menu.id} menu={menu} />
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div
-        className="menudeldia2 mt-3"
-        style={{
-          marginBottom: "20px",
-          fontFamily: "Mulish, sans-serif",
-          backgroundColor: "rgba(56, 101, 229, 0.2)",
-          padding: "20px",
-          borderRadius: "10px",
-        }}
-      >
-        <div className="mb-5">
-          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Miércoles</h2>
-          <div className="row">
-            {store.menuMiercoles.map((menu) => (
-              <CardMenu key={menu.id} menu={menu} />
-            ))}
+          <div
+            className="menudeldia2 mt-3"
+            style={{
+              marginBottom: "20px",
+              fontFamily: "Mulish, sans-serif",
+              backgroundColor: "rgba(56, 101, 229, 0.2)",
+              padding: "20px",
+              borderRadius: "10px",
+            }}
+          >
+            <div className="mb-5">
+              <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Miércoles</h2>
+              <div className="row">
+                {store.menuMiercoles.map((menu) => (
+                  <CardMenu key={menu.id} menu={menu} />
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div
-        className="menudeldia2 mt-3"
-        style={{
-          marginBottom: "20px",
-          fontFamily: "Mulish, sans-serif",
-          backgroundColor: "rgba(56, 101, 229, 0.2)",
-          padding: "20px",
-          borderRadius: "10px",
-        }}
-      >
-        <div className="mb-5">
-          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Jueves</h2>
-          <div className="row">
-            {store.menuJueves.map((menu) => (
-              <CardMenu key={menu.id} menu={menu} />
-            ))}
+          <div
+            className="menudeldia2 mt-3"
+            style={{
+              marginBottom: "20px",
+              fontFamily: "Mulish, sans-serif",
+              backgroundColor: "rgba(56, 101, 229, 0.2)",
+              padding: "20px",
+              borderRadius: "10px",
+            }}
+          >
+            <div className="mb-5">
+              <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Jueves</h2>
+              <div className="row">
+                {store.menuJueves.map((menu) => (
+                  <CardMenu key={menu.id} menu={menu} />
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div
-        className="menudeldia2 mt-3"
-        style={{
-          marginBottom: "20px",
-          fontFamily: "Mulish, sans-serif",
-          backgroundColor: "rgba(56, 101, 229, 0.2)",
-          padding: "20px",
-          borderRadius: "10px",
-        }}
-      >
-        <div className="mb-5">
-          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Viernes</h2>
-          <div className="row">
-            {store.menuViernes.map((menu) => (
-              <CardMenu key={menu.id} menu={menu} />
-            ))}
+          <div
+            className="menudeldia2 mt-3"
+            style={{
+              marginBottom: "20px",
+              fontFamily: "Mulish, sans-serif",
+              backgroundColor: "rgba(56, 101, 229, 0.2)",
+              padding: "20px",
+              borderRadius: "10px",
+            }}
+          >
+            <div className="mb-5">
+              <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Viernes</h2>
+              <div className="row">
+                {store.menuViernes.map((menu) => (
+                  <CardMenu key={menu.id} menu={menu} />
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div
-        className="menudeldia2 mt-3"
-        style={{
-          marginBottom: "20px",
-          fontFamily: "Mulish, sans-serif",
-          backgroundColor: "rgba(56, 101, 229, 0.2)",
-          padding: "20px",
-          borderRadius: "10px",
-        }}
-      >
-        <div className="mb-5">
-          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Sábado</h2>
-          <div className="row">
-            {store.menuSabado.map((menu) => (
-              <CardMenu key={menu.id} menu={menu} />
-            ))}
-          </div>
-        </div>
-      </div>
-      </div>
-
-      {/* Otras Opciones*/}
-      <div className="container my-4">
-        <h1
-          className="text-center mb-2"
-          style={{
-            fontFamily: "Mulish, sans-serif",
-            color: "rgb(56, 101, 229)",
-          }}
-        >
-          OTRAS OPCIONES
-        </h1>
-        <div
-          className="menudeldia2 mt-3"
-          style={{
-            marginBottom: "20px",
-            fontFamily: "Mulish, sans-serif",
-            backgroundColor: "rgba(56, 101, 229, 0.2)",
-            padding: "10px",
-            borderRadius: "10px",
-          }}
-        >
-          <div className="mb-5">
-            <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}></h2>
-            <div className="d-flex flex-wrap justify-content-center">
-              {store.optionCocaCola.map((option) => (
-                <div className="m-2" style={{ flex: "1 0 auto", maxWidth: "200px" }}>
-                  <CardOption key={option.id} option={option} />
-                </div>
-              ))}
+          <div
+            className="menudeldia2 mt-3"
+            style={{
+              marginBottom: "20px",
+              fontFamily: "Mulish, sans-serif",
+              backgroundColor: "rgba(56, 101, 229, 0.2)",
+              padding: "20px",
+              borderRadius: "10px",
+            }}
+          >
+            <div className="mb-5">
+              <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Sábado</h2>
+              <div className="row">
+                {store.menuSabado.map((menu) => (
+                  <CardMenu key={menu.id} menu={menu} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="text-center mt-4">
+        {/* Otras Opciones*/}
+        <div className="container my-4">
+          <h1
+            className="text-center mb-2"
+            style={{
+              fontFamily: "Mulish, sans-serif",
+              color: "rgb(56, 101, 229)",
+            }}
+          >
+            OTRAS OPCIONES
+          </h1>
+          <div
+            className="menudeldia2 mt-3"
+            style={{
+              marginBottom: "20px",
+              fontFamily: "Mulish, sans-serif",
+              backgroundColor: "rgba(56, 101, 229, 0.2)",
+              padding: "10px",
+              borderRadius: "10px",
+            }}
+          >
+            <div className="mb-5">
+              <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}></h2>
+              <div className="d-flex flex-wrap justify-content-center">
+                {store.optionCocaCola.map((option) => (
+                  <div className="m-2" style={{ flex: "1 0 auto", maxWidth: "200px" }}>
+                    <CardOption key={option.id} option={option} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* <div className="text-center mt-4">
           <button
             className="btn"
             onClick={irAPayment}
@@ -499,9 +545,10 @@ export const Menu = () => {
           >
             Ir a Pago
           </button>
+        </div> */}
         </div>
       </div>
-      </div>
     </div>
-  );
+  </SelectedMenuData.Provider>
+);
 };
