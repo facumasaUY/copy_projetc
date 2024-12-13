@@ -52,7 +52,7 @@ class Menu(db.Model):
      
     def __init__(self, day,name,description, img, price):
         self.day = day
-        self.name=name
+        self.name= name
         self.description = description
         self.img = img
         self.price= price
@@ -63,7 +63,7 @@ class Menu(db.Model):
             "name": self.name,
             "description": self.description,
             "img": self.img,
-            "price": self.price,
+            "price": self.price
         }
 
 
