@@ -400,7 +400,7 @@ def get_allReservations():
         return jsonify({"error": str(e)}), 400
 
 # Endpoint para borrar reservas de un usuario
-@app.route('/reservations', methods=['DELETE'])
+@api.route('/reservations', methods=['DELETE'])
 def delete_reservation_by_email():
     # Obtener el email desde los parámetros de la solicitud
     email = request.json.get('email')
