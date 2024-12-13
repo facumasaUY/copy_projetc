@@ -80,8 +80,8 @@ export const NewMenu = () => {
     };
 
     return (
-        <div className="d-flex justify-content-center align-items-center vh-100">
-            <div className="col-md-8 col-lg-6 order-md-1 bg-light p-4 rounded">
+        <div className="d-flex justify-content-center align-items-center" style={{ marginTop: "80px" }}>
+        <div className="col-md-8 col-lg-6 order-md-1 bg-light p-4 rounded">
                 <h4 className="mt-5">MENÚ NUEVO</h4>
                 <form className="needs-validation" noValidate>
                     <div className="row">
