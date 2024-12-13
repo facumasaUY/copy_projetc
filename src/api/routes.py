@@ -46,17 +46,17 @@ sender_password = os.getenv("SMTP_APP_PASSWORD")
 smtp_host = os.getenv("SMTP_HOST")
 smtp_port = os.getenv("SMTP_PORT")
 
-receiver_email = ["","",""]
-# linea 59 poner lo mismo en los corchetes
+receivers_email = ["natimartalvarez@gmail.com"]
 
-def send_signup_email(receiver_email):
+
+def send_signup_email(receivers_email):
     message =MIMEMultipart("alternative")
 
     message["Subject"]="Prueba de envio de correo - Olvidaste tu contraseña"
 
-    message["from"]="anda@gmail.com"
+    message["from"]=os.getenv("SMTP_USERNAME")
 
-    message ["To"] = ",".join(receiver_email)
+    message ["To"] = ",".join(receivers_email)
 
     html_context = """
         <html>
@@ -78,7 +78,7 @@ def send_signup_email(receiver_email):
     server = smtplib.SMTP(smtp_host,smtp_port)
     server.starttls()
     server.login(sender_email,sender_password)
-    server.sendmail(sender_email,receiver_email,message.as_string())
+    server.sendmail(sender_email,receivers_email,message.as_string())
     server.quit()
 
 @api.route('/send-email',methods=['POST'])
@@ -90,8 +90,8 @@ def send_email():
 
     message["From"]="anda@gmail.com"
 
-    message ["To"] = ["","",""]
-    # linea 49 poner lo mismo en los corchetes
+    message ["To"] = ",".join(receivers_email)
+    
     
     html_context = """
         <html>
@@ -113,42 +113,10 @@ def send_email():
     server = smtplib.SMTP(smtp_host,smtp_port)
     server.starttls()
     server.login(send_email,sender_password)
-    server.sendmail(sender_email,receiver_email,message.as_string())
+    server.sendmail(sender_email,receivers_email,message.as_string())
     server.quit()
     return jsonify({"msg":"Correo enviado exitosamente"}),200
         
-def send_signup_email(receivers_emails):
-    message =MIMEMultipart("alternative")
-
-    message["Subject"]="Prueba de envio de correo - Olvidaste tu contraseña"
-
-    message["from"]="anda@gmail.com"
-
-    message ["To"] = ",".join(receivers_emails)
-
-    html_context = """
-        <html>
-            <body>
-                <h1>Hola</h1>
-                <p>Correo de recuperacion de contraseña</p>
-                <p>Nos alegramos de poder ayudarte a recuperar tu contraseña!</p>
-            </body>
-        </html>
-    """
-
-    text = "Hola ya recuperaste tu contraseña"
-     
-    message.attach(MIMEText(html_context,"html"))
-    message.attach(MIMEText(text ,"plain"))
-
-
-
-    server = smtplib.SMTP(smtp_host,smtp_port)
-    server.starttls()
-    server.login(send_email,sender_password)
-    server.sendmail(sender_email,receiver_email,message.as_string())
-    server.quit()
-
 
 
 @api.route('/hello', methods=['POST', 'GET'])
@@ -189,7 +157,7 @@ def create_menu():
 
     db.session.add(new_menu)
     db.session.commit()
-    send_signup_email([email])
+    # send_signup_email([email])
 
     return jsonify({"msg": "Menu created successfully"}), 200
 
@@ -328,10 +296,11 @@ def register():
     )
     db.session.add(new_user)
     db.session.commit()
+    send_signup_email([email])
     return jsonify({"message":"User created successfully"}),201
 
 
-        #ceci tengo una pregunta en el post de arriba 
+        
 # katte login
 @api.route('/login', methods=['POST'])
 def login():
