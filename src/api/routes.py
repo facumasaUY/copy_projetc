@@ -399,3 +399,30 @@ def get_allReservations():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
+# Endpoint para borrar reservas de un usuario
+@app.route('/reservations', methods=['DELETE'])
+def delete_reservation_by_email():
+    # Obtener el email desde los parámetros de la solicitud
+    email = request.json.get('email')
+
+    if not email:
+        return jsonify({"error": "Email is required"}), 400
+
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    try:
+        reservas = Reserva.query.filter_by(user_id=user.id).all()
+        if not reservas:
+            return jsonify({"message": "No hay reservas para este usuario"}), 404
+
+        for reserva in reservas:
+            db.session.delete(reserva)
+        db.session.commit()
+
+        return jsonify({"message": f"Todas las reservas para este usuario han sido borradas exitosamente"}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": "Ha ocurrido un error durante la eliminación de las reservas", "detalles": str(e)}), 500
+

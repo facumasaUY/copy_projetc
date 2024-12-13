@@ -91,13 +91,7 @@ class MenuOptions(db.Model):
             "price": self.price,
         }
 
-
-
-
 #user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  es asi, cada menú está asociado a un único usuario?????
-
-
-
 
 class Reserva(db.Model):
     id = db.Column(db.Integer, primary_key=True)
