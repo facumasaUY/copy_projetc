@@ -39,6 +39,8 @@ api = Blueprint('api', __name__)
 # Allow CORS requests to this API
 CORS(api)
 
+# Email Sender
+
 sender_email = os.getenv("SMTP_USERNAME")
 sender_password = os.getenv("SMTP_APP_PASSWORD")
 smtp_host = os.getenv("SMTP_HOST")
