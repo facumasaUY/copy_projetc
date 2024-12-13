@@ -14,6 +14,7 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 
+
 import cloudinary
 import cloudinary.uploader
 from cloudinary.utils import cloudinary_url
@@ -304,6 +305,13 @@ def login():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token, user=user.serialize()),200
 
+
+@api.route("/protected", methods=["GET"])
+@jwt_required()
+def protected():
+    # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
 
 # Endpoint para guardar reservas
 @api.route('/reservations', methods=['POST'])
