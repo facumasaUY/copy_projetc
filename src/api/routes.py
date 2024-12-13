@@ -43,74 +43,71 @@ CORS(api)
 
 # Email Sender
 
-# sender_email = os.getenv("SMTP_USERNAME")
-# sender_password = os.getenv("SMTP_APP_PASSWORD")
-# smtp_host = os.getenv("SMTP_HOST")
-# smtp_port = os.getenv("SMTP_PORT")
+sender_email = os.getenv("SMTP_USERNAME")
+sender_password = os.getenv("SMTP_APP_PASSWORD")
+smtp_host = os.getenv("SMTP_HOST")
+smtp_port = os.getenv("SMTP_PORT")
 
-# receivers_email = ["", "", ""]
+receivers_email = "fiorellaviscardi.2412@gmail.com", "natimartalvarez@gmail.com", "eliasmilano@gmail.com"
 
-# def send_singup_email(receivers_email):
-#     message = MIMEMultipart("alternative")
+def send_singup_email(receivers_email):
+   message = MIMEMultipart("alternative")
 
-#     message["Subject"] = "Bienvenido a Anda Food!"
-#     message["From"] = os.getenv("SMTP_USERNAME")
-#     message["To"] = ",".join(receivers_email)
+   message["Subject"] = "Bienvenido a Anda Food!"
+   message["From"] = os.getenv("SMTP_USERNAME")
+   message["To"] = ",".join(receivers_email)
 
-#     html_content = """
-#         <html>
-#             <body>
-#                 <h1>Bienvenido a Anda Food!</h1>
-#                 <p>¿Olvidaste la contraseña?</p>
-#                 <p>Por favor, ingresa el correo electrónico que usas en la aplicación para continuar.</p>
-#             </body>
-#         </html>
-#     """
-#     text = "Correo enviado desde la API Anda Food. Saludos👋."
+   html_content = """
+       <html>
+           <body>
+               <h1>Bienvenido a Anda Food!</h1>
+               <p>¿Olvidaste la contraseña?</p>
+               <p>Por favor, ingresa el correo electrónico que usas en la aplicación para continuar.</p>
+           </body>
+       </html>
+   """
+   text = "Correo enviado desde la API Anda Food. Saludos👋."
 
-#     message.attach(MIMEText(text, "plain"))
-#     message.attach(MIMEText(html_content, "html"))
+   message.attach(MIMEText(text, "plain"))
+   message.attach(MIMEText(html_content, "html"))
 
-#     server = smtplib.SMTP(smtp_host, smtp_port)
-#     server.starttls()
-#     server.login(sender_email, sender_password)
-#     server.sendmail(sender_email, receivers_email, message.as_string())
-#     server.quit()
+   server = smtplib.SMTP(smtp_host, smtp_port)
+   server.starttls()
+   server.login(sender_email, sender_password)
+   server.sendmail(sender_email, receivers_email, message.as_string())
+   server.quit()
 
-# @api.route('/send-email', methods=['POST'])
-# def send_email():
-#     message = MIMEMultipart("alternative")
+@api.route('/send-email', methods=['POST'])
+def send_email():
+   message = MIMEMultipart("alternative")
 
-#     message["Subject"] = "Olvido de contraseña - Anda Food"
-#     message["From"] = "andamanagment@gmail.com"
-#     message["To"] = ",".join(receivers_email)
+   message["Subject"] = "Olvido de contraseña - Anda Food"
+   message["From"] = "andamanagment@gmail.com"
+   message["To"] = ",".join(receivers_email)
 
-#     html_content = """
-#         <html>
-#             <body>
-#                 <h1>Bienvenido a Anda Food!</h1>
-#                 <p>¿Olvidaste la contraseña?</p>
-#                 <p>Por favor, ingresa el correo electrónico que usas en la aplicación para continuar.</p>
-#             </body>
-#         </html>
-#     """
-#     text = "Correo enviado desde la API Anda Food. Saludos👋."
+   html_content = """
+       <html>
+           <body>
+               <h1>Bienvenido a Anda Food!</h1>
+               <p>¿Olvidaste la contraseña?</p>
+               <p>Por favor, ingresa el correo electrónico que usas en la aplicación para continuar.</p>
+           </body>
+       </html>
+   """
+   text = "Correo enviado desde la API Anda Food. Saludos👋."
 
-#     message.attach(MIMEText(text, "plain"))
-#     message.attach(MIMEText(html_content, "html"))
+   message.attach(MIMEText(text, "plain"))
+   message.attach(MIMEText(html_content, "html"))
 
-#     server = smtplib.SMTP(smtp_host, smtp_port)
-#     server.starttls()
-#     server.login(sender_email, sender_password)
-#     server.sendmail(sender_email, receivers_email, message.as_string())
-#     server.quit()
+   server = smtplib.SMTP(smtp_host, smtp_port)
+   server.starttls()
+   server.login(sender_email, sender_password)
+   server.sendmail(sender_email, receivers_email, message.as_string())
+   server.quit()
 
-#     return jsonify({"msg": "Correo enviado correctamente"}), 200
+   return jsonify({"msg": "Correo enviado correctamente"}), 200
 
     
-
-
-
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
     response_body = {
@@ -149,8 +146,7 @@ def create_menu():
 
     db.session.add(new_menu)
     db.session.commit()
-    #Email Sender
-    # send_signup_email([email])
+    
 
     return jsonify({"msg": "Menu created successfully"}), 200
 
@@ -289,6 +285,9 @@ def register():
     )
     db.session.add(new_user)
     db.session.commit()
+    #Email Sender
+    send_singup_email([email])
+
     return jsonify({"message":"User created successfully"}),201
 
 

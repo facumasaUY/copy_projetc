@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 
 export const CardMenu = ({ menu }) => {
@@ -78,10 +78,10 @@ export const CardMenu = ({ menu }) => {
                     >
                         ${menu.price}
                     </div>
-                    <div className="card-body text-center p-2">
+                    <div className="card-body text-center p-1">
                         <div className="d-flex justify-content-between">
                             <button
-                                className="btn"
+                                className="btn btn-sm"
                                 onClick={() => {
                                     handleClick(menu);
                                     handleNotificacion();
@@ -96,14 +96,16 @@ export const CardMenu = ({ menu }) => {
                                 Añadir al Carrito
                             </button>
                             <button
-                                className="btn"
+                                className="btn btn-sm"
                                 style={{
                                     backgroundColor: "transparent",
                                     fontSize: "20px",
                                 }}
                                 onClick={toggleModal}
                             >
-                                ⭐
+                                ⭐ <span style={{ fontWeight: "bold", color: "rgb(56, 101, 229)",fontSize:"12px" }}>
+                                    {rating} / 5
+                                </span>
                             </button>
                         </div>
                     </div>
@@ -155,9 +157,6 @@ export const CardMenu = ({ menu }) => {
                                 <p>Descripción: {menu.description}</p>
                                 <div className="d-flex align-items-center" style={{ gap: "10px" }}>
                                     <div>{starElements}</div>
-                                    <span style={{ fontWeight: "bold", color: "rgb(56, 101, 229)" }}>
-                                        {rating} / 5
-                                    </span>
                                 </div>
                             </div>
                         </div>

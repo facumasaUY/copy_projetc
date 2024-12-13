@@ -325,7 +325,7 @@ export const Menu = () => {
 
 
       <div className="mb-5">
-          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)", padding:"20px" }}>MENÚ SEMANAL</h2>
+          <h2 className="text-center" style={{ color: "rgb(56, 101, 229)", padding:"20px" }}> <i class="fa-solid fa-calendar-days"></i> MENÚ SEMANAL</h2>
           <div className="row">
       <div
         className="menudeldia2 mt-3"
