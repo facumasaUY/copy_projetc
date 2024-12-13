@@ -10,6 +10,7 @@ class User(db.Model):
     password = db.Column(db.String(80), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     num_funcionario = db.Column(db.Integer, unique=True, nullable=False)
+    reserva = db.relationship("Reserva", backref="user")
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -21,6 +22,7 @@ class User(db.Model):
         self.password = password
         self.is_active = True
         self.num_funcionario = num_funcionario
+        
 
     def serialize(self):
         return {
@@ -30,11 +32,11 @@ class User(db.Model):
             "email":self.email,
             "is_active":self.is_active,
             "num_funcionario":self.num_funcionario,
-            # "reserva":self.reserva.serialize()
+            "reserva":[res.id for res in self.reserva] if self.reserva else []
             
         }
 
-       # menus = db.relationship('Menu', backref='user', lazy=True)
+    # menus = db.relationship('Menu', backref='user', lazy=True)
 
 #Menú
 class Menu(db.Model):
@@ -100,7 +102,7 @@ class MenuOptions(db.Model):
 class Reserva(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    user = db.relationship("User", backref="reserva")
+    #user = db.relationship("User", backref="reserva")
     lunes = db.Column(db.String(20), nullable=True)
     martes = db.Column(db.String(20), nullable=True)
     miercoles = db.Column(db.String(20), nullable=True)
@@ -114,7 +116,7 @@ class Reserva(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "user":self.user.serialize(),            
+            "user":self.user_id,          
             "user_id": self.user_id,
             "lunes":self.lunes,
             "martes":self.martes,

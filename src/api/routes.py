@@ -338,13 +338,43 @@ def guardar_reserva():
     return jsonify({"message": "Reserva guardada con éxito"}), 200
     
 
-# Endpoint para traer reservas
+# # Endpoint para traer reservas de un usuario
+# @api.route('/reservations', methods=['GET'])
+# def get_reservas():
+#     try:
+#         reservas = Reserva.query.all()
+#         reservas_serializadas = [reserva.serialize() for reserva in reservas]
+#         return jsonify(reservas_serializadas), 200
+#     except Exception as e:
+#         return jsonify({"error": str(e)}), 400
+
+
+# Endpoint para traer reservas de un usuario
 @api.route('/reservations', methods=['GET'])
-def get_reservas():
+def get_reservas_by_email():
     try:
-        reservas = Reserva.query.all()
-        reservas_serializadas = [reserva.serialize() for reserva in reservas]
-        return jsonify(reservas_serializadas), 200
+        email = request.args.get('email')
+        if not email:
+            return jsonify({"error": "Email parameter is required"}), 400
+
+        user = User.query.filter_by(email=email).first()
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+
+        reservas = Reserva.query.filter_by(user_id=user.id).all()
+        reservas_list = [reserva.serialize() for reserva in reservas]
+        
+        return jsonify(reservas_list), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
+
+# Endpoint para traer reservas de todos los usuarios
+@api.route('/users_reservations', methods=['GET'])
+def get_users_reservations():
+    try:
+        users = User.query.all()
+        users_list = [user.serialize() for user in users]
+        return jsonify(users_list), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
