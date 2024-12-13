@@ -27,17 +27,10 @@ aleatorio="cucaracha"
 frontendurl = os.getenv("FRONTEND_URL")
 
 
-<<<<<<< HEAD
-cloudinary.config( 
-    cloud_name = "dqspjepfs", 
-    api_key = "992526845141794", 
-    api_secret = os.getenv("CLOUDINARY_SECRET_2", ""),
-=======
 cloudinary.config(
     cloud_name = "dqspjepfs",
     api_key = "992526845141794",
     api_secret = os.getenv("CLOUDINARY_SECRET_2", ""), # Click 'View API Keys' above to copy your API secret
->>>>>>> f8bb2a23ea5130ec306494b9c7bf50a8a693c66e
     secure=True
 )
 api = Blueprint('api', __name__)
