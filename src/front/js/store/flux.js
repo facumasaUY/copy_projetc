@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -231,4 +230,4 @@ const getState = ({ getStore, getActions, setStore }) => {
 };
 
 
-export default getState;
+export default getState

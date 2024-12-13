@@ -12,14 +12,6 @@ export const Payment = () => {
     initMercadoPago('APP_USR-95548522-114d-4404-9dfd-408bd646ee05', { locale: "es-UY", });
     const [preferenceId, setPreferenceId] = useState(null)
 
-    // const createPreference = async () => { 
-    //     try { const response = await Axios.post("http://localhost:3000/create_preference", { 
-    //         title: "Fideos con Salsa Boloñesa", 
-    //         quantity: 1, 
-    //         price: 100, }); 
-    //         const { id } = response.data; 
-    //         return id; } 
-    //         catch (error) { console.log(error) } };
 
             const pagar = async () => {
                 // const subtotal = 100; 
@@ -34,9 +26,29 @@ export const Payment = () => {
 
     return (
 
-    <div className="d-flex align-items-center justify-content-center" style={{backgroundColor: "rgba(56, 101, 229, 0.5)", borderRadius: "10px", padding: "15px", margin: "50px", height:"auto"}}>
-        <button onClick={pagar}>Pagar con Mercado Pago</button>
+
+    <div className="d-flex justify-content-between" style={{backgroundColor: "rgba(56, 101, 229, 0.5)", borderRadius: "10px", padding: "15px", margin: "50px", height:"auto"}}>
+       <div>
+        <h1>Tu pedido:</h1>
+        <ul>
+            <li>Comida 1</li>
+            <li>Comida 2</li>
+            <li>Comida 3</li>
+            <li>Comida 4</li>
+        </ul>
+       </div>
+       
+            <div d-flex align-items-center justify-content-center>
+                <h1>Elegí tu forma de pago:</h1>
+                <div>        
+                    <button onClick={pagar}>Pagar con Mercado Pago</button>
+                </div>
+                <div className="ms-3">
+                    <button>Pagar en Caja al Retirar</button>
+                </div>
+            </div>
     </div>
+   
 
 )}
      

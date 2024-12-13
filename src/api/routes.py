@@ -28,15 +28,12 @@ aleatorio="cucaracha"
 frontendurl = os.getenv("FRONTEND_URL")
 
 
-cloudinary.config( 
-    cloud_name = "dqspjepfs", 
-    api_key = "992526845141794", 
+cloudinary.config(
+    cloud_name = "dqspjepfs",
+    api_key = "992526845141794",
     api_secret = os.getenv("CLOUDINARY_SECRET_2", ""), # Click 'View API Keys' above to copy your API secret
     secure=True
 )
-
-
-
 api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
@@ -121,15 +118,13 @@ def handle_hello():
     }
     return jsonify(response_body), 200
 
-#Menu
 
+# Para crear los menu
 @api.route('/menu', methods=['POST'])
 def create_menu():
     body = request.form
-
-    if not body or "day" not in body or "name" not in body or "description" not in body or "price" not in body:
+    if not body or "day" not in body or "name" not in body or "description" not in body or "price" not in  body or "img" not in body:
         raise APIException("Missing name, price, description, or img", status_code=400)
-
     day = body.get("day")
     name = body.get("name")
     description = body.get("description")
@@ -163,7 +158,6 @@ def get_menu_by_day(day):
 
     if not menu:
         return jsonify({"msg": "No menus found"}), 404
-
     menu_list = []
     for item in menu:
         menu_list.append({
@@ -174,7 +168,6 @@ def get_menu_by_day(day):
             "price": item.price,
             "img": item.img
         })
-
     return jsonify(menu_list), 200
 
 
@@ -235,16 +228,16 @@ def get_option():
 def preference(): 
     # body = json.loads(request.data)
     # total = body["total"]
-    # Crea un ítem en la preferencia 
-    preference_data = { 
-        "items": [ 
-            { 
-                "title": "Mi producto", 
-                "quantity": 1,  
-                "unit_price": 75.76   
-            } 
+    # Crea un ítem en la preferencia
+    preference_data = {
+        "items": [
+            {
+                "title": "Mi producto",
+                "quantity": 1,
+                "unit_price": 75.76
+            }
         ],
-        "payer": { 
+        "payer": {
             "email": "test_user_17805074@testuser.com"
         },
        "back_urls": { 
@@ -259,18 +252,15 @@ def preference():
         },
         "auto_return": "approved"
     }
-
-    preference_response = sdk.preference().create(preference_data) 
-    preference = preference_response["response"] 
+    preference_response = sdk.preference().create(preference_data)
+    preference = preference_response["response"]
     return jsonify(preference), 200
     # return jsonify({"init_point": preference["init_point"]}), 200
 
 
-# dejo espacios para no chocar con facu en sus lineas 
-
-@api.route('/signup', methods=['POST']) 
+# Para inicio de sesión
+@api.route('/signup', methods=['POST'])
 def register():
-
     data= request.json
     name = data.get("name")
     last_name=data.get("last_name")
@@ -281,10 +271,9 @@ def register():
     exist_user = User.query.filter_by(email=email).first()
     if exist_user:
         return jsonify({"msg":"El usuario ya existe"}),400
-    
     new_user = User(
         name = name,
-        email = email , 
+        email = email ,
         last_name=last_name,
         password = password ,
         num_funcionario = num_funcionario
@@ -299,7 +288,6 @@ def register():
 # katte login
 @api.route('/login', methods=['POST'])
 def login():
-
     data= request.json
     #info desde el frontend
     email = data.get("email", None)
@@ -312,7 +300,6 @@ def login():
 
     if email != user.email or password != user.password:
         return jsonify({"msg": "Bad username or password"}), 401
-
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token, user=user.serialize()),200
 
