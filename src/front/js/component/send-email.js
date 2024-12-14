@@ -12,10 +12,10 @@ export const SendEmail = () => {
     const { store, actions } = useContext(Context);
     const navigate=useNavigate()
     const [email, setEmail] = useState("")
-     const mensaje = (titulo) => {
+     const mensaje = (titulo,icon="error" ,title="error de ingreso") => {
             Swal.fire({
-                icon: "error",
-                title: "error de ingreso",
+                icon: icon,
+                title: title,
                 text: titulo,
     
             });
@@ -23,14 +23,14 @@ export const SendEmail = () => {
     const envio = async (e) => {
         e.preventDefault()
         if(email==""){
-            mensaje("ingrese los datos solicitados")
+            mensaje("Ingrese los datos solicitados")
             return
         }
         let resp = await actions.restablecerPassword(email)
         if(resp){
 
         }else{
-            mensaje("usuario no registrado")
+            mensaje("Usuario no registrado")
             navigate("/register")
         }
     }

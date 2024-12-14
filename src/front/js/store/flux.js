@@ -69,7 +69,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						status:false
 					};
 				}
-			},
+			},logout: () => {
+                localStorage.removeItem("access_token");
+                setStore({ user: null, token: null, auth: false });
+                console.log("Sesión cerrada");
+            },
 			signup: async (user) => {
 				try {
 					// fetching data from the backend
@@ -228,6 +232,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 						headers: { "Content-Type": "application/json" },
 						body: JSON.stringify({
 							email: email
+						}),
+					});
+					console.log(response);
+					if (response.status == 200) {
+						return true;
+					}
+					if (response.status == 404) {
+						return false;
+					}
+				} catch (error) {
+					console.log(error);
+					return false;
+				}
+
+			},
+			recuperarPassword: async (email,aleatorio,password) => {
+				try {
+
+					const response = await fetch(process.env.BACKEND_URL + "api/recuperar-password", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							email,
+							aleatorio,
+							password
 						}),
 					});
 					console.log(response);

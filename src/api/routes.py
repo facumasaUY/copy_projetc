@@ -113,6 +113,31 @@ def send_email():
 
    return jsonify({"msg": "Correo enviado correctamente"}), 200
 
+
+@api.route('/recuperar-password', methods=['POST'])
+def recuperar_password():
+    data=request.json
+    email=data.get("email")
+    new_password=data.get("password")
+    user_aleatorio=data.get("aleatorio")
+    exist_user=User.query.filter_by(email=email).first()
+   
+    if email is None :
+       return jsonify({"msg":"email no registrado"}),404
+    
+    if exist_user is None :
+       return jsonify({"msg":"usuario no registrado"}),404
+    
+    if user_aleatorio==aleatorio:
+       exist_user.password=new_password
+       db.session.commit()
+       return jsonify({"msg":"contraseña actualizada con exito"}),200
+    return jsonify({"msg":"paso algo inesperado"}),500
+
+
+
+
+
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
     response_body = {
@@ -282,7 +307,7 @@ def register():
     )
     db.session.add(new_user)
     db.session.commit()
-    send_signup_email([email])
+    send_singup_email([email])
     return jsonify({"message":"User created successfully"}),201
 
 
