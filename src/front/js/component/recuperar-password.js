@@ -6,26 +6,41 @@ import { useNavigate } from "react-router-dom"
 import "../../styles/home.css";
 import homeImage from "../../img/home.png";
 import Swal from 'sweetalert2'
+import { title } from "process";
 
 export const RecuperarPassword = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate()
+    const [email, setEmail] = useState("")
     const [aleatoria, setAleatoria] = useState("")
     const [nueva, setNueva] = useState("")
-    const mensaje = (titulo) => {
+    const mensaje = (titulo,icon="error" ,title="error de ingreso") => {
         Swal.fire({
-            icon: "error",
-            title: "error de ingreso",
+            icon: icon,
+            title: title,
             text: titulo,
 
         })
     }
     const envio = async (e) => {
         e.preventDefault()
-        if (contraseña == "") {
+        if (email == "") {
+            mensaje("ingrese su email")
+            return
+        }
+        if (aleatoria == "") {
             mensaje("ingrese su contraseña enviada por email")
             return
         }
+        if (nueva==""){
+            mensaje("ingrese su nueva contraseña")
+            return
+        }
+        let resp=await actions.recuperarPassword(email,aleatoria,nueva)
+            if (resp){
+                mensaje("contraseña actualizada con exito","success", "ya tienes tu contraseña")
+                return
+            }
 
     }
     return (
@@ -37,6 +52,10 @@ export const RecuperarPassword = () => {
             </div>
             <form className="form content" style={{ width: "370px" }}>
                 <h3>Reseteo de Contraseña</h3>
+                <div className="mb-3">
+                    <label className="form-label">Ingrese su Email</label>
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                </div>
                 <div className="mb-3">
                     <label className="form-label">Contraseña Enviada Por Email</label>
                     <input type="password" value={aleatoria} onChange={(e) => setAleatoria(e.target.value)} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />

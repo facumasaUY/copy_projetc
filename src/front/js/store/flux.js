@@ -247,6 +247,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			},
+			recuperarPassword: async (email,aleatorio,password) => {
+				try {
+
+					const response = await fetch(process.env.BACKEND_URL + "api/recuperar-password", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							email,
+							aleatorio,
+							password
+						}),
+					});
+					console.log(response);
+					if (response.status == 200) {
+						return true;
+					}
+					if (response.status == 404) {
+						return false;
+					}
+				} catch (error) {
+					console.log(error);
+					return false;
+				}
+
+			},
 
 			traerTodasLasReservas: async () => {
 				try {
