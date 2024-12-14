@@ -33,9 +33,9 @@ export const PlaceReservations = () => {
 
     const actualizarReserva = (diaSemana, nuevaHora) => {
         console.log(diaSemana, nuevaHora),
-            // setReservas((prev) => {
-            //     return {...prev, [diaSemana]: nuevaHora,};
-            // });
+            setReservas((prev) => {
+                return {...prev, [diaSemana]: nuevaHora,};
+            });
             setReservas({ ...reservas, [diaSemana]: nuevaHora });
     };
 
@@ -106,4 +106,6 @@ export const PlaceReservations = () => {
         </div>
     )
 }
+
+
 

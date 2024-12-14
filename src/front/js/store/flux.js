@@ -19,6 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			optionAgua: [],
 			optionNaranja: [],
 			optionManzana: [],
+			reservas: []
 
 		},
 		actions: {
@@ -210,12 +211,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 					console.log(response);
 					if (response.status == 200) {
-						const data = await response.json()
-						console.log(data)
+						const data = await response.json();
+						console.log("Reservas", data);
+						setStore({ reservas: data });
 						return true;
+					} else {
+						console.error("Error al obtener las reservas:", response.status);
+						return false;
 					}
 				} catch (error) {
-					console.log(error)
+					console.error("Error al traer reservas:", error);
 					return false
 				}
 			},

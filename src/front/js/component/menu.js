@@ -173,7 +173,7 @@ export const Menu = () => {
 
                 <Link to={"/reservations"} className="custom-link">
                   <div className="feedbacklink my-2">
-                    <i class="fa-solid fa-calendar-days me-2" style={{ color: "#ffffff;" }}></i> Reservar lugar</div>
+                    <i className="fa-solid fa-calendar-days me-2" style={{ color: "#ffffff;" }}></i> Reservar lugar</div>
                 </Link>
 
                 <Link to={"/form"} className="custom-link customhover">
@@ -187,7 +187,7 @@ export const Menu = () => {
 
 
               <div className="text-end pb-2">
-                <button className="logout">Cerrar Sesión <i class="fa-solid fa-right-from-bracket" style={{ color: "#ffffff" }}></i></button>
+                <button className="logout">Cerrar Sesión <i className="fa-solid fa-right-from-bracket" style={{ color: "#ffffff" }}></i></button>
               </div>
 
             </div>
@@ -362,7 +362,7 @@ return (
 
 
       <div className="mb-5">
-        <h2 className="text-center" style={{ color: "rgb(56, 101, 229)", padding: "20px" }}> <i class="fa-solid fa-calendar-days"></i> MENÚ SEMANAL</h2>
+        <h2 className="text-center" style={{ color: "rgb(56, 101, 229)", padding: "20px" }}> <i className="fa-solid fa-calendar-days"></i> MENÚ SEMANAL</h2>
         <div className="row">
           <div
             className="menudeldia2 mt-3"
