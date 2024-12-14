@@ -82,15 +82,12 @@ export const Menu = () => {
     navigate("/reservations");
   };
 
-  const handleLogout = () => {
-    actions.logout();
-    navigate("/");
-  };
 
   // **Mueve el return al cuerpo principal del componente**
   return (
     <SelectedMenuData.Provider value={{ selectedMenu, listCart, setListCart }}>
       <div className="container mt-3">
+
         <MenuNavbar />
 
         <div className="mb-5">
