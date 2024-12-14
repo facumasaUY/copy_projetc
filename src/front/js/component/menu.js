@@ -68,23 +68,11 @@ export const Menu = () => {
     });
   };
 
-  
   const handleNotificacion = () => {
     return mostrarNotificacion()
   };
 
 
-  // const handleCompra = async () => {
-  //   if (listCart.length === 0) {
-  //     alert("El carrito está vacío. Por favor, añade productos antes de pagar.");
-  //   } else {
-  //     setSpinner(true)
-  //     setTimeout(() => {
-  //       setSpinner(false)
-  //       irAPayment();
-  //     }, 2000)
-  //   }
-  // };
 
   const decrecer = () => {
 
@@ -110,218 +98,79 @@ export const Menu = () => {
     actions.getOptions("Manzana")
   }, []);
 
-
-
-  // const irAFeedback = (item) => {
-  //   navigate(`/feedback/${item.id}`, { state: item });
-  // };
-
   const irAReservaDeLugar = () => {
     navigate("/reservations");
   };
 
-  // const irAPayment = () => {
-  //   navigate("/payment");
-  // };
+
+
 
   const handleLogout = () => {
     actions.logout();
     navigate("/");
-  //Sacar el menuNavbar para otro componente.
-
- 
-return (
-  <SelectedMenuData.Provider value={{ selectedMenu, listCart, setListCart }}>
-    <div className="container mt-3">
+    //Sacar el menuNavbar para otro componente.
 
 
+    return (
+      <SelectedMenuData.Provider value={{ selectedMenu, listCart, setListCart }}>
+        <div className="container mt-3">
+          <MenuNavbar />
 
-
-      <div>
-        <MenuNavbar />
-      </div>
-
-
-      <div className="mb-5">
-        <h2 className="text-center" style={{ color: "rgb(56, 101, 229)", padding: "20px" }}> <i class="fa-solid fa-calendar-days"></i> MENÚ SEMANAL</h2>
-        <div className="row">
-          <div
-            className="menudeldia2 mt-3"
-            style={{
-              marginBottom: "20px",
-              fontFamily: "Mulish, sans-serif",
-              backgroundColor: "rgba(56, 101, 229, 0.2)",
-              padding: "20px",
-              borderRadius: "10px",
-            }}
-          >
-            <div className="mb-5">
-              <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Lunes</h2>
-              <div className="row">
-                {store.menuLunes.map((menu) => (
-                  <CardMenu key={menu.id} menu={menu}
-                  //   onClick={() => {
-                  //     handleClick(menu);
-                  //     handleNotificacion();
-                  // }}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div
-            className="menudeldia2 mt-3"
-            style={{
-              marginBottom: "20px",
-              fontFamily: "Mulish, sans-serif",
-              backgroundColor: "rgba(56, 101, 229, 0.2)",
-              padding: "20px",
-              borderRadius: "10px",
-            }}
-          >
-            <div className="mb-5">
-              <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Martes</h2>
-              <div className="row">
-                {store.menuMartes.map((menu) => (
-                  <CardMenu key={menu.id} menu={menu} />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div
-            className="menudeldia2 mt-3"
-            style={{
-              marginBottom: "20px",
-              fontFamily: "Mulish, sans-serif",
-              backgroundColor: "rgba(56, 101, 229, 0.2)",
-              padding: "20px",
-              borderRadius: "10px",
-            }}
-          >
-            <div className="mb-5">
-              <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Miércoles</h2>
-              <div className="row">
-                {store.menuMiercoles.map((menu) => (
-                  <CardMenu key={menu.id} menu={menu} />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div
-            className="menudeldia2 mt-3"
-            style={{
-              marginBottom: "20px",
-              fontFamily: "Mulish, sans-serif",
-              backgroundColor: "rgba(56, 101, 229, 0.2)",
-              padding: "20px",
-              borderRadius: "10px",
-            }}
-          >
-            <div className="mb-5">
-              <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Jueves</h2>
-              <div className="row">
-                {store.menuJueves.map((menu) => (
-                  <CardMenu key={menu.id} menu={menu} />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div
-            className="menudeldia2 mt-3"
-            style={{
-              marginBottom: "20px",
-              fontFamily: "Mulish, sans-serif",
-              backgroundColor: "rgba(56, 101, 229, 0.2)",
-              padding: "20px",
-              borderRadius: "10px",
-            }}
-          >
-            <div className="mb-5">
-              <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Viernes</h2>
-              <div className="row">
-                {store.menuViernes.map((menu) => (
-                  <CardMenu key={menu.id} menu={menu} />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div
-            className="menudeldia2 mt-3"
-            style={{
-              marginBottom: "20px",
-              fontFamily: "Mulish, sans-serif",
-              backgroundColor: "rgba(56, 101, 229, 0.2)",
-              padding: "20px",
-              borderRadius: "10px",
-            }}
-          >
-            <div className="mb-5">
-              <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>Sábado</h2>
-              <div className="row">
-                {store.menuSabado.map((menu) => (
-                  <CardMenu key={menu.id} menu={menu} />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Otras Opciones*/}
-        <div className="container my-4">
-          <h1
-            className="text-center mb-2"
-            style={{
-              fontFamily: "Mulish, sans-serif",
-              color: "rgb(56, 101, 229)",
-            }}
-          >
-            OTRAS OPCIONES
-          </h1>
-          <div
-            className="menudeldia2 mt-3"
-            style={{
-              marginBottom: "20px",
-              fontFamily: "Mulish, sans-serif",
-              backgroundColor: "rgba(56, 101, 229, 0.2)",
-              padding: "10px",
-              borderRadius: "10px",
-            }}
-          >
-            <div className="mb-5">
-              <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}></h2>
-              <div className="d-flex flex-wrap justify-content-center">
-                {store.optionCocaCola.map((option) => (
-                  <div className="m-2" style={{ flex: "1 0 auto", maxWidth: "200px" }}>
-                    <CardOption key={option.id} option={option} />
+          <div className="mb-5">
+            <h2 className="text-center" style={{ color: "rgb(56, 101, 229)", padding: "20px" }}>
+              <i className="fa-solid fa-calendar-days"></i> MENÚ SEMANAL
+            </h2>
+            <div className="row">
+              {/* Itera sobre cada día */}
+              {["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"].map((day) => (
+                <div
+                  key={day}
+                  className="menudeldia2 mt-3"
+                  style={{
+                    marginBottom: "20px",
+                    fontFamily: "Mulish, sans-serif",
+                    backgroundColor: "rgba(56, 101, 229, 0.2)",
+                    padding: "20px",
+                    borderRadius: "10px",
+                  }}
+                >
+                  <h2 className="text-center" style={{ color: "rgb(56, 101, 229)" }}>{day}</h2>
+                  <div className="row">
+                    {store[`menu${day}`]?.map((menu) => (
+                      <CardMenu key={menu.id} menu={menu} />
+                    ))}
                   </div>
-                ))}
+                </div>
+              ))}
+            </div>
+
+            <div className="container my-4">
+              <h1 className="text-center mb-2" style={{ fontFamily: "Mulish, sans-serif", color: "rgb(56, 101, 229)" }}>
+                OTRAS OPCIONES
+              </h1>
+              <div
+                className="menudeldia2 mt-3"
+                style={{
+                  marginBottom: "20px",
+                  fontFamily: "Mulish, sans-serif",
+                  backgroundColor: "rgba(56, 101, 229, 0.2)",
+                  padding: "10px",
+                  borderRadius: "10px",
+                }}
+              >
+                <div className="d-flex flex-wrap justify-content-center">
+                  {store.optionCocaCola.map((option) => (
+                    <div key={option.id} className="m-2" style={{ flex: "1 0 auto", maxWidth: "200px" }}>
+                      <CardOption option={option} />
+                    </div>
+                  ))}
+                </div>
               </div>
+
             </div>
           </div>
-
-          {/* <div className="text-center mt-4">
-          <button
-            className="btn"
-            onClick={irAPayment}
-            style={{
-              backgroundColor: "rgb(56, 101, 229)",
-              color: "white",
-              fontSize: "1rem",
-              borderRadius: "10px",
-              padding: "10px 20px",
-            }}
-          >
-            Ir a Pago
-          </button>
-        </div> */}
         </div>
-      </div>
-    </div>
-  </SelectedMenuData.Provider>
-);
-};}
+      </SelectedMenuData.Provider>
+    )
+  }
+}
