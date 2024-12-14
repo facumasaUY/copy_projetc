@@ -11,12 +11,10 @@ import { Context } from "../store/appContext";
 export const MenuNavbar = (props) => {
   const { actions, store } = useContext(Context)
 
-
   const handleLogout = () => {
     actions.logout();
     navigate("/");
   };
-
 
   const { listCart } = useContext(SelectedMenuData);
 

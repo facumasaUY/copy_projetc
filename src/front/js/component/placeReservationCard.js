@@ -28,7 +28,7 @@ export const PlaceReservationCard = ({ dia, hora, actualizarReserva }) => {
     return (
         <div className="d-flex flex-wrap">
             <div
-                className="card my-2 py-2"
+                className="card my-1 py-1"
                 style={{
                     width: "20rem",
                     borderRadius: "25px",
@@ -81,7 +81,7 @@ export const PlaceReservationCard = ({ dia, hora, actualizarReserva }) => {
                         </p>
                     </div>
 
-                    <p className="card-text text mb-3">
+                    {/* <p className="card-text text mb-3">
                         <i>Lugares disponibles: 5</i>
                     </p>
                     <div className="border-top d-flex justify-content-between">
@@ -94,7 +94,7 @@ export const PlaceReservationCard = ({ dia, hora, actualizarReserva }) => {
                         >
                             <i className="fa-solid fa-bucket"></i>
                         </button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
