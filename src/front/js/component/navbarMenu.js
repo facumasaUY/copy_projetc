@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useActionState } from "react";
 import andalogofood from "../../img/anda.png";
 import userlogo from "../../img/user.webp";
 import { Link } from 'react-router-dom';
 import { SelectedMenuData } from "./cardMenu";
 import { useNavigate } from "react-router-dom";
-
+import { Context } from "../store/appContext";
 
 
 export const MenuNavbar = (props) => {
@@ -28,6 +28,10 @@ export const MenuNavbar = (props) => {
       const irAPayment = () => {
         navigate("/payment");
       };
+        const handleLogout=()=>{
+          actions.logout();
+          navigate("/")
+        }
 
     return (
       <nav className="navbar bg-body-tertiary">
@@ -39,7 +43,7 @@ export const MenuNavbar = (props) => {
           </div>
 
          {/* imagen user, perfil usuario */}
-                <div className="offcanvas offcanvas-start coloroffcanvas" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                <div className="offcanvas offcanvas-start coloroffcanvas" data-bs-scroll="true" data-bs-backdrop="false" tabIndex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
 
                     <div className="offcanvas-header">
                         <div className="d-flex flex-column mx-auto">
@@ -77,7 +81,7 @@ export const MenuNavbar = (props) => {
 
 
                         <div className="text-end pb-2">
-                            <button className="logout">Cerrar Sesión <i className="fa-solid fa-right-from-bracket" style={{ color: "#ffffff" }}></i></button>
+                            <button className="logout" onClick={handleLogout}>Cerrar Sesión <i className="fa-solid fa-right-from-bracket" style={{ color: "#ffffff" }}></i></button>
                         </div>
 
                     </div>
@@ -230,5 +234,7 @@ export const MenuNavbar = (props) => {
           </div>
         </div>
       </nav>
-    )
+      
+    );
+  
   };
