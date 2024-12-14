@@ -36,22 +36,22 @@ export const Register = () => {
         e.preventDefault()
         
         if (name == "") {
-            mensaje("falta ingresar el nombre")
+            mensaje("Falta ingresar el nombre")
             return
         }
         if (last_name == "") {
-            mensaje("falta ingresar el apellido")
+            mensaje("Falta ingresar el apellido")
             return
         }
         if (num_funcionario == "") {
-            mensaje("falta ingresar el numero de funcionario")
+            mensaje("Falta ingresar el numero de funcionario")
             return
         } if (email == "") {
-            mensaje("falta ingresar el email")
+            mensaje("Falta ingresar el email")
             return
         }
         if (password == "") {
-            mensaje("falta ingresar el contraseña")
+            mensaje("Falta ingresar el contraseña")
             return
         }
         if (password.length >20 || password.length<8){
@@ -60,11 +60,11 @@ export const Register = () => {
 
         }
         if (confirmar == "") {
-            mensaje("falta ingresar la confirmacion de contraseña")
+            mensaje("Falta ingresar la confirmacion de contraseña")
             return
         }
         if (confirmar != password) {
-            mensaje(" la contraseña no coincide con la confirmacion")
+            mensaje(" La contraseña no coincide con la confirmacion")
             return
         }
         let newUser = {
@@ -83,10 +83,18 @@ export const Register = () => {
                 password: password
 
             }
+            
             let respLogin = await actions.login(userLogin)
             if (respLogin) {
                 navigate("/menu")
+                Swal.fire({
+                    icon: "success",
+                    title: "usuario registrado con exito",
+                    text: "bienvenido",
+        
+                });
             }
+
         }
     }
 
@@ -112,7 +120,7 @@ export const Register = () => {
             </div>
             <div className="mb-2">
                 <label className="form-label">Número de funcionario</label>
-                <input type="tel" value={num_funcionario} onChange={(event) => setNum_funcionario(event.target.value)} className="form-control" id="exampleFormControlInput4" placeholder="" />
+                <input type="text" value={num_funcionario} onChange={(event) => setNum_funcionario(event.target.value)} className="form-control" id="exampleFormControlInput4" placeholder="" />
             </div>
             <div className="mb-2">
                 <label className="form-label">Contraseña</label>

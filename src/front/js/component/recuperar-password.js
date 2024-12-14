@@ -25,20 +25,20 @@ export const RecuperarPassword = () => {
     const envio = async (e) => {
         e.preventDefault()
         if (email == "") {
-            mensaje("ingrese su email")
+            mensaje("Ingrese su email")
             return
         }
         if (aleatoria == "") {
-            mensaje("ingrese su contraseña enviada por email")
+            mensaje("Ingrese su contraseña enviada por email")
             return
         }
         if (nueva==""){
-            mensaje("ingrese su nueva contraseña")
+            mensaje("Ingrese su nueva contraseña")
             return
         }
         let resp=await actions.recuperarPassword(email,aleatoria,nueva)
             if (resp){
-                mensaje("contraseña actualizada con exito","success", "ya tienes tu contraseña")
+                mensaje("Contraseña actualizada con exito","success", "Ya tienes tu contraseña")
                 return
             }
 
