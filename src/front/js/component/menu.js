@@ -105,10 +105,6 @@ export const Menu = () => {
   };
 
 
-  const handleLogout = () => {
-    actions.logout();
-    navigate("/");
-  };
 
   //Sacar el menuNavbar para otro componente.
 
@@ -116,6 +112,7 @@ export const Menu = () => {
   return (
     <SelectedMenuData.Provider value={{ selectedMenu, listCart, setListCart }}>
       <div className="container mt-3">
+
         <MenuNavbar />
 
         <div className="mb-5">
