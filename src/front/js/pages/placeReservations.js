@@ -1,42 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import { PlaceReservationCard } from "../component/placeReservationCard";
+import { Context } from "../store/appContext"
 
 export const PlaceReservations = () => {
+
+    const {actions, store} = useContext(Context);
 
     const navigate = useNavigate();
     const volver = () => {
         navigate(-1);
     };
 
-    const diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"]
-    const [reservas, setReservas] = useState([]);
+    const diasSemana = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"]
+    const [reservas, setReservas] = useState([{
+        "Lunes":"", 
+        "Martes":"", 
+        "Miercoles":"", 
+        "Jueves":"", 
+        "Viernes":"", 
+        "Sabado":""
+    }]);
 
-    const actualizarReserva = (dia, hora) => {
-        setReservas((prev) => {
-            const nuevaReserva = { dia, hora };
-            const filtrado = prev.filter((reserva) => reserva.dia !== dia);
-            return [...filtrado, nuevaReserva];
-        });
+    useEffect(() => {
+        fetchReservas();
+    }, []);
+
+
+    const fetchReservas = async () => {
+        let resp = await actions.traerReserva()
+    }
+
+    const actualizarReserva = (diaSemana, nuevaHora) => {
+        console.log(diaSemana, nuevaHora),
+        // setReservas((prev) => {
+        //     return {...prev, [diaSemana]: nuevaHora,};
+        // });
+        setReservas({...reservas,[diaSemana]:nuevaHora});
     };
 
     
     const guardarReservas = async () => {
-        const user = "UnUsuario"; // Cambiar esto!!! Preguntar a Samuel
-            const response = await fetch("https://refactored-trout-gwx9vg7ggj7c994r-3001.app.github.dev/reservations", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(
-                    reservas.map((reserva) => ({
-                        user,
-                        dia: reserva.dia,
-                        hora: reserva.hora,
-                    }))
-                ),
-            });
-            if (response.ok) {
+        console.log(reservas["Lunes"]);
+        console.log(actions);
+            let resp = await actions.guardarReserva(reservas)
+            if (resp) {
                 alert("Reservas guardadas con éxito");
             } else {
                 alert("Hubo un problema al guardar las reservas");
@@ -53,7 +61,7 @@ export const PlaceReservations = () => {
                     title="Volver al menú"
                     onClick={volver} 
                 >
-                    <div ClassName="d-flex flex-column">
+                    <div className="d-flex flex-column">
                         Menú
                         <i className="fa-solid fa-arrow-left fa-xl ms-1"></i>
                     </div>
@@ -69,7 +77,6 @@ export const PlaceReservations = () => {
                 </button>
 
             </div>
-            {/* <img className="mt-4" src="https://lambdatres.com/wp-content/uploads/2011/12/mobiliario-zona-office-01.jpg" alt="..." style={{width:"40%"}}/> */}
 
             <div className="col-6 d-flex flex-wrap justify-content-center gap-3">
                 {diasSemana.map((dia, index) => (

@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
-
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
@@ -10,16 +9,16 @@ import injectContext from "./store/appContext";
 import { Form } from "./component/form";
 import { Navbar } from "./component/loginnavbar";
 import { Footer } from "./component/loginfooter";
-
+import { Admin } from "./component/admin.js";
 import {Register} from "./component/register";
 import { Menu } from "./component/menu";
 import { Payment } from "./component/payment";
-
-
-
-import { Feedback } from "./component/feedback";
 import { PlaceReservations } from "./pages/placeReservations";
 import {NewMenu} from "./pages/newMenu";
+import { NewOption } from "./pages/newOptions";
+import { SendEmail } from "./component/send-email";
+import { RecuperarPassword } from "./component/recuperar-password";
+
 
 
 
@@ -36,24 +35,24 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop> 
-                {location.pathname !== "/menu" && <Navbar />} {/* Es un condicional que hace que el navbar de login no se vea en menu, si hay duda, consultar a Facu */}
+                {/* {location.pathname !== "/menu" && <Navbar />} Es un condicional que hace que el navbar de login no se vea en menu, si hay duda, consultar a Facu */}
                     <Routes>
 
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Register />} path="/register" />
                         <Route element={<Single />} path="/single/:theid" />
-                        {/* <Route element={<Private/>} path="/private" /> */}
                         <Route element={<PlaceReservations />} path="/reservations" />
                         <Route element={<Menu />} path="/menu" />
+                        <Route element={<Admin/>} path="/admin" />
 
                         <Route element={<Payment />} path="/payment" />
-                        <Route element={<Form />} path="/form/:theid" />
-
-                        <Route element={<Form />} path="/improve-us/" />
-
-                        <Route element={<Feedback />} path="/feedback/:theid" />
+                        <Route element={<Form />} path="/form" />                    
+               
                         <Route element={<NewMenu />} path="/newMenu" />
+                        <Route element={<RecuperarPassword />} path="/recuperar-password" />
+                        <Route element={<SendEmail />} path="/send-email" />
+                        <Route element={<NewOption />} path="/newOptions" />
                         <Route element={<h1>Not found!</h1>} />
 
                     </Routes>
