@@ -282,7 +282,7 @@ def register():
     )
     db.session.add(new_user)
     db.session.commit()
-    send_signup_email([email])
+    send_singup_email([email])
     return jsonify({"message":"User created successfully"}),201
 
 
