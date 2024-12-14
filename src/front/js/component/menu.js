@@ -68,34 +68,22 @@ export const Menu = () => {
     });
   };
 
-  // const handleClick = (item) => {
-  //   setListCart((carritoActual) => {
-  //       console.log("Carrito actual:", carritoActual);
-  //       console.log("Nuevo item:", item);
-  //       const existe = carritoActual.some((producto) => producto.id === item.id);
-  //       if (!existe) {
-  //           return [...carritoActual, item];
-  //       }
-  //       return carritoActual;
-  //   });
-  // };
-
-  const handleNotificacion = () => {
+    const handleNotificacion = () => {
     return mostrarNotificacion()
   };
 
 
-  const handleCompra = async () => {
-    if (listCart.length === 0) {
-      alert("El carrito está vacío. Por favor, añade productos antes de pagar.");
-    } else {
-      setSpinner(true)
-      setTimeout(() => {
-        setSpinner(false)
-        irAPayment();
-      }, 2000)
-    }
-  };
+  // const handleCompra = async () => {
+  //   if (listCart.length === 0) {
+  //     alert("El carrito está vacío. Por favor, añade productos antes de pagar.");
+  //   } else {
+  //     setSpinner(true)
+  //     setTimeout(() => {
+  //       setSpinner(false)
+  //       irAPayment();
+  //     }, 2000)
+  //   }
+  // };
 
   const decrecer = () => {
 
@@ -131,9 +119,9 @@ export const Menu = () => {
     navigate("/reservations");
   };
 
-  const irAPayment = () => {
-    navigate("/payment");
-  };
+  // const irAPayment = () => {
+  //   navigate("/payment");
+  // };
 
   const handleLogout = () => {
     actions.logout(); 
