@@ -62,7 +62,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ user: false })
 					return false;
 				}
-			},
+			},logout: () => {
+                localStorage.removeItem("access_token");
+                setStore({ user: null, token: null, auth: false });
+                console.log("Sesión cerrada");
+            },
 			signup: async (user) => {
 				try {
 					// fetching data from the backend
