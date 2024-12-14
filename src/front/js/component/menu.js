@@ -22,8 +22,6 @@ export const Menu = () => {
 
   const [quantity, setQuantity] = useState(1);
 
-  const [spinner, setSpinner] = useState(false);
-
   const [menus, setMenus] = useState([]);
 
   const [listCart, setListCart] = useState([]);
