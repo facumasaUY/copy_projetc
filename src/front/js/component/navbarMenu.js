@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, useActionState } from "react";
 import andalogofood from "../../img/anda.png";
+import { Context } from "../store/appContext";
 import userlogo from "../../img/user.webp";
 
 import { Link } from 'react-router-dom';
@@ -9,14 +10,25 @@ import { Context } from "../store/appContext";
 
 
 export const MenuNavbar = (props) => {
+
+  const [spinner, setSpinner] = useState(false);
+
+
   const { actions, store } = useContext(Context)
 
-  const handleLogout = () => {
-    actions.logout();
-    navigate("/");
-  };
+  const navigate = useNavigate();
 
   const { listCart } = useContext(SelectedMenuData);
+
+  const logout = () => {
+  localStorage.removeItem("access_token");
+  setStore({ user: null, token: null, auth: false });
+  console.log("Sesión cerrada");
+};
+
+const handleLogout = () => {
+  actions.logout();
+  navigate("/");
 
   const handleCompra = async () => {
     if (listCart.length === 0) {
@@ -294,4 +306,5 @@ export const MenuNavbar = (props) => {
       </div>
     </nav>
   )
+};
 };
